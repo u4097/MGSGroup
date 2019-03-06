@@ -1,2 +1,2 @@
-rootProject.name="PhotoDocs"
+rootProject.name="Start Template Project"
 include(Modules.app)
