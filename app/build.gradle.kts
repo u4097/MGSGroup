@@ -110,7 +110,8 @@ dependencies {
 
     /** Networkin */
     // Coroutines
-    implementation(Libraries.coroutines)
+    implementation(Libraries.coroutinesKotlinAndroid)
+
     // Retrofit
     implementation(Libraries.retrofit)
     implementation(Libraries.retrofitCoroutines)
@@ -121,9 +122,16 @@ dependencies {
     implementation(Libraries.moshi)
 
 
+    /** DI */
+    implementation(Libraries.koinAndroid)
+
+
+
     /** Design */
     // Fresco
     implementation(Libraries.fresco)
+    // Picasso
+    implementation(Libraries.picasso)
 
     /** Debug Drawer */
     implementation(Libraries.debugDrawer)
@@ -146,7 +154,15 @@ dependencies {
     // material dialog
     implementation(Libraries.materialDialog)
 
+    // TEST
+    testImplementation(Libraries.mockwebserver)
+    testImplementation(Libraries.androidArchTest)
+    testImplementation(Libraries.robolectric)
+    testImplementation(Libraries.kotlinTest)
+
     testImplementation ("junit:junit:4.12")
     testImplementation("androidx.test.ext:junit:1.1.0")
     testImplementation("androidx.test.espresso:espresso-core:3.1.1")
+
+
 }
