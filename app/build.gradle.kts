@@ -47,7 +47,7 @@ android {
                         val fileName = output.outputFileName
                             .replace("-release", "-release-v$versionName-vc$versionCode")
                             .replace("-debug", "-debug-v$versionName-vc$versionCode")
-                        println("output file name: $fileName")
+                        println("output file login: $fileName")
                         outputImpl.outputFileName = fileName
                     }
                 })
@@ -58,6 +58,10 @@ android {
 
     }
     buildTypes {
+        getByName("debug") {
+            buildConfigField("String", "PROD_URL", Constants.PROD_URL)
+            buildConfigField("String", "DEV_URL", Constants.DEV_URL)
+        }
         getByName("release") {
             isMinifyEnabled = false
             isUseProguard = false // user R8 instead
@@ -129,6 +133,7 @@ dependencies {
 
     /** DI */
     implementation(Libraries.koinAndroid)
+    implementation( Libraries.koinViewModel)
 
 
 
