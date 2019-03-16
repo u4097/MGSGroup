@@ -2,10 +2,7 @@ package com.apptimizm.mgs
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -32,7 +29,7 @@ interface ToolbarListener {
 }
 
 class MainActivity : AppCompatActivity(),
-        ToolbarListener {
+    ToolbarListener {
     override fun updateTitle(title: String) {
         toolbar.setTitle(title)
     }
@@ -76,13 +73,6 @@ class MainActivity : AppCompatActivity(),
         appBarConfiguration = AppBarConfiguration(mNavController.graph)
         setupActionBar(mNavController, appBarConfiguration)
 
-        // Put refresh button in toolbar menu and have it refresh the games list.
-        toolbar.inflateMenu(R.menu.main_menu)
-        toolbar.setOnMenuItemClickListener {
-            //            mSuitVm.getSuits(refresh = false)
-//            mBackgroundVm.getBackgrounds(refresh = false)
-            return@setOnMenuItemClickListener true
-        }
 
         // Koin  DI init
         loadAppModules()
@@ -137,6 +127,23 @@ class MainActivity : AppCompatActivity(),
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when (item?.itemId) {
+            R.id.login_fragment -> {
+                PrefUtils.token = ""
+                while (mNavController.popBackStack()) {
+                    mNavController.popBackStack()
+                }
+                mNavController.navigate(R.id.login_fragment)
+                return true
+            }
+        }
+        return NavigationUI.onNavDestinationSelected(item!!, mNavController) ||
+                super.onOptionsItemSelected(item)
+
     }
 
 

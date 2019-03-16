@@ -17,5 +17,9 @@
     <fragment android:id="@+id/route_fragment"
               tools:layout="@layout/fmt_route"
               android:name="com.apptimizm.mgs.presentation.routes.RouteFragment"
-              android:label="RouteFragment"/>
+              android:label="RouteFragment">
+
+        <action android:id="@+id/action__to_login_fragment"
+                app:destination="@id/login_fragment"/>
+    </fragment>
 </navigation>
