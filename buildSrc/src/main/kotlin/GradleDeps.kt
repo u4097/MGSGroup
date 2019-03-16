@@ -54,7 +54,7 @@ object Versions {
 
     const val rxpaper = "1.4.0"
 
-    const val koin = "2.0.0-beta-4"
+    const val koin = "2.0.0-beta-1"
 
     const val materialDialog = "2.1.0"
 

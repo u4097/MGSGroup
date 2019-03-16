@@ -99,8 +99,6 @@ val cacheModule: Module = module {
 private const val LOGIN_CACHE = "LOGIN_CACHE"
 private const val SETTING_CACHE = "SETTING_CACHE"
 private const val ROUTE_CACHE = "ROUTE_CACHE"
-private const val SUIT_CACHE = "SUIT_CACHE"
-private const val BACKGROUND_CACHE = "BACKGROUND_CACHE"
 
 
 
