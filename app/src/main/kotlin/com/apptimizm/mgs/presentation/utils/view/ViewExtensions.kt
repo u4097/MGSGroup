@@ -1,4 +1,4 @@
-package com.apptimizm.mgs.presentation.utils
+package com.apptimizm.mgs.presentation.utils.view
 
 import android.annotation.SuppressLint
 import android.content.Context

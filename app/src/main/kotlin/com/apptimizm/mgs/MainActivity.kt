@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.apptimizm.mgs.AppConfiguration.getRootViewContainerFor
 import com.apptimizm.mgs.AppConfiguration.riseAndShine
 import com.apptimizm.mgs.data.repository.resouces.ResourceState
@@ -23,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private val mLoginVm: LoginViewModel by viewModel()
     private val mSettingVm: SettingViewModel by viewModel()
     private val mRouteVm: RouteViewModel by viewModel()
+    private lateinit var mNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +35,20 @@ class MainActivity : AppCompatActivity() {
         val container: ViewGroup = getRootViewContainerFor(this)
         val home: View = LayoutInflater.from(this).inflate(R.layout.activity_main, container, false)
         container.addView(home)
+
+        // Wire up navigation drawer to open on toolbar button clicks.
+        val toolbar: Toolbar = findViewById(R.id.home_toolbar)
+
+//        Navigation
+        mNavController = Navigation.findNavController(this, R.id.host_fragment)
+
+        mNavController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+/*                R.id.splash_fragment -> {
+                    supportActionBar?.hide()
+                }*/
+            }
+        }
 
 
         // Koin  DI init

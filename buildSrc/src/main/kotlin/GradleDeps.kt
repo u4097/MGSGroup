@@ -58,6 +58,8 @@ object Versions {
 
     const val materialDialog = "2.1.0"
 
+    const val jodaTime = "2.10.1.1"
+
     const val materialDisign = "1.0.0"
 
     const val debugDrawer = "0.9.5"
@@ -136,6 +138,9 @@ object Libraries {
     // MATERIAL DIALOG
     const val materialDialog = "com.afollestad.material-dialogs:core:${Versions.materialDialog}"
 
+    // JODA TIME
+    const val jodaTime = "net.danlew:android.joda:${Versions.jodaTime}"
+    const val jodaTimeTest = "net.danlew:android.joda:${Versions.jodaTime}"
 
     // DEBUG DRAWER
     const val debugDrawer = "au.com.gridstone.debugdrawer:debugdrawer:${Versions.debugDrawer}"

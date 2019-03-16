@@ -159,6 +159,8 @@ dependencies {
     // Anko
     implementation(Libraries.anko)
 
+    /** JodaTime */
+    implementation(Libraries.jodaTime)
 
     /** LeakCanary */
     debugImplementation (Libraries.leakCanaryAndroid)
@@ -173,5 +175,6 @@ dependencies {
     testImplementation(Libraries.kotlinTest)
     testImplementation(Libraries.koinTest)
     testImplementation(Libraries.androidArchTest)
+    testImplementation(Libraries.jodaTimeTest)
 //    testImplementation(Libraries.robolectric)
 }
