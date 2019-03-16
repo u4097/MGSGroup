@@ -22,7 +22,7 @@ androidExtensions {
 android {
     compileSdkVersion(28)
     defaultConfig {
-        applicationId = "com.oleg.photodocs"
+        applicationId = ApplicationId.id
         minSdkVersion(21)
         targetSdkVersion(28)
         versionCode = 1
