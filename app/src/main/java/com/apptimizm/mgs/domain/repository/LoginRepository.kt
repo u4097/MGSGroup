@@ -1,7 +1,7 @@
-package com.oleg.photodocs.domain.repository
+package com.apptimizm.mgs.domain.repository
 
 import com.apptimizm.mgs.data.repository.resouces.Resource
-import com.oleg.photodocs.domain.model.login.LoginModel
+import com.apptimizm.mgs.domain.model.LoginModel
 import com.apptimizm.mgs.datasource.model.LoginResponseEntity
 
 interface LoginRepository {

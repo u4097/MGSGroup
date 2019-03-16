@@ -11,14 +11,17 @@ import com.apptimizm.mgs.AppConfiguration.riseAndShine
 import com.apptimizm.mgs.data.repository.resouces.ResourceState
 import com.apptimizm.mgs.di.loadAppModules
 import com.apptimizm.mgs.presentation.model.login.Login
+import com.apptimizm.mgs.presentation.model.login.Setting
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.apptimizm.mgs.presentation.viewmodel.LoginViewModel
+import com.apptimizm.mgs.presentation.viewmodel.SettingViewModel
 import org.jetbrains.anko.longToast
 import org.koin.androidx.viewmodel.ext.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private val mLoginVm: LoginViewModel by viewModel()
+    private val mSettingVm: SettingViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +53,26 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        mSettingVm.settingEventResponse.observe(this@MainActivity, Observer {
+            it?.let {
+                when (it.state) {
+                    ResourceState.LOADING -> {
+                    }
+                    ResourceState.ERROR -> {
+                    }
+                    ResourceState.SUCCESS -> {
+                        PrefUtils.phone = it.data?.setting
+                        longToast(PrefUtils.phone.toString())
+                    }
+                }
+            }
+        })
+
     }
 
     override fun onStart() {
         super.onStart()
-        mLoginVm.login(Login(login = "Admin", password = "admin2018"))
+//        mLoginVm.login(Login(login = "Admin", password = "admin2018"))
+        mSettingVm.getPhone()
     }
 }

@@ -2,6 +2,7 @@ package com.apptimizm.mgs.networking
 
 import com.apptimizm.mgs.datasource.model.LoginEntity
 import com.apptimizm.mgs.datasource.model.LoginResponseEntity
+import com.apptimizm.mgs.datasource.model.SettingEntity
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.Body
@@ -20,5 +21,11 @@ interface LoginApi {
     fun loginAsync(
         @Body loginEntity: LoginEntity
     ): Deferred<Response<LoginResponseEntity>>
+}
+
+interface SettingApi {
+    @GET("/v0/settings/")
+    fun getPhoneAsync(
+    ): Deferred<Response<SettingEntity>>
 }
 

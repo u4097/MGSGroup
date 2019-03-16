@@ -1,6 +1,6 @@
 package com.apptimizm.mgs.datasource.model
 
-import com.oleg.photodocs.domain.model.login.LoginModel
+import com.apptimizm.mgs.domain.model.LoginModel
 import com.squareup.moshi.Json
 
 class LoginEntity(

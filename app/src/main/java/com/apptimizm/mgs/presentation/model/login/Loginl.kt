@@ -1,6 +1,6 @@
 package com.apptimizm.mgs.presentation.model.login
 
-import com.oleg.photodocs.domain.model.login.LoginModel
+import com.apptimizm.mgs.domain.model.LoginModel
 
 data class Login(
     val login: String?,

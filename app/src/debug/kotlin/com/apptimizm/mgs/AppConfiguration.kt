@@ -11,7 +11,9 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.apptimizm.mgs.AppConfiguration.DatasourceProperties.DEV_URL
 import com.apptimizm.mgs.AppConfiguration.DatasourceProperties.MOCK_URL
 import com.apptimizm.mgs.mockapi.MockLoginApi
+import com.apptimizm.mgs.mockapi.MockSettingApi
 import com.apptimizm.mgs.networking.LoginApi
+import com.apptimizm.mgs.networking.SettingApi
 import com.apptimizm.mgs.presentation.utils.debugdrawer.VersionInfoModule
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.readystatesoftware.chuck.ChuckInterceptor
@@ -103,6 +105,14 @@ object AppConfiguration : KoinComponent {
         } else {
             retrofit.create<LoginApi>(LoginApi::class.java)
         }
+
+    fun createSettingApi(): SettingApi =
+        if (debugRetrofitConfig.currentEndpoint.isMock) {
+            MockSettingApi(mockRetrofit)
+        } else {
+            retrofit.create<SettingApi>(SettingApi::class.java)
+        }
+
 
     // Debug Drawer SetUp
     fun getRootViewContainerFor(activity: Activity): ViewGroup {
