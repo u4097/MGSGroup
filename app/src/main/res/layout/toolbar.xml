@@ -6,17 +6,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
->
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
-            android:id="@+id/home_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="MGS"
+            android:id="@+id/toolbar"
+            style="@style/Widget.MGS.Toolbar"
     />
 
 </com.google.android.material.appbar.AppBarLayout>

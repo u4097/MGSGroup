@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Toolbar: uses in layout: ac_mainscreen.xml and ac_login.xml -->
+    <style name="Widget.MGS.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:theme">@style/ThemeOverlay.MaterialComponents.Dark.ActionBar</item>
+        <item name="android:popupTheme">@style/ThemeOverlay.MaterialComponents.Light</item>
+        <item name="android:background">?attr/themePrimaryDark</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?actionBarSize</item>
+    </style>
+
+    <!-- *********************  Text ********************************************* -->
+
     <!--Tab Layout-->
     <style name="TabLayoutTextStyle">
         <item name="fontFamily">@font/muller_medium</item>

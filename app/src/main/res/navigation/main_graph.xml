@@ -7,5 +7,15 @@
     <fragment android:id="@+id/login_fragment"
               tools:layout="@layout/fmt_login"
               android:name="com.apptimizm.mgs.presentation.login.LoginFragment"
-              android:label="Login"/>
+              android:label="Login">
+
+        <action android:id="@+id/action_to_route_fragment"
+                app:destination="@id/route_fragment" app:popUpTo="@+id/main_graph" app:popUpToInclusive="true"/>
+    </fragment>
+
+    <!--Route-->
+    <fragment android:id="@+id/route_fragment"
+              tools:layout="@layout/fmt_route"
+              android:name="com.apptimizm.mgs.presentation.routes.RouteFragment"
+              android:label="RouteFragment"/>
 </navigation>
