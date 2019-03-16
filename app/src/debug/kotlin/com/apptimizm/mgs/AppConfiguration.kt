@@ -10,6 +10,8 @@ import au.com.gridstone.debugdrawer.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.apptimizm.mgs.AppConfiguration.DatasourceProperties.DEV_URL
 import com.apptimizm.mgs.AppConfiguration.DatasourceProperties.MOCK_URL
+import com.apptimizm.mgs.mockapi.MockLoginApi
+import com.apptimizm.mgs.networking.LoginApi
 import com.apptimizm.mgs.presentation.utils.debugdrawer.VersionInfoModule
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.readystatesoftware.chuck.ChuckInterceptor
@@ -34,7 +36,7 @@ object AppConfiguration : KoinComponent {
 
     object DatasourceProperties {
         const val MOCK_URL = "http://localhost/mock/"
-        const val DEV_URL = "http://185.244.173.11/v0/"
+        const val DEV_URL = "http://178.57.222.1:8000/v0/"
     }
 
 
@@ -95,12 +97,12 @@ object AppConfiguration : KoinComponent {
     }
 
     // API Services
-/*    fun createLoginApi(): LoginApi =
+    fun createLoginApi(): LoginApi =
         if (debugRetrofitConfig.currentEndpoint.isMock) {
             MockLoginApi(mockRetrofit)
         } else {
             retrofit.create<LoginApi>(LoginApi::class.java)
-        }*/
+        }
 
     // Debug Drawer SetUp
     fun getRootViewContainerFor(activity: Activity): ViewGroup {

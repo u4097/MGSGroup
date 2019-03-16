@@ -156,6 +156,9 @@ dependencies {
     // Chuck
     debugImplementation(Libraries.chuck)
     releaseImplementation(Libraries.chuckRelease)
+    // Anko
+    implementation(Libraries.anko)
+
 
     /** LeakCanary */
     debugImplementation (Libraries.leakCanaryAndroid)
