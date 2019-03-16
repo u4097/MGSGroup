@@ -1,5 +1,77 @@
 <resources>
-    <string name="app_name">mgsGroup</string>
+    <string name="app_name">MGS</string>
     <string name="drawer_version_name">Name</string>
     <string name="drawer_version_code">Code</string>
+
+    <!--Labels for UI:-->
+    <string name="label_enter">Войти</string>
+    <string name="label_login">Логин</string>
+    <string name="label_pass">Пароль</string>
+    <string name="label_checkbox_talon">Подписанная ведомость или талон</string>
+    <string name="label_contact">Контакты:</string>
+    <string name="label_tank_11">1.1</string>
+    <string name="label_tank_08">0.8</string>
+    <string name="label_tank_8">8</string>
+    <string name="label_tank_plan">Необходимо забрать баков:</string>
+    <string name="label_time_fact">Фактическое время вывоза:</string>
+    <string name="label_time_plan">Время вывоза:</string>
+
+
+    <!--Dialog:-->
+    <string name="dialog_progress_default">Пожалуйста, подождите…</string>
+    <string name="dialog_error">"Ошибка"</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_update">Обновить</string>
+    <string name="dialog_repeat">Повторить</string>
+    <string name="dialog_cancel">Отмена</string>
+    <string name="dialog_exit">Закрыть</string>
+    <string name="dialog_logout">Выход</string>
+    <string name="dialog_confirm_app_exit">Вы действительно хотите выйти из приложения?</string>
+    <string name="dialog_confirm_logout">Вы действительно хотите выйти?</string>
+    <string name="dialog_wanted">Внимание</string>
+
+    <!--Messages:-->
+    <string name="msg_no_internet_dialog_content">Ошибка соединения с интернетом</string>
+    <!--<string name="msg_no_internet_dialog_content">Проверьте правильность настройки сети Интернет и попробуйте еще раз.</string>-->
+    <string name="msg_unknown_server_error_title">Неизвестная ошибка сервера</string>
+    <string name="msg_coordinates_copy">Координаты скопированы</string>
+    <string name="msg_no_garbage">Уважаемый пользователь для вас на данный момент не загружен график забора мусора.</string>
+    <string name="msg_call_dispatcher">Просьба связаться с диспетчером по указанному номеру или напрямую из приложения</string>
+    <string name="msg_amount_tank">Для завершения визита укажите\nколичество баков\nи подтвердите \nподписание ведомости или талона</string>
+    <string name="msg_amount_tank_no_talon">Для завершения визита укажите\nколичество баков</string>
+    <string name="msg_routes_update">Маршруты обновлены</string>
+    <string name="msg_routes_update_error">Ошибка загрузки адресной программы. Попробуйте позже.</string>
+    <string name="msg_route_save_to_local">Маршрут сохранен</string>
+    <string name="msg_routes_update_false">Ошибка обновления маршрутов</string>
+    <string name="msg_unknown_error_title">Неизвестная ошибка</string>
+    <string name="msg_internet_error_title">Ошибка загрузки</string>
+    <string name="msg_internet_error_message">Пожалуйста, попробуйте ещё раз</string>
+    <string name="msg_check_user_name_is_correct">Проверьте правильность ввода логина</string>
+    <string name="msg_check_password_is_correct">Проверьте правильность ввода пароля</string>
+
+
+    <!--Test string data:-->
+    <string name="test_string_title">(ГБУЗ ГП # 212) ГБУЗ ГП Фил # 217 (2*0,8 жИ)</string>
+    <string name="test_string_addres">Адрес:</string>
+    <string name="test_string_address">г. Щербинка, ул. 40 лет Октября, д. 5/1</string>
+    <string name="test_phone">8 999 839–32–95</string>
+
+    <!--Test users login data:-->
+    <string name="login_abramov">abramov</string>
+    <string name="login_kazbek">kazbek</string>
+    <string name="bug_0_8">0.8</string>
+    <string name="bug_0_6">0.66</string>
+    <string name="bug_0_7">0.7</string>
+    <string name="bug_1_1">1.1</string>
+    <string name="bug_3m3">3</string>
+    <string name="bug_5m3">5</string>
+    <string name="bug_8m3">8</string>
+    <string name="bug_20m3">20</string>
+    <string name="bug_27m3">27</string>
+    <string name="bug_32m3">32</string>
+    <string name="bug_35m3">35</string>
+    <string name="bug_PackagedCollection">ПАКЕТИРОВАННЫЙ СБОР</string>
+    <string name="bug_MeshkovCollection">МЕШКОВОЙ СБОР</string>
+    <string name="title_plan">Необходимо забрать баков, мешков, бункеров:</string>
+    <string name="title_fact">Количество загруженных баков, мешков, бункеров:</string>
 </resources>

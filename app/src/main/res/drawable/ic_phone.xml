@@ -1,0 +1,28 @@
+<vector android:height="50dp" android:viewportHeight="74"
+    android:viewportWidth="66" android:width="50dp"
+    xmlns:aapt="http://schemas.android.com/aapt" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#00C853" android:fillType="evenOdd" android:pathData="M33,58C46.8071,58 58,46.8071 58,33C58,19.1929 46.8071,8 33,8C19.1929,8 8,19.1929 8,33C8,46.8071 19.1929,58 33,58Z"/>
+    <path android:fillColor="#00000000"
+        android:pathData="M57.75,33C57.75,46.669 46.669,57.75 33,57.75C19.331,57.75 8.25,46.669 8.25,33C8.25,19.331 19.331,8.25 33,8.25C46.669,8.25 57.75,19.331 57.75,33Z" android:strokeWidth="0.5">
+        <aapt:attr name="android:strokeColor">
+            <gradient android:endX="8.24464" android:endY="57.5107"
+                android:startX="8.24464" android:startY="8" android:type="linear">
+                <item android:color="#02000000" android:offset="0"/>
+                <item android:color="#05000000" android:offset="0.8"/>
+                <item android:color="#0A000000" android:offset="1"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:fillColor="#00000000"
+        android:pathData="M57.75,33C57.75,46.669 46.669,57.75 33,57.75C19.331,57.75 8.25,46.669 8.25,33C8.25,19.331 19.331,8.25 33,8.25C46.669,8.25 57.75,19.331 57.75,33Z" android:strokeWidth="0.5">
+        <aapt:attr name="android:strokeColor">
+            <gradient android:endX="8" android:endY="58"
+                android:startX="8" android:startY="8" android:type="linear">
+                <item android:color="#1EFFFFFF" android:offset="0"/>
+                <item android:color="#0FFFFFFF" android:offset="0.2"/>
+                <item android:color="#02FFFFFF" android:offset="1"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:fillColor="#ffffff" android:fillType="evenOdd" android:pathData="M27.62,31.79C29.06,34.62 31.38,36.93 34.21,38.38L36.41,36.18C36.68,35.91 37.08,35.82 37.43,35.94C38.55,36.31 39.76,36.51 41,36.51C41.55,36.51 42,36.96 42,37.51V41C42,41.55 41.55,42 41,42C31.61,42 24,34.39 24,25C24,24.45 24.45,24 25,24H28.5C29.05,24 29.5,24.45 29.5,25C29.5,26.25 29.7,27.45 30.07,28.57C30.18,28.92 30.1,29.31 29.82,29.59L27.62,31.79Z"/>
+</vector>

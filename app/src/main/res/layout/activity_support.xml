@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".ui.login.LoginActivity">
+
+  <ImageView
+    android:id="@+id/ivSupport"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:src="@drawable/support"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    />
+
+  <TextView
+    android:id="@+id/tvSupportTextTop"
+    style="@style/MullerMedium18"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="43dp"
+    android:text="@string/msg_no_garbage"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/ivSupport"/>
+
+  <TextView
+    android:id="@+id/tvSupportTextBottom"
+    style="@style/MullerMedium18"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginLeft="24dp"
+    android:text="@string/msg_call_dispatcher"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tvSupportTextTop"/>
+
+  <TextView
+    android:id="@+id/tvSupportPhone"
+    style="@style/MullerRegular34"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="36dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="43dp"
+    android:text="@string/test_phone"
+    android:textAlignment="center"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tvSupportTextBottom"/>
+
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/btnCall"
+    android:layout_width="56dp"
+    android:layout_height="56dp"
+    app:fabSize="normal"
+    android:layout_marginTop="24dp"
+    android:scaleType="fitXY"
+    android:backgroundTint="@color/green"
+    app:borderWidth="0dp"
+    android:elevation="8dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tvSupportPhone"
+    app:srcCompat="@android:drawable/stat_sys_phone_call"
+    tools:ignore="UnusedAttribute"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/layoutCardView"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginBottom="8dp"
+  android:layout_marginLeft="16dp"
+  android:layout_marginRight="16dp"
+  app:cardBackgroundColor="@color/white">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:id="@+id/tvContragent"
+      style="@style/MullerMedium14"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="16dp"
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="OOO Пятерочка"/>
+
+
+    <View
+      android:id="@+id/vDivider"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginTop="7dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:background="@color/white_smoke"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tvContragent"/>
+
+    <TextView
+      android:id="@+id/tvAddressTitle"
+      style="@style/MullerBold14"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="8dp"
+      android:paddingStart="16dp"
+      android:paddingLeft="16dp"
+      android:alpha=".57"
+      android:text="@string/test_string_addres"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/vDivider"/>
+
+    <TextView
+      android:id="@+id/tvAddressInfo"
+      style="@style/MullerRegular14"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="8dp"
+      android:paddingStart="16dp"
+      android:paddingLeft="16dp"
+      android:text="@string/test_string_address"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tvAddressTitle"/>
+
+
+    <TextView
+      android:id="@+id/tvType"
+      style="@style/MullerRegular14"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="8dp"
+      android:paddingStart="16dp"
+      android:paddingLeft="16dp"
+      android:text="Пищевые отходы"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tvAddressInfo"/>
+
+
+    <TextView
+      android:id="@+id/tvTankTitle"
+      style="@style/MullerBold14"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="24dp"
+      android:paddingStart="16dp"
+      android:paddingLeft="16dp"
+      android:text="@string/title_plan"
+      android:textColor="@color/colorPrimaryDark"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tvType"/>
+
+    <Button
+      android:id="@+id/btnTank06"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_0_6"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tvTankTitle"
+      tools:visibility="visible"/>
+
+    <Button
+      android:id="@+id/btnAmountPlan06"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank06"
+      app:layout_constraintTop_toBottomOf="@id/tvTankTitle"
+      tools:text="4"
+      tools:visibility="visible"
+      />
+
+    <Button
+      android:id="@+id/btnTank07"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_0_7"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/btnTank06"
+      tools:visibility="visible"/>
+
+    <Button
+      android:id="@+id/btnAmountPlan07"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank07"
+      app:layout_constraintTop_toBottomOf="@id/btnTank06"
+      tools:text="07"
+      tools:visibility="visible"
+      />
+
+
+    <Button
+      android:id="@+id/btnTank08"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_0_8"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/btnTank07"
+      tools:visibility="visible"/>
+
+    <Button
+      android:id="@+id/btnAmountPlan08"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank08"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan07"
+      tools:text="4"
+      tools:visibility="visible"
+      />
+
+
+    <Button
+      android:id="@+id/btnTank11"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_1_1"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTank08"
+      tools:visibility="gone"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlan11"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:background="@drawable/bg_btn_green"
+      android:text="4"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank11"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan08"
+      tools:text="4"
+      tools:visibility="gone"
+      />
+
+
+    <Button
+      android:id="@+id/btnTank3m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_3m3"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTank11"
+      tools:visibility="gone"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlan3m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:background="@drawable/bg_btn_green"
+      android:text="4"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank3m3"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan11"
+      tools:text="4"
+      tools:visibility="gone"/>
+
+    <Button
+      android:id="@+id/btnTank5m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_5m3"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTank3m3"
+      tools:visibility="visible"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlan5m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:background="@drawable/bg_btn_green"
+      android:text="4"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank5m3"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan3m3"
+      tools:text="4"
+      tools:visibility="visible"/>
+
+
+    <Button
+      android:id="@+id/btnTank8"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="8"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTank5m3"
+      tools:visibility="visible"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlan8"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank8"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan5m3"
+      tools:text="4"
+      tools:visibility="visible"
+      />
+
+    <Button
+      android:id="@+id/btnTank20m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_20m3"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTank8"
+      tools:visibility="visible"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlan20m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="20dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank20m3"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan8"
+      tools:text="4"
+      tools:visibility="visible"
+      />
+
+    <Button
+      android:id="@+id/btnTank27m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_27m3"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTank20m3"
+      tools:visibility="gone"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlan27m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="20dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank27m3"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan20m3"
+      tools:text="4"
+      tools:visibility="gone"
+      />
+
+    <Button
+      android:id="@+id/btnTank32m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_32m3"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTank27m3"
+      tools:visibility="visible"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlan32m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="20dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank32m3"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan27m3"
+      tools:text="4"
+      tools:visibility="visible"
+      />
+
+    <Button
+      android:id="@+id/btnTank35m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_35m3"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTank32m3"
+      tools:visibility="visible"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlan35m3"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="20dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTank35m3"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan32m3"
+      tools:text="4"
+      tools:visibility="visible"
+      />
+
+    <Button
+      android:id="@+id/btnTankPackagedCollection"
+      style="@style/MullerBold20"
+      android:layout_width="250dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_PackagedCollection"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTank35m3"
+      tools:visibility="visible"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlanPackagedCollection"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="20dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTankPackagedCollection"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlan35m3"
+      tools:text="4"
+      tools:visibility="visible"
+      />
+
+    <Button
+      android:id="@+id/btnTankMeshkovCollection"
+      style="@style/MullerBold20"
+      android:layout_width="250dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:background="@drawable/bg_btn_accent"
+      android:text="@string/bug_MeshkovCollection"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnTankPackagedCollection"
+      tools:visibility="visible"/>
+
+
+    <Button
+      android:id="@+id/btnAmountPlanMeshkovCollection"
+      style="@style/MullerBold20"
+      android:layout_width="64dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="20dp"
+      android:background="@drawable/bg_btn_green"
+      android:textAlignment="center"
+      android:textColor="@color/white"
+      android:visibility="gone"
+      app:layout_constraintStart_toEndOf="@id/btnTankMeshkovCollection"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlanPackagedCollection"
+      tools:text="4"
+      tools:visibility="visible"
+      />
+
+
+
+    <TextView
+      android:id="@+id/tvTime"
+      style="@style/MullerBold14"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="16dp"
+      android:paddingBottom="16dp"
+      android:paddingStart="16dp"
+      android:paddingLeft="16dp"
+      android:text="@string/label_time_plan"
+      android:textColor="@color/black"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlanMeshkovCollection"/>
+
+
+    <TextView
+      android:id="@+id/tvTimeRemoval"
+      style="@style/MullerRegular14"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="16dp"
+      android:paddingStart="4dp"
+      android:paddingLeft="4dp"
+      android:textColor="@color/black"
+      app:layout_constraintStart_toEndOf="@id/tvTime"
+      app:layout_constraintTop_toBottomOf="@id/btnAmountPlanMeshkovCollection"
+      tools:text="7-00:11-00"/>
+
+    <View
+      android:id="@+id/vDividerTime"
+      android:layout_width="match_parent"
+      android:layout_height="1dp"
+      android:layout_marginTop="7dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp"
+      android:background="@color/white_smoke"
+      android:visibility="gone"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tvTime"
+      tools:visibility="visible"/>
+
+    <CheckBox
+      android:id="@+id/cbTalon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginLeft="16dp"
+      android:paddingTop="8dp"
+      android:paddingBottom="8dp"
+      android:text="@string/label_checkbox_talon"
+      android:visibility="gone"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/vDividerTime"
+      tools:visibility="visible"/>
+
+
+    <ImageView
+      android:id="@+id/ivStatus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:srcCompat="@drawable/ic_eclipse_status_green"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>
