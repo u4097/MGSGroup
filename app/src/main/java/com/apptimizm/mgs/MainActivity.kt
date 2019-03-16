@@ -10,10 +10,10 @@ import com.apptimizm.mgs.AppConfiguration.getRootViewContainerFor
 import com.apptimizm.mgs.AppConfiguration.riseAndShine
 import com.apptimizm.mgs.data.repository.resouces.ResourceState
 import com.apptimizm.mgs.di.loadAppModules
-import com.apptimizm.mgs.presentation.model.login.Login
-import com.apptimizm.mgs.presentation.model.login.Setting
+import com.apptimizm.mgs.presentation.model.Login
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.apptimizm.mgs.presentation.viewmodel.LoginViewModel
+import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
 import com.apptimizm.mgs.presentation.viewmodel.SettingViewModel
 import org.jetbrains.anko.longToast
 import org.koin.androidx.viewmodel.ext.viewModel
@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mLoginVm: LoginViewModel by viewModel()
     private val mSettingVm: SettingViewModel by viewModel()
+    private val mRouteVm: RouteViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                     ResourceState.SUCCESS -> {
                         PrefUtils.token = it.data?.token
                         longToast(PrefUtils.token.toString())
+                        mRouteVm.getRoutes("1", "3")
                     }
                 }
             }
@@ -68,11 +70,27 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        mRouteVm.routes.observe(this@MainActivity, Observer {
+            it?.let {
+                when (it.state) {
+                    ResourceState.LOADING -> {
+                    }
+                    ResourceState.ERROR -> {
+                    }
+                    ResourceState.SUCCESS -> {
+//                        PrefUtils.phone = it.data?.route
+                        longToast("Routes size: ${it.data?.results?.size}")
+                    }
+                }
+            }
+        })
+
+
     }
 
     override fun onStart() {
         super.onStart()
-//        mLoginVm.login(Login(login = "Admin", password = "admin2018"))
-        mSettingVm.getPhone()
+        mLoginVm.login(Login(login = "фаун765", password = "скания765"))
+//        mSettingVm.getPhone()
     }
 }

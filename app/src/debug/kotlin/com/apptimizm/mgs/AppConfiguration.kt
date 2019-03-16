@@ -11,8 +11,10 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.apptimizm.mgs.AppConfiguration.DatasourceProperties.DEV_URL
 import com.apptimizm.mgs.AppConfiguration.DatasourceProperties.MOCK_URL
 import com.apptimizm.mgs.mockapi.MockLoginApi
+import com.apptimizm.mgs.mockapi.MockRouteApi
 import com.apptimizm.mgs.mockapi.MockSettingApi
 import com.apptimizm.mgs.networking.LoginApi
+import com.apptimizm.mgs.networking.RouteApi
 import com.apptimizm.mgs.networking.SettingApi
 import com.apptimizm.mgs.presentation.utils.debugdrawer.VersionInfoModule
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
@@ -37,7 +39,7 @@ object AppConfiguration : KoinComponent {
     private val mockRetrofit by inject<MockRetrofit>()
 
     object DatasourceProperties {
-        const val MOCK_URL = "http://localhost/mock/"
+        const val MOCK_URL = "http://localhost/mock/v0/"
         const val DEV_URL = "http://178.57.222.1:8000/v0/"
     }
 
@@ -112,6 +114,14 @@ object AppConfiguration : KoinComponent {
         } else {
             retrofit.create<SettingApi>(SettingApi::class.java)
         }
+
+    fun createRouteApi(): RouteApi =
+        if (debugRetrofitConfig.currentEndpoint.isMock) {
+            MockRouteApi(mockRetrofit)
+        } else {
+            retrofit.create<RouteApi>(RouteApi::class.java)
+        }
+
 
 
     // Debug Drawer SetUp

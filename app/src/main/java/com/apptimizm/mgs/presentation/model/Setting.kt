@@ -1,4 +1,4 @@
-package com.apptimizm.mgs.presentation.model.login
+package com.apptimizm.mgs.presentation.model
 
 import com.apptimizm.mgs.domain.model.SettingModel
 

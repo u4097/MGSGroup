@@ -8,6 +8,7 @@ import com.apptimizm.mgs.domain.model.LoginModel
 import com.apptimizm.mgs.domain.repository.LoginRepository
 import com.apptimizm.mgs.datasource.model.LoginResponseEntity
 import com.apptimizm.mgs.domain.model.mapToDataSource
+import timber.log.Timber
 
 class LoginRepositoryImpl constructor(
     private val cacheDataSource: LoginCacheDataSource,
@@ -33,7 +34,11 @@ class LoginRepositoryImpl constructor(
 
         override suspend fun get(loginModel: LoginModel): Resource<LoginResponseEntity>? {
             val loginResponse = remoteDataSource.get(loginModel = loginModel.mapToDataSource())
-            cacheDataSource.set(loginResponse?.data?.token)
+            try {
+                cacheDataSource.set(loginResponse?.data?.token)
+            } catch (e: Exception) {
+                Timber.e("Fail to login:\n $e")
+            }
             return loginResponse
         }
 
