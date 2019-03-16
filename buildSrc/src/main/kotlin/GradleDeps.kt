@@ -24,24 +24,23 @@ object Versions {
     const val googleServicies = "4.2.0"
     const val kotlin = "1.3.21"
     const val anko = "0.10.8"
-    const val androidx = "1.1.0-alpha02"
+    const val androidx = "1.1.0-alpha03"
     const val lifecycle = "2.0.0"
-    const val ktx = "1.1.0-alpha04"
+    const val ktx = "1.1.0-alpha05"
 
-    const val navigation = "2.0.0-rc02"
+    const val navigation = "2.0.0"
 
     const val constraintLayout = "2.0.0-alpha3"
 
 
     const val retrofit = "2.5.0"
-    const val okhttp = "3.13.1"
+    const val okhttp = "3.14.0"
     const val coroutinesRetrofit = "0.9.2"
     const val coroutines = "1.1.1"
 
     const val fresco = "1.13.0"
+
     const val lottie = "3.0.0-beta1"
-    const val decoro = "1.3.5"
-    const val showhidepasswordedittext = "0.8"
 
     const val chuck = "1.1.0"
     const val timber = "4.7.1"
@@ -55,9 +54,9 @@ object Versions {
 
     const val rxpaper = "1.4.0"
 
-    const val koin = "2.0.0-beta-1"
+    const val koin = "2.0.0-beta-4"
 
-    const val materialDialog = "2.0.3"
+    const val materialDialog = "2.1.0"
 
     const val materialDisign = "1.0.0"
 

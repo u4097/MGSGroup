@@ -8,7 +8,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     id("androidx.navigation.safeargs")
-    id("org.jmailen.kotlinter") version "1.21.0"
+    id("org.jmailen.kotlinter") version "1.22.0"
     id("com.github.ben-manes.versions") version "0.21.0" // uses gradle depUp ; show old dependencies in terminal
 }
 
