@@ -17,13 +17,15 @@ object DialogUtils {
         }
 
     fun createSplashExitDialog(
-        context: Context, content: String
+        context: Context, content: String,
+        exit: () -> Unit,
+        cancel: () -> Unit
     ): MaterialDialog =
         MaterialDialog(context).show {
             title(R.string.dialog_logout)
             message(R.string.dialog_confirm_app_exit)
-            positiveButton(R.string.dialog_logout)
-            negativeButton(R.string.dialog_cancel)
+            positiveButton(R.string.dialog_logout) { exit }
+            negativeButton(R.string.dialog_cancel) { cancel }
             cancelable(false)
         }
 

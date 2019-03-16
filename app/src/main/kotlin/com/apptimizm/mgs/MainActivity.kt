@@ -9,6 +9,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.afollestad.materialdialogs.MaterialDialog
 import com.apptimizm.mgs.AppConfiguration.getRootViewContainerFor
 import com.apptimizm.mgs.AppConfiguration.riseAndShine
 import com.apptimizm.mgs.data.repository.resouces.ResourceState
@@ -17,6 +18,7 @@ import com.apptimizm.mgs.presentation.model.Login
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.currentDate
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.getUpdateDate
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
+import com.apptimizm.mgs.presentation.utils.view.DialogUtils
 import com.apptimizm.mgs.presentation.viewmodel.LoginViewModel
 import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
 import com.apptimizm.mgs.presentation.viewmodel.SettingViewModel
@@ -133,11 +135,20 @@ class MainActivity : AppCompatActivity(),
 
         when (item?.itemId) {
             R.id.login_fragment -> {
-                PrefUtils.token = ""
-                while (mNavController.popBackStack()) {
-                    mNavController.popBackStack()
+                MaterialDialog(this).show {
+                    title(R.string.dialog_logout)
+                    message(R.string.dialog_confirm_app_exit)
+                    positiveButton(R.string.dialog_logout) {
+                        PrefUtils.token = ""
+                        while (mNavController.popBackStack()) {
+                            mNavController.popBackStack()
+                        }
+                        mNavController.navigate(R.id.login_fragment)
+                    }
+                    negativeButton(R.string.dialog_cancel) { }
+                    cancelable(false)
                 }
-                mNavController.navigate(R.id.login_fragment)
+
                 return true
             }
         }
@@ -145,7 +156,5 @@ class MainActivity : AppCompatActivity(),
                 super.onOptionsItemSelected(item)
 
     }
-
-
 
 }

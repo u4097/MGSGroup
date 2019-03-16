@@ -10,16 +10,17 @@
               android:label="Login">
 
         <action android:id="@+id/action_to_route_fragment"
-                app:destination="@id/route_fragment" app:popUpTo="@+id/main_graph" app:popUpToInclusive="true"/>
+                app:destination="@id/route_fragment"
+                app:popUpTo="@+id/main_graph" app:popUpToInclusive="true"/>
     </fragment>
 
     <!--Route-->
     <fragment android:id="@+id/route_fragment"
               tools:layout="@layout/fmt_route"
-              android:name="com.apptimizm.mgs.presentation.routes.RouteFragment"
+              android:name="com.apptimizm.mgs.presentation.routes.RouteTabFragment"
               android:label="RouteFragment">
 
-        <action android:id="@+id/action__to_login_fragment"
+        <action android:id="@+id/action_to_login_fragment"
                 app:destination="@id/login_fragment"/>
     </fragment>
 </navigation>

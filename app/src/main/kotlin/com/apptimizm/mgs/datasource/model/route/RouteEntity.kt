@@ -1,5 +1,6 @@
 package com.apptimizm.mgs.datasource.model.route
 
+import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.Json
 
 data class RouteEntity(
@@ -40,7 +41,7 @@ data class RouteEntity(
     @field:Json(name = "get_out_export_time_end")
     val getOutExportTimeEnd: String? = "",
     @field:Json(name = "fact_on_export_datetime")
-    val factOnExportDatetime: Any? = Any(),
+    val factOnExportDatetime: String? = "",
     @field:Json(name = "executor")
     val executor: String? = "",
     @field:Json(name = "schedule")

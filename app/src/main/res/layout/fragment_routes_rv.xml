@@ -22,7 +22,8 @@
         android:layout_height="match_parent"
         android:layout_marginTop="16dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
+        tools:itemCount="2"
+        tools:listitem="@layout/item_route"
         tools:ignore="MissingConstraints" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

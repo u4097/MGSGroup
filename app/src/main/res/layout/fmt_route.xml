@@ -12,14 +12,18 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary">
 
+
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/white_smoke_80"/>
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:tabTextAppearance="@style/TabLayout.MGS"
+        />
+
 
     </FrameLayout>
 

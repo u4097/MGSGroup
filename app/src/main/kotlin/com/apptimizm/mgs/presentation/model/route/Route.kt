@@ -19,7 +19,7 @@ data class Route(
     val exportOnScheduleDate: String? = "",
     val getOutExportTimeStart: String? = "",
     val getOutExportTimeEnd: String? = "",
-    val factOnExportDatetime: Any? = Any(),
+    val factOnExportDatetime: String? = "",
     val executor: String? = "",
     val schedule: String? = "0"
 )
