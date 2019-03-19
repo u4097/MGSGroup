@@ -19,6 +19,6 @@ class MockLoginApi(mockRetrofit: MockRetrofit) : LoginApi {
     }
 
     private val token =
-        "!~ Mocking Token ~!"
+        "\uD83D\uDE28 !~ This is Mocking Token ~!"
 
 }

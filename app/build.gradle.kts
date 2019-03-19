@@ -7,6 +7,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
     id("androidx.navigation.safeargs")
     id("org.jmailen.kotlinter") version "1.22.0"
     id("com.github.ben-manes.versions") version "0.21.0" // uses gradle depUp ; show old dependencies in terminal
@@ -18,6 +19,14 @@ androidExtensions {
     })
 }
 
+kapt {
+    useBuildCache = true
+    javacOptions {
+        // Increase the max count of errors from annotation processors.
+        // Default is 100.
+        option("-Xmaxerrs", 500)
+    }
+}
 
 android {
     compileSdkVersion(28)
@@ -158,6 +167,11 @@ dependencies {
     releaseImplementation(Libraries.chuckRelease)
     // Anko
     implementation(Libraries.anko)
+
+    /** Room */
+    implementation(Libraries.room)
+    implementation(Libraries.roomAndrodX)
+    kapt(Libraries.roomKap)
 
     /** JodaTime */
     implementation(Libraries.jodaTime)

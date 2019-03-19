@@ -74,6 +74,8 @@ object Versions {
 
     const val layercache = "0.4.0"
 
+    const val room = "2.1.0-alpha05"
+
     const val mockito = "2.25.0"
 }
 
@@ -135,6 +137,7 @@ object Libraries {
     const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
     // FRESCO
     const val fresco = "com.facebook.fresco:fresco:${Versions.fresco}"
+
     // MATERIAL DIALOG
     const val materialDialog = "com.afollestad.material-dialogs:core:${Versions.materialDialog}"
 
@@ -149,6 +152,11 @@ object Libraries {
     const val debugDrawerTimber = "au.com.gridstone.debugdrawer:debugdrawer-timber:${Versions.debugDrawer}"
     const val debugDrawerOkHTTP = "au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:${Versions.debugDrawer}"
 
+
+    // ROOM
+    const val room = "androidx.room:room-runtime:${Versions.room}"
+    const val roomKap = "androidx.room:room-compiler:${Versions.room}"
+    const val roomAndrodX = "androidx.room:room-ktx:${Versions.room}"
 
     // CACHE
     const val layercache = "com.appmattus:layercache:${Versions.layercache}"

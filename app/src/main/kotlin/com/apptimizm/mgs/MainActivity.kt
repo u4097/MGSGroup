@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     private val mSettingVm: SettingViewModel by viewModel()
-    private val mRouteVm: RouteViewModel by viewModel()
     private lateinit var mNavController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -96,22 +95,6 @@ class MainActivity : AppCompatActivity(),
                 }
             }
         })
-
-        mRouteVm.routes.observe(this@MainActivity, Observer {
-            it?.let {
-                when (it.state) {
-                    ResourceState.LOADING -> {
-                    }
-                    ResourceState.ERROR -> {
-                    }
-                    ResourceState.SUCCESS -> {
-//                        PrefUtils.phone = it.data?.route
-                        longToast("Routes size: ${it.data?.results?.size}")
-                    }
-                }
-            }
-        })
-
 
     }
 

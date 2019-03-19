@@ -20,4 +20,9 @@ class UnfinishedFragment : Fragment() {
         return context?.inflate(R.layout.fragment_routes_rv)
     }
 
+    override fun onStart() {
+        super.onStart()
+        // Получаем все из базы все незавершенные маршруты.
+    }
+
 }

@@ -5,13 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.apptimizm.mgs.R
 import com.apptimizm.mgs.ToolbarListener
+import com.apptimizm.mgs.data.repository.resouces.ResourceState
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.currentDate
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.getUpdateDate
 import com.apptimizm.mgs.presentation.utils.view.inflate
+import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
 import com.google.android.material.tabs.TabLayout
+import org.jetbrains.anko.support.v4.longToast
+import org.koin.androidx.viewmodel.ext.viewModel
 
 /**
  * Created by Sitnikov Oleg
@@ -21,9 +26,10 @@ import com.google.android.material.tabs.TabLayout
 
 class RouteTabFragment : Fragment() {
     private lateinit var adapter: TabAdapter
-
     private var tabLayout: TabLayout? = null
     private var vp: ViewPager? = null
+
+    private val mRouteVm: RouteViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             context?.inflate(R.layout.fmt_route)
@@ -37,6 +43,28 @@ class RouteTabFragment : Fragment() {
         vp = view.findViewById(R.id.view_pager)
 
         initAdapter()
+
+       startObserveRoutes()
+    }
+
+    private fun startObserveRoutes() {
+
+        mRouteVm.routes.observe(this@RouteTabFragment, Observer {
+            it?.let {
+                when (it.state) {
+                    ResourceState.LOADING -> {
+                    }
+                    ResourceState.ERROR -> {
+                    }
+                    ResourceState.SUCCESS -> {
+                        longToast("Get routes size: ${it.data?.results?.size}")
+                    }
+                }
+            }
+        })
+
+
+
     }
 
     private fun initAdapter() {
@@ -47,5 +75,13 @@ class RouteTabFragment : Fragment() {
         (vp as ViewPager).adapter = adapter
         (tabLayout as TabLayout).setupWithViewPager(vp)
     }
+
+
+    override fun onStart() {
+        super.onStart()
+        // Получаем все маршруты и сохраняем их в базе.
+        mRouteVm.getRoutes(page = "1", pageSize = "10")
+    }
+
 
 }
