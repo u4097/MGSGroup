@@ -17,6 +17,9 @@ import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.datasource.remote.LoginRemoteDataSourceImpl
 import com.apptimizm.mgs.datasource.remote.RouteRemoteDataSourceImpl
 import com.apptimizm.mgs.datasource.remote.SettingRemoteDataSourceImpl
+import com.apptimizm.mgs.db.AppDatabase
+import com.apptimizm.mgs.db.AppDatabase_Impl
+import com.apptimizm.mgs.db.RoomLocalCache
 import com.apptimizm.mgs.networking.LoginApi
 import com.apptimizm.mgs.domain.repository.LoginRepository
 import com.apptimizm.mgs.domain.repository.RouteRepository
@@ -31,6 +34,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
+import java.util.concurrent.Executors
 
 fun loadAppModules() = loadModules
 
@@ -63,7 +67,7 @@ val useCaseModule: Module = module {
 val repositoryModule: Module = module {
     single { LoginRepositoryImpl(cacheDataSource = get(), remoteDataSource = get()) as LoginRepository }
     single { SettingRepositoryImpl(cacheDataSource = get(), remoteDataSource = get()) as SettingRepository }
-    single { RouteRepositoryImpl(cacheDataSource = get(), remoteDataSource = get()) as RouteRepository }
+    single { RouteRepositoryImpl(roomCache = get(ROOM_CACHE), remoteDataSource = get()) as RouteRepository }
 }
 
 // DATASOURCE (cache and remote)
@@ -94,8 +98,15 @@ val cacheModule: Module = module {
     single(name = LOGIN_CACHE) { DiskLruCache<LoginResponseEntity>(App.instance.dirForCache) }
     single(name = SETTING_CACHE) { DiskLruCache<SettingEntity>(App.instance.dirForCache) }
     single(name = ROUTE_CACHE) { LruCache<List<RouteEntity>>() }
+    single(name = ROOM_CACHE) {
+        RoomLocalCache(
+            AppDatabase.getInstance(App.instance).routeDao(),
+            Executors.newSingleThreadExecutor()
+        )
+    }
 }
 
+private const val ROOM_CACHE = "ROOM_CACHE"
 private const val LOGIN_CACHE = "LOGIN_CACHE"
 private const val SETTING_CACHE = "SETTING_CACHE"
 private const val ROUTE_CACHE = "ROUTE_CACHE"

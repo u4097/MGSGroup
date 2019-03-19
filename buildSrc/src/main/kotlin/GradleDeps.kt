@@ -28,6 +28,8 @@ object Versions {
     const val lifecycle = "2.0.0"
     const val ktx = "1.1.0-alpha05"
 
+    const val pageList = "2.1.0"
+
     const val navigation = "2.0.0"
 
     const val constraintLayout = "2.0.0-alpha3"
@@ -76,6 +78,8 @@ object Versions {
 
     const val room = "2.1.0-alpha05"
 
+    const val stetho = "1.5.1"
+
     const val mockito = "2.25.0"
 }
 
@@ -87,6 +91,7 @@ object Libraries {
     const val androidx = "androidx.appcompat:appcompat:${Versions.androidx}"
     const val ktx = "androidx.core:core-ktx:${Versions.ktx}"
     const val lifecycle = "android.arch.lifecycle:extensions:${Versions.lifecycle}"
+
 
     // NAVIGATION
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
@@ -157,6 +162,13 @@ object Libraries {
     const val room = "androidx.room:room-runtime:${Versions.room}"
     const val roomKap = "androidx.room:room-compiler:${Versions.room}"
     const val roomAndrodX = "androidx.room:room-ktx:${Versions.room}"
+
+    // STETHO
+    const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
+    const val stethoOkHttp = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
+
+    // PAGED LIST
+    const val pagedList = "androidx.paging:paging-runtime:${Versions.pageList}"
 
     // CACHE
     const val layercache = "com.appmattus:layercache:${Versions.layercache}"

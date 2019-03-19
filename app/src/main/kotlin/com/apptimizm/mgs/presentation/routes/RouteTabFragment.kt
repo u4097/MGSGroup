@@ -51,7 +51,9 @@ class RouteTabFragment : Fragment() {
 
         mRouteVm.routes.observe(this@RouteTabFragment, Observer {
             it?.let {
-                when (it.state) {
+
+                longToast("Get routes size: ${it.size}")
+/*                when (it.state) {
                     ResourceState.LOADING -> {
                     }
                     ResourceState.ERROR -> {
@@ -59,7 +61,7 @@ class RouteTabFragment : Fragment() {
                     ResourceState.SUCCESS -> {
                         longToast("Get routes size: ${it.data?.results?.size}")
                     }
-                }
+                }*/
             }
         })
 

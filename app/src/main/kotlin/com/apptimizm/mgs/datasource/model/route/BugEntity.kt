@@ -6,7 +6,7 @@ import com.squareup.moshi.Json
 
 data class BugEntity(
     @field:Json(name = "name")
-    val name: String? = "",
+    val name: String = "",
     @field:Json(name = "plan")
     val plan: Int? = 0,
     @field:Json(name = "fact")

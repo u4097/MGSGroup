@@ -3,6 +3,7 @@ package com.apptimizm.mgs
 import android.app.Application
 import au.com.gridstone.debugdrawer.LumberYard
 import com.apptimizm.mgs.AppConfiguration.remoteDataSource
+import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
@@ -34,7 +35,7 @@ class App : Application() {
 
         loadKoinModules(remoteDataSource)
 
-//        AppConfiguration.init(this)
+        Stetho.initializeWithDefaults(this);
     }
 
     private fun getRootAppDir(): String? {

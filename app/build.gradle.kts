@@ -173,6 +173,13 @@ dependencies {
     implementation(Libraries.roomAndrodX)
     kapt(Libraries.roomKap)
 
+    /** Stetho */
+    implementation(Libraries.stetho)
+
+
+    /** Paged List */
+    implementation(Libraries.pagedList)
+
     /** JodaTime */
     implementation(Libraries.jodaTime)
 
