@@ -20,4 +20,5 @@ class FinishedFragment : Fragment() {
         return context?.inflate(R.layout.fragment_routes_rv)
     }
 
+
 }

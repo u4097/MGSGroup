@@ -52,6 +52,7 @@ class LoginFragment : Fragment() {
 
        btnLogin.setOnClickListener {
            mLoginVm.login(Login(login = "фаун765", password = "скания765"))
+//           mLoginVm.login(Login(login = "user", password = "access123"))
        }
 
     }

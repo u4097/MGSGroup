@@ -39,7 +39,7 @@ interface RouteApi {
 
     @GET("routing_sheet/")
     fun getRouteAsync(
-        @Query("page") page: String,
-        @Query("page_size") pageSize: String
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int
     ): Deferred<Response<RouteResponseEntity>>
 }

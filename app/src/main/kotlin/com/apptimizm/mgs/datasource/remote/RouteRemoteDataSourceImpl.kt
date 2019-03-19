@@ -10,10 +10,10 @@ class RouteRemoteDataSourceImpl constructor(
 ) : RouteRemoteDataSource, BaseRepository() {
 
 
-    override suspend fun get(page: String, pageSize: String): Resource<RouteResponseEntity>? {
+    override suspend fun get(page: Int, pageSize: Int): Resource<RouteResponseEntity>? {
         val response = safeApiCall(
             call = { api.getRouteAsync(page, pageSize).await() },
-            errorMessage = "Error Auth user"
+            errorMessage = "Failure get routes from server!"
         )
         return response
     }

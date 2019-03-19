@@ -12,9 +12,9 @@ import retrofit2.mock.MockRetrofit
 
 class MockRouteApi(mockRetrofit: MockRetrofit) : RouteApi {
 
-    override fun getRouteAsync(page: String, pageSize: String): Deferred<Response<RouteResponseEntity>> {
+    override fun getRouteAsync(page: Int, pageSize: Int): Deferred<Response<RouteResponseEntity>> {
         val response = RouteResponseEntity("1","3","0",mockRoutes)
-        return delegate.returningResponse(response).getRouteAsync("1","3")
+        return delegate.returningResponse(response).getRouteAsync(1,3)
     }
 
     private val delegate: BehaviorDelegate<RouteApi> =

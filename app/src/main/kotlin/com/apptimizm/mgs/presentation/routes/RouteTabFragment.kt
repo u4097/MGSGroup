@@ -29,10 +29,9 @@ class RouteTabFragment : Fragment() {
     private var tabLayout: TabLayout? = null
     private var vp: ViewPager? = null
 
-    private val mRouteVm: RouteViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            context?.inflate(R.layout.fmt_route)
+        context?.inflate(R.layout.fmt_route)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,27 +43,10 @@ class RouteTabFragment : Fragment() {
 
         initAdapter()
 
-       startObserveRoutes()
+        startObserveRoutes()
     }
 
     private fun startObserveRoutes() {
-
-        mRouteVm.routes.observe(this@RouteTabFragment, Observer {
-            it?.let {
-
-                longToast("Get routes size: ${it.size}")
-/*                when (it.state) {
-                    ResourceState.LOADING -> {
-                    }
-                    ResourceState.ERROR -> {
-                    }
-                    ResourceState.SUCCESS -> {
-                        longToast("Get routes size: ${it.data?.results?.size}")
-                    }
-                }*/
-            }
-        })
-
 
 
     }
@@ -78,12 +60,6 @@ class RouteTabFragment : Fragment() {
         (tabLayout as TabLayout).setupWithViewPager(vp)
     }
 
-
-    override fun onStart() {
-        super.onStart()
-        // Получаем все маршруты и сохраняем их в базе.
-        mRouteVm.getRoutes(page = "1", pageSize = "10")
-    }
 
 
 }

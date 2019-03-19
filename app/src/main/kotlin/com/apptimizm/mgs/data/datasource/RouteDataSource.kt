@@ -15,6 +15,6 @@ interface RouteCacheDataSource {
 
 interface RouteRemoteDataSource {
 
-    suspend fun get(page: String, pageSize: String): Resource<RouteResponseEntity>?
+    suspend fun get(page: Int, pageSize: Int): Resource<RouteResponseEntity>?
 
 }
