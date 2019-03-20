@@ -11,7 +11,7 @@ import com.apptimizm.mgs.App
  *
  */
 object SharedPrefFactory {
-    private const val PREF_NAME = "winstrike_preferences"
+    private const val PREF_NAME = "mgs"
 
     val prefs: SharedPreferences
         get() = App.instance.getSharedPreferences(

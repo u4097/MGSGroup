@@ -40,9 +40,11 @@ class LoginFragment : Fragment() {
                     }
                     ResourceState.ERROR -> {
                     }
+                    ResourceState.EMPTY_CACHE -> {
+                    }
                     ResourceState.SUCCESS -> {
                         PrefUtils.token = it.data?.token
-                        longToast(PrefUtils.token.toString())
+//                        longToast(PrefUtils.token.toString())
                         val action = LoginFragmentDirections.actionToRouteFragment()
                         findNavController().navigate(action)
                     }
@@ -50,11 +52,18 @@ class LoginFragment : Fragment() {
             }
         })
 
-       btnLogin.setOnClickListener {
-           mLoginVm.login(Login(login = "фаун765", password = "скания765"))
-//           mLoginVm.login(Login(login = "user", password = "access123"))
-       }
+        btnLogin.setOnClickListener {
+            //           mLoginVm.login(Login(login = "фаун765", password = "скания765"))
+//            mLoginVm.login(Login(login = "user", password = "access123"))
+        }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        PrefUtils.token = ""
+//        mLoginVm.login(Login(login = "user", password = "access123"))
+        mLoginVm.login(Login(login = "фаун765", password = "скания765"))
     }
 
 

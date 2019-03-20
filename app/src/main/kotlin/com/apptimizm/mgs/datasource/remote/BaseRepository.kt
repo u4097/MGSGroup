@@ -18,6 +18,7 @@ open class BaseRepository {
 //        var data : Resource<T>? = null
 
         when (result.state) {
+            is ResourceState.EMPTY_CACHE ->{}
             is ResourceState.SUCCESS ->{}
 //                Timber.tag("$$$").d("${result.state}  - ${result.data.toString()}")
             is ResourceState.ERROR -> {
@@ -46,7 +47,7 @@ open class BaseRepository {
         }
 
 
-        return Resource(ResourceState.ERROR, null, "$code - $message")
+        return Resource(ResourceState.ERROR, null, message)
     }
 }
 

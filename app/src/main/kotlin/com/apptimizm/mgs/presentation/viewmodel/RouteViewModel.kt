@@ -1,13 +1,17 @@
 package com.apptimizm.mgs.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
+import com.apptimizm.mgs.data.repository.resouces.Resource
+import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.domain.model.route.RouteResponse
 import com.apptimizm.mgs.domain.usecases.RouteUseCase
 import com.apptimizm.mgs.presentation.utils.livedata.SingleLiveEvent
 import kotlinx.coroutines.launch
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Created by Oleg Sitnikov
@@ -18,52 +22,59 @@ import kotlinx.coroutines.launch
 
 class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewModel() {
 
+    val pending = AtomicBoolean(false)
+
     companion object {
         private const val VISIBLE_THRESHOLD = 5
     }
 
-    val refreshRouteList = SingleLiveEvent<Boolean>()
+//    val refreshRouteList = SingleLiveEvent<Boolean>()
 
-    private val routeResult: LiveData<RouteResponse> = Transformations.map(refreshRouteList) {
-        routeUseCase.getRoutesFromCache()
-    }
+/*     val routeResult: LiveData<Resource<RouteResponse>>? = Transformations.map(refreshRouteList) {
+            routeUseCase.getRoutesFromCache()
+        }*/
+
+    val routeResult = MutableLiveData<Resource<RouteResponse>>()
 
     val routes: LiveData<PagedList<RouteEntity>> = Transformations.switchMap(
         routeResult
-    ) { it.results }
+    ) {
+        it.data?.results
+    }
 
     val networkErrors: LiveData<String> = Transformations.switchMap(
         routeResult
-    ) { it.networkErrors }
+    ) { it.data?.networkErrors }
 
+    val serverError = MutableLiveData<ErrorResponseEntity>()
 
     /**
      * Refresh routes from  repository based.
      */
-    fun getRoutes(isRefresh: Boolean) {
-        if (isRefresh)
-            refreshRouteList.postValue(true)
+    fun getRoutesFromCache() {
+        routeResult.postValue(routeUseCase.getRoutesFromCache())
     }
+
+    fun getRoutesFromServer() {
+        scope.launch {
+            routeUseCase.getRouteFromServer {
+                serverError.postValue(it)
+            }
+        }
+    }
+
 
     fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
             scope.launch {
-                routeUseCase.getRouteFromServer()
+                if (pending.compareAndSet(false, true)) {
+                    routeUseCase.getRouteFromServer {
+                        serverError.postValue(it)
+                    }
+                }
             }
         }
     }
 }
 
 
-//    val networkError = SingleLiveEvent<String>()
-
-//fun getRoutes(page: String, pageSize: String) {
-//    scope.launch {
-/*             routeUseCase.getRouteFromServerAndSave(page, pageSize, { routes.postValue(it) }, {
-                if (!it.isEmpty())
-                    networkError.postValue(it)
-            })*/
-//    }
-//}
-
-//}

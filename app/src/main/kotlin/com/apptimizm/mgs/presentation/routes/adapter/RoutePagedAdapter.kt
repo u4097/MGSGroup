@@ -44,7 +44,7 @@ class RoutePagedAdapter : PagedListAdapter<RouteEntity, RecyclerView.ViewHolder>
                 oldItem.id == newItem.id
 
             override fun areContentsTheSame(oldItem: RouteEntity, newItem: RouteEntity): Boolean =
-                oldItem == newItem
+                oldItem.address == newItem.address
         }
     }
 }

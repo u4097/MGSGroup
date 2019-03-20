@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.apptimizm.mgs.AppConfiguration.getRootViewContainerFor
@@ -91,6 +92,9 @@ class MainActivity : AppCompatActivity(),
                     ResourceState.SUCCESS -> {
                         PrefUtils.phone = it.data?.setting
                         longToast(PrefUtils.phone.toString())
+                    }
+                    else -> {
+                        longToast("No data")
                     }
                 }
             }

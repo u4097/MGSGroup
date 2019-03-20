@@ -39,8 +39,8 @@ object AppConfiguration : KoinComponent {
     private val mockRetrofit by inject<MockRetrofit>()
 
     object DatasourceProperties {
-        const val MOCK_URL = "http://localhost/mock/v0/"
         const val DEV_URL = "http://178.57.222.1:8000/v0/"
+        const val MOCK_URL = "http://localhost/mock/v0/"
     }
 
 
@@ -52,8 +52,8 @@ object AppConfiguration : KoinComponent {
             DebugRetrofitConfig(
                 get(),
                 listOf(
-                    Endpoint("Mock", MOCK_URL, isMock = true),
-                    Endpoint("Develop",DEV_URL , isMock = false)
+                    Endpoint("Develop", DEV_URL, isMock = false),
+                    Endpoint("Mock", MOCK_URL, isMock = true)
                 ),
                 get()
             )
@@ -121,7 +121,6 @@ object AppConfiguration : KoinComponent {
         } else {
             retrofit.create<RouteApi>(RouteApi::class.java)
         }
-
 
 
     // Debug Drawer SetUp
