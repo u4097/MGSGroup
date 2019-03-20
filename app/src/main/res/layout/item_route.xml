@@ -98,7 +98,7 @@
     <Button
       android:id="@+id/btnTank06"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -114,7 +114,7 @@
     <Button
       android:id="@+id/btnAmountPlan06"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -132,7 +132,7 @@
     <Button
       android:id="@+id/btnTank07"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -148,7 +148,7 @@
     <Button
       android:id="@+id/btnAmountPlan07"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -167,7 +167,7 @@
     <Button
       android:id="@+id/btnTank08"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -183,7 +183,7 @@
     <Button
       android:id="@+id/btnAmountPlan08"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -202,7 +202,7 @@
     <Button
       android:id="@+id/btnTank11"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -219,7 +219,7 @@
     <Button
       android:id="@+id/btnAmountPlan11"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -239,7 +239,7 @@
     <Button
       android:id="@+id/btnTank3m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -256,7 +256,7 @@
     <Button
       android:id="@+id/btnAmountPlan3m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -274,7 +274,7 @@
     <Button
       android:id="@+id/btnTank5m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -291,7 +291,7 @@
     <Button
       android:id="@+id/btnAmountPlan5m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -310,7 +310,7 @@
     <Button
       android:id="@+id/btnTank8"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -327,7 +327,7 @@
     <Button
       android:id="@+id/btnAmountPlan8"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -345,7 +345,7 @@
     <Button
       android:id="@+id/btnTank20m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -362,7 +362,7 @@
     <Button
       android:id="@+id/btnAmountPlan20m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -380,7 +380,7 @@
     <Button
       android:id="@+id/btnTank27m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -397,7 +397,7 @@
     <Button
       android:id="@+id/btnAmountPlan27m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -415,7 +415,7 @@
     <Button
       android:id="@+id/btnTank32m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -432,7 +432,7 @@
     <Button
       android:id="@+id/btnAmountPlan32m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -450,7 +450,7 @@
     <Button
       android:id="@+id/btnTank35m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="16dp"
@@ -467,7 +467,7 @@
     <Button
       android:id="@+id/btnAmountPlan35m3"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -502,7 +502,7 @@
     <Button
       android:id="@+id/btnAmountPlanPackagedCollection"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
@@ -537,7 +537,7 @@
     <Button
       android:id="@+id/btnAmountPlanMeshkovCollection"
       style="@style/MullerBold20"
-      android:layout_width="64dp"
+      android:layout_width="77dp"
       android:layout_height="50dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"

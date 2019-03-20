@@ -9,10 +9,15 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.core.content.res.ResourcesCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.apptimizm.mgs.R
+import org.jetbrains.anko.backgroundDrawable
+import org.jetbrains.anko.backgroundResource
 
 fun View.visible() {
     visibility = View.VISIBLE
@@ -118,3 +123,9 @@ fun TextView.onRightDrawableClicked(onClicked: (view: TextView) -> Unit) {
     }
 }
 
+//mBtnAmountPlan_06!!.background = ResourcesCompat.getDrawable(view.resources, R.drawable.bg_btn_white, null)
+// !!.background =
+fun Button.setBackgroundWhite(view: View) {
+    this.backgroundResource =  R.drawable.bg_btn_white
+
+}
