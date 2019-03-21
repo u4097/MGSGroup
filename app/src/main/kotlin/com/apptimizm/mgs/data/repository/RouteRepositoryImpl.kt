@@ -17,7 +17,7 @@ import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.squareup.moshi.JsonAdapter
 import timber.log.Timber
 import com.squareup.moshi.Moshi
-
+import java.util.concurrent.atomic.AtomicBoolean
 
 
 class RouteRepositoryImpl constructor(
@@ -49,17 +49,32 @@ class RouteRepositoryImpl constructor(
 
 
     // Get from server And save routes to cache on Success.
-    override suspend fun getRouteFromServerAndSave(onError: (error: ErrorResponseEntity)->Unit) {
+    override suspend fun getRouteFromServerAndSave(refresh: Boolean, onError: (error: ErrorResponseEntity) -> Unit) {
+        val pending = AtomicBoolean(false)
+        var routes: Resource<RouteResponseEntity>? = null
         if (isRequestInProgress) return
 
-        Timber.d("Get routes from server, page: ${PrefUtils.nextpage}, itemsPerPage: $NETWORK_PAGE_SIZE")
-        val routes: Resource<RouteResponseEntity>? = remoteDataSource.get(PrefUtils.nextpage, NETWORK_PAGE_SIZE)
+        if (refresh) {
+            roomCache.delete()
+            PrefUtils.nextpage = 1
+            Timber.tag("ROUTE").d("Remove data from cache")
+            isRequestInProgress = true
+        }
 
-        isRequestInProgress = true
+        if (pending.compareAndSet(false, true)) {
+            Timber.tag("ROUTE")
+                .d("Get routes from server, page: ${PrefUtils.nextpage}, itemsPerPage: $NETWORK_PAGE_SIZE")
+            routes = remoteDataSource.get(PrefUtils.nextpage, NETWORK_PAGE_SIZE)
+            isRequestInProgress = true
+        } else {
+            return
+        }
+
 
         routes?.data?.results?.let {
             // Save to cache
-            roomCache.insert(routes.data.results) {
+            pending.set(false)
+            roomCache.insert(routes.data?.results!!) {
                 PrefUtils.nextpage++
                 isRequestInProgress = false
             }
@@ -67,9 +82,9 @@ class RouteRepositoryImpl constructor(
 
         routes?.message?.let {
             val moshi = Moshi.Builder().build()
-            val jsonAdapter : JsonAdapter<ErrorResponseEntity> = moshi.adapter(ErrorResponseEntity::class.java)
-            val error: ErrorResponseEntity  = jsonAdapter.fromJson(it)!!
-            Timber.e("Failure to get routes: \n ${error.errors}")
+            val jsonAdapter: JsonAdapter<ErrorResponseEntity> = moshi.adapter(ErrorResponseEntity::class.java)
+            val error: ErrorResponseEntity = jsonAdapter.fromJson(it)!!
+            Timber.tag("ROUTE").e("Failure to get routes: \n ${error.errors}")
 
             onError(error)
         }

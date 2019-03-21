@@ -9,5 +9,5 @@ interface RouteRepository {
 
     fun getRouteFromCache(): Resource<RouteResponse>
 
-    suspend fun getRouteFromServerAndSave(onError: (error: ErrorResponseEntity) -> Unit)
+    suspend fun getRouteFromServerAndSave(refresh: Boolean, onError: (error: ErrorResponseEntity) -> Unit)
 }

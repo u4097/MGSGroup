@@ -11,6 +11,7 @@ import com.apptimizm.mgs.domain.model.route.RouteResponse
 import com.apptimizm.mgs.domain.usecases.RouteUseCase
 import com.apptimizm.mgs.presentation.utils.livedata.SingleLiveEvent
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -39,6 +40,7 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
     val routes: LiveData<PagedList<RouteEntity>> = Transformations.switchMap(
         routeResult
     ) {
+        Timber.tag("ROUTE").d("Transform.swithcMap on routeResult")
         it.data?.results
     }
 
@@ -55,10 +57,12 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
         routeResult.postValue(routeUseCase.getRoutesFromCache())
     }
 
-    fun getRoutesFromServer() {
+    fun getRoutesFromServer(refresh: Boolean = false) {
         scope.launch {
-            routeUseCase.getRouteFromServer {
-                serverError.postValue(it)
+            if (pending.compareAndSet(false, true)) {
+                routeUseCase.getRouteFromServer(refresh = refresh) {
+                    serverError.postValue(it)
+                }
             }
         }
     }
@@ -68,7 +72,7 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
             scope.launch {
                 if (pending.compareAndSet(false, true)) {
-                    routeUseCase.getRouteFromServer {
+                    routeUseCase.getRouteFromServer(refresh = false) {
                         serverError.postValue(it)
                     }
                 }

@@ -38,4 +38,6 @@ interface RouteDao {
     @Query("SELECT * FROM route ORDER BY counterparty ASC")
     fun routes(): DataSource.Factory<Int,RouteEntity>
 
+    @Query("DELETE FROM route")
+    fun clear()
 }

@@ -41,10 +41,6 @@ class RouteTabFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     private fun initAdapter() {
         adapter = TabAdapter(fragmentManager)
         adapter.addFragments(UnfinishedFragment(), "Не выполненные")

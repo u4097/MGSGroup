@@ -51,4 +51,10 @@ class RoomLocalCache(
         return routeDao.routes()
     }
 
+    fun delete() {
+        ioExecutor.execute {
+            routeDao.clear()
+        }
+    }
+
 }

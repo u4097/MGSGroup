@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.apptimizm.mgs.R
 import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
@@ -47,6 +48,13 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val swipeRefreshLayout: SwipeRefreshLayout = view.findViewById(R.id.swRefreshLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            longToast("Update routes on swipe")
+            Timber.tag("ROUTE").d("Update routes on swipe")
+            mRouteVm.getRoutesFromServer(refresh = true)
+        }
+
         setupScrollListener()
 
         mRouteVm.getRoutesFromCache()
@@ -69,6 +77,7 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
             showEmptyList(it?.size == 0)
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
+            swRefreshLayout.isRefreshing = false
             Timber.tag("ROUTE").d("Update route adapter in initAdapter() fun")
         })
 

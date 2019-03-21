@@ -1,6 +1,8 @@
 package com.apptimizm.mgs
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import au.com.gridstone.debugdrawer.LumberYard
 import com.apptimizm.mgs.AppConfiguration.remoteDataSource
 import com.facebook.stetho.Stetho
@@ -48,6 +50,12 @@ class App : Application() {
 
     companion object {
         lateinit var instance: App
+    }
+
+    fun isOnline(): Boolean {
+        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val netInfo = cm.activeNetworkInfo
+        return netInfo != null && netInfo.isConnectedOrConnecting
     }
 
 }

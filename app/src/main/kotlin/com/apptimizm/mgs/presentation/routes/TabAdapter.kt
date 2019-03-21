@@ -13,10 +13,6 @@ class TabAdapter(fm: FragmentManager?) : FragmentStatePagerAdapter(fm!!) {
     private val fragments = mutableListOf<Fragment>()
     private val mFragmentTitleList = mutableListOf<String>()
 
-    fun addFragments(fragment: Fragment) {
-        fragments.add(fragment)
-    }
-
     fun addFragments(fragment: Fragment, title: String) {
         fragments.add(fragment)
         mFragmentTitleList.add(title)
