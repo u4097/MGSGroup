@@ -14,13 +14,32 @@
                 app:popUpTo="@+id/main_graph" app:popUpToInclusive="true"/>
     </fragment>
 
-    <!--Route-->
+    <!--Route List Tab Layout-->
     <fragment android:id="@+id/route_fragment"
-              tools:layout="@layout/fmt_route"
+              tools:layout="@layout/fmt_routes_rv"
               android:name="com.apptimizm.mgs.presentation.routes.RouteTabFragment"
               android:label="RouteFragment">
 
         <action android:id="@+id/action_to_login_fragment"
                 app:destination="@id/login_fragment"/>
+
+        <action android:id="@+id/action_to_unFinishedDetail"
+                app:destination="@id/unFinishedDetail"/>
+
     </fragment>
+
+
+    <!--UnFinishedDetail-->
+    <fragment android:id="@+id/unFinishedDetail"
+              tools:layout="@layout/fmt_info"
+              android:name="com.apptimizm.mgs.presentation.routes.unfinish.UnFinishedDetailFragment"
+              android:label="UnFinishedDetail">
+        <!--Route id-->
+        <argument android:name="routeId" app:argType="string"
+                  android:defaultValue=" "
+        />
+    </fragment>
+
+    <!--UnFinished Fragment-->
+
 </navigation>

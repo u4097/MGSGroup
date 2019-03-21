@@ -1,4 +1,4 @@
-package com.apptimizm.mgs.presentation.routes
+package com.apptimizm.mgs.presentation.routes.finish
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,11 +13,12 @@ import com.apptimizm.mgs.presentation.utils.view.inflate
  * Created by oleg on 03.02.2018.
  */
 
-class AllFragment : Fragment() {
+class FinishedFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return context?.inflate(R.layout.fragment_routes_rv)
+        return context?.inflate(R.layout.fmt_routes_rv)
     }
+
 
 }

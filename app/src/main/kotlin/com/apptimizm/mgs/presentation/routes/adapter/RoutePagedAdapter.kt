@@ -25,10 +25,10 @@ import com.apptimizm.mgs.datasource.model.route.RouteEntity
 /**
  * Adapter for the list of routesitories.
  */
-class RoutePagedAdapter : PagedListAdapter<RouteEntity, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
+class RoutePagedAdapter(val listener: OnRouteClickListener) : PagedListAdapter<RouteEntity, RecyclerView.ViewHolder>(REPO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return RouteViewHolder.create(parent)
+        return RouteViewHolder.create(parent = parent, listener = listener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

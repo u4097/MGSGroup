@@ -3,6 +3,7 @@ package com.apptimizm.mgs.presentation.routes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 
 /**
  * Created by Oleg Sitnikov on 2019-01-28

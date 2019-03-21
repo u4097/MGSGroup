@@ -1,4 +1,4 @@
-package com.apptimizm.mgs.presentation.routes
+package com.apptimizm.mgs.presentation.routes.unfinish
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,17 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.apptimizm.mgs.R
 import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
+import com.apptimizm.mgs.presentation.routes.RouteTabFragmentDirections
+import com.apptimizm.mgs.presentation.routes.adapter.OnRouteClickListener
 import com.apptimizm.mgs.presentation.routes.adapter.RoutePagedAdapter
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.apptimizm.mgs.presentation.utils.view.inflate
 import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
-import kotlinx.android.synthetic.main.fragment_routes_rv.*
+import kotlinx.android.synthetic.main.fmt_routes_rv.*
 import org.jetbrains.anko.support.v4.longToast
 import org.koin.androidx.viewmodel.ext.viewModel
 import timber.log.Timber
@@ -26,13 +29,19 @@ import timber.log.Timber
  * Created by oleg on 03.02.2018.
  */
 
-class UnfinishedFragment : Fragment() {
+class UnfinishedFragment : Fragment(), OnRouteClickListener {
+
+    override fun onRouteItemClicked(route: RouteEntity) {
+        val action = RouteTabFragmentDirections.actionToUnFinishedDetail()
+        action.routeId = route.id
+        findNavController().navigate(action)
+    }
 
     private val mRouteVm: RouteViewModel by viewModel()
-    private val adapter = RoutePagedAdapter()
+    private val adapter = RoutePagedAdapter(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return context?.inflate(R.layout.fragment_routes_rv)
+        return context?.inflate(R.layout.fmt_routes_rv)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,12 +49,14 @@ class UnfinishedFragment : Fragment() {
 
         setupScrollListener()
 
-        initAdapter()
         mRouteVm.getRoutesFromCache()
+        initAdapter()
+
     }
 
 
     private fun initAdapter() {
+
         rvRoutes.adapter = adapter
         mRouteVm.routes.observe(this, Observer<PagedList<RouteEntity>> {
             if (it?.size == 0) {
@@ -57,6 +68,8 @@ class UnfinishedFragment : Fragment() {
             Timber.d("list: ${it?.size}")
             showEmptyList(it?.size == 0)
             adapter.submitList(it)
+            adapter.notifyDataSetChanged()
+            Timber.tag("ROUTE").d("Update route adapter in initAdapter() fun")
         })
 
         mRouteVm.networkErrors.observe(this, Observer<String> {

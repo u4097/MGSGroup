@@ -1,31 +1,25 @@
 package com.apptimizm.mgs
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.apptimizm.mgs.AppConfiguration.getRootViewContainerFor
 import com.apptimizm.mgs.AppConfiguration.riseAndShine
 import com.apptimizm.mgs.data.repository.resouces.ResourceState
 import com.apptimizm.mgs.di.loadAppModules
-import com.apptimizm.mgs.presentation.model.Login
-import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.currentDate
-import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.getUpdateDate
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
-import com.apptimizm.mgs.presentation.utils.view.DialogUtils
-import com.apptimizm.mgs.presentation.viewmodel.LoginViewModel
-import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
 import com.apptimizm.mgs.presentation.viewmodel.SettingViewModel
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.longToast
 import org.koin.androidx.viewmodel.ext.viewModel
+import timber.log.Timber
 
 interface ToolbarListener {
     fun updateTitle(title: String)
@@ -33,12 +27,14 @@ interface ToolbarListener {
 
 class MainActivity : AppCompatActivity(),
     ToolbarListener {
+
+
     override fun updateTitle(title: String) {
         toolbar.setTitle(title)
     }
 
     private val mSettingVm: SettingViewModel by viewModel()
-    private lateinit var mNavController: NavController
+    lateinit var mNavController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -121,6 +117,11 @@ class MainActivity : AppCompatActivity(),
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when (item?.itemId) {
+            android.R.id.home -> {
+                mNavController.navigate(R.id.route_fragment)
+                Timber.tag("ROUTE").d("On home click")
+                return true
+            }
             R.id.login_fragment -> {
                 MaterialDialog(this).show {
                     title(R.string.dialog_logout)
@@ -142,6 +143,11 @@ class MainActivity : AppCompatActivity(),
         return NavigationUI.onNavDestinationSelected(item!!, mNavController) ||
                 super.onOptionsItemSelected(item)
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        mNavController.navigate(R.id.route_fragment)
     }
 
 }

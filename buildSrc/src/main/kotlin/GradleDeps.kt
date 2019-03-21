@@ -58,6 +58,8 @@ object Versions {
 
     const val koin = "2.0.0-beta-1"
 
+    const val eventBus = "3.1.1"
+
     const val materialDialog = "2.1.0"
 
     const val jodaTime = "2.10.1.1"
@@ -193,6 +195,9 @@ object Libraries {
 
     // KOIN TEST
     const val koinTest = "org.koin:koin-test:${Versions.koin}"
+
+    // Event BUS
+    const val eventBus = "org.greenrobot:eventbus:${Versions.eventBus}"
 }
 
 
