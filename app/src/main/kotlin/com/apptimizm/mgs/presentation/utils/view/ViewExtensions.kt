@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.appcompat.widget.AppCompatButton
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.apptimizm.mgs.R
 import org.jetbrains.anko.backgroundResource
@@ -42,7 +43,7 @@ fun SwipeRefreshLayout.stopRefreshing() {
  * context.inflate(R.layout.my_layout)
  */
 
-fun Context.inflate(res: Int, parent: ViewGroup? = null) : View {
+fun Context.inflate(res: Int, parent: ViewGroup? = null): View {
     return LayoutInflater.from(this).inflate(res, parent, false)
 }
 
@@ -84,16 +85,17 @@ fun View.setHeight(height: Int) {
 
 // Validate login
 fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
-    this.addTextChangedListener(object: TextWatcher {
+    this.addTextChangedListener(object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             afterTextChanged.invoke(s.toString())
         }
 
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     })
 }
+
 fun EditText.validate(validator: (String) -> Boolean, message: String): Boolean {
     this.afterTextChanged {
         this.error = if (validator(it)) null else message
@@ -124,6 +126,24 @@ fun TextView.onRightDrawableClicked(onClicked: (view: TextView) -> Unit) {
 //mBtnAmountPlan_06!!.background = ResourcesCompat.getDrawable(view.resources, R.drawable.bg_btn_white, null)
 // !!.background =
 fun Button.setBackgroundWhite() {
-    this.backgroundResource =  R.drawable.bg_btn_white
+    this.backgroundResource = R.drawable.bg_btn_white
 
 }
+
+fun Button.getTextValue(): Int {
+    return if (!this.text.isEmpty()) {
+        this.text.toString().toInt()
+    } else {
+        0
+    }
+}
+
+fun EditText.getTextValue(): Int {
+    return if (!this.text.isEmpty()) {
+        this.text.toString().toInt()
+    } else {
+        0
+    }
+}
+
+fun EditText.isNotEmpty(): Boolean  = this.text.isNotEmpty()

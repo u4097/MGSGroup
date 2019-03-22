@@ -2,6 +2,7 @@ package com.apptimizm.mgs.presentation.routes.unfinish
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +11,32 @@ import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
 import com.apptimizm.mgs.R
 import com.apptimizm.mgs.ToolbarListener
+import com.apptimizm.mgs.datasource.model.route.BugEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
+import com.apptimizm.mgs.presentation.model.route.Bug
 import com.apptimizm.mgs.presentation.routes.BaseFragment
 import com.apptimizm.mgs.presentation.utils.Constants
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_06
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_07
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_08
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_11
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_20m3
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_27m3
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_32m3
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_35m3
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_3m3
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_5m3
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_8m3
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_MeshkovCollection
+import com.apptimizm.mgs.presentation.utils.Constants.BUG_PackagedCollection
 import com.apptimizm.mgs.presentation.utils.RxUtils.rxTextView
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.getStringFromLocalTime
+import com.apptimizm.mgs.presentation.utils.view.getTextValue
 import com.apptimizm.mgs.presentation.utils.view.inflate
+import com.apptimizm.mgs.presentation.utils.view.isNotEmpty
 import com.apptimizm.mgs.presentation.utils.view.visible
 import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
+import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.checkedChanges
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -239,6 +258,7 @@ class UnFinishedDetailFragment : BaseFragment() {
         mTvNote = view.findViewById(R.id.tvNote)
 
         initView()
+        initFinishBtn()
     }
 
     private fun initView() {
@@ -252,6 +272,140 @@ class UnFinishedDetailFragment : BaseFragment() {
         })
 
     }
+
+    fun initFinishBtn() {
+        disposables.add(
+            mBtnFinish.clicks()
+                .subscribe {
+                    if (mBtnFinish.isEnabled) {
+                        val bugs = mutableListOf<BugEntity>()
+
+                        when {
+                            mEtAmountFact_06.isNotEmpty() -> {
+                                val bug_06 = BugEntity(
+                                    BUG_06,
+                                    mBtnAmountPlan_06.getTextValue(),
+                                    mEtAmountFact_06.getTextValue()
+                                )
+                                bugs.add(bug_06)
+                            }
+
+                            mEtAmountFact_07.isNotEmpty() -> {
+                                val bug_07 = BugEntity(
+                                    BUG_07,
+                                    mBtnAmountPlan_07.getTextValue(),
+                                    mEtAmountFact_07.getTextValue()
+                                )
+                                bugs.add(bug_07)
+                            }
+
+                            mEtAmountFact_08.isNotEmpty() -> {
+                                val bug_08 = BugEntity(
+                                    BUG_08,
+                                    mBtnAmountPlan_08.getTextValue(),
+                                    mEtAmountFact_08.getTextValue()
+                                )
+                                bugs.add(bug_08)
+                            }
+
+                            mEtAmountFact_11.isNotEmpty() -> {
+                                val bug_11 = BugEntity(
+                                    BUG_11,
+                                    mBtnAmountPlan_11.getTextValue(),
+                                    mEtAmountFact_11.getTextValue()
+                                )
+                                bugs.add(bug_11)
+                            }
+
+                            mEtAmountFact_3m3.isNotEmpty() -> {
+                                val bug_3m3 = BugEntity(
+                                    BUG_3m3,
+                                    mBtnAmountPlan_3m3.getTextValue(),
+                                    mEtAmountFact_3m3.getTextValue()
+                                )
+                                bugs.add(bug_3m3)
+                            }
+
+                            mEtAmountFact_5m3.isNotEmpty() -> {
+                                val bug_5m3 = BugEntity(
+                                    BUG_5m3,
+                                    mBtnAmountPlan_5m3.getTextValue(),
+                                    mEtAmountFact_5m3.getTextValue()
+                                )
+                                bugs.add(bug_5m3)
+                            }
+
+                            mEtAmountFact_8m3.isNotEmpty() -> {
+                                val bug_8m3 = BugEntity(
+                                    BUG_8m3,
+                                    mBtnAmountPlan_8m3.getTextValue(),
+                                    mEtAmountFact_8m3.getTextValue()
+                                )
+                                bugs.add(bug_8m3)
+                            }
+
+                            mEtAmountFact_20m3.isNotEmpty() -> {
+                                val bug_20m3 = BugEntity(
+                                    BUG_20m3,
+                                    mBtnAmountPlan_20m3.getTextValue(),
+                                    mEtAmountFact_20m3.getTextValue()
+                                )
+                                bugs.add(bug_20m3)
+                            }
+
+                            mEtAmountFact_27m3.isNotEmpty() -> {
+                                val bug_27m3 = BugEntity(
+                                    BUG_27m3,
+                                    mBtnAmountPlan_27m3.getTextValue(),
+                                    mEtAmountFact_27m3.getTextValue()
+                                )
+                                bugs.add(bug_27m3)
+                            }
+
+                            mEtAmountFact_32m3.isNotEmpty() -> {
+                                val bug_32m3 = BugEntity(
+                                    BUG_32m3,
+                                    mBtnAmountPlan_32m3.getTextValue(),
+                                    mEtAmountFact_32m3.getTextValue()
+                                )
+                                bugs.add(bug_32m3)
+                            }
+
+                            mEtAmountFact_35m3.isNotEmpty() -> {
+                                val bug_35m3 = BugEntity(
+                                    BUG_35m3,
+                                    mBtnAmountPlan_35m3.getTextValue(),
+                                    mEtAmountFact_35m3.getTextValue()
+                                )
+                                bugs.add(bug_35m3)
+                            }
+
+                            mEtAmountFact_PackagedCollection.isNotEmpty() -> {
+                                val bug_PackagedCollection = BugEntity(
+                                    BUG_PackagedCollection,
+                                    mBtnAmountPlan_PackagedCollection.getTextValue(),
+                                    mEtAmountFact_PackagedCollection.getTextValue()
+                                )
+                                bugs.add(bug_PackagedCollection)
+                            }
+
+                            mEtAmountFact_MeshkovCollection.isNotEmpty() -> {
+                                val bug_MeshkovCollection = BugEntity(
+                                    BUG_MeshkovCollection,
+                                    mBtnAmountPlan_MeshkovCollection.getTextValue(),
+                                    mEtAmountFact_MeshkovCollection.getTextValue()
+                                )
+                                bugs.add(bug_MeshkovCollection)
+                            }
+
+                        }
+                        longToast("bugs list: ${bugs.size}")
+                        Timber.tag("ROUTE").d("bugs list: ${bugs}")
+                    }
+                }
+        )
+    }
+
 
     private fun setRoute() {
         (activity as ToolbarListener).updateTitle("${mRoute?.counterparty}")
