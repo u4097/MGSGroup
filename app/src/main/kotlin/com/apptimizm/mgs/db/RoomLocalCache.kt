@@ -52,6 +52,11 @@ class RoomLocalCache(
         return routeDao.routes()
     }
 
+    /** Get routes by status (active or not) */
+    fun getRouteByStatus(status: String): DataSource.Factory<Int, RouteEntity> {
+        return routeDao.routesByStatus(status)
+    }
+
     /**
      * Clear cache
      */

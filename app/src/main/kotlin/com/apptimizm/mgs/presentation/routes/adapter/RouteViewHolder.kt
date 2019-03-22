@@ -36,6 +36,13 @@ import com.apptimizm.mgs.presentation.utils.view.setBackgroundWhite
 import timber.log.Timber
 
 /**
+ * Created by Sitnikov Oleg
+ * Date: 2019-03-22
+ * Time: 23:03
+ */
+
+
+/**
  * View Holder for a [RouteEntity] RecyclerView list item.
  */
 class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : RecyclerView.ViewHolder(view) {

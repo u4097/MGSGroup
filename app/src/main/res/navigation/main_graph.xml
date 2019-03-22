@@ -26,6 +26,10 @@
         <action android:id="@+id/action_to_unFinishedDetail"
                 app:destination="@id/unFinishedDetail"/>
 
+
+        <action android:id="@+id/action_to_finished_detail"
+                app:destination="@id/finished_detail"/>
+
     </fragment>
 
 
@@ -40,6 +44,15 @@
         />
     </fragment>
 
-    <!--UnFinished Fragment-->
+    <!--Finished Detail Fragment-->
+    <fragment android:id="@+id/finished_detail"
+              tools:layout="@layout/fmt_info"
+              android:name="com.apptimizm.mgs.presentation.routes.finish.FinishedDetailFragment"
+              android:label="FinishedDetailFragment"/>
+
+    <!--Route id-->
+    <argument android:name="routeId" app:argType="string"
+              android:defaultValue=" "
+    />
 
 </navigation>

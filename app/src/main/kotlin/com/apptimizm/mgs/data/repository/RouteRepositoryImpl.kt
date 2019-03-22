@@ -48,6 +48,19 @@ class RouteRepositoryImpl constructor(
 
     }
 
+    override fun getRouteFromCacheByStatus(status: String): Resource<RouteResponse> {
+        var data: LiveData<PagedList<RouteEntity>>? = null
+        // Get from cache first.
+        // Get data source factory from room cache
+        val dataSourceFactory = roomCache.getRouteByStatus(status)
+        // Get data from room cache
+        data = LivePagedListBuilder(dataSourceFactory, DATABASE_PAGE_SIZE).build()
+
+        return Resource(ResourceState.SUCCESS, RouteResponse(data, networkErrors))
+
+    }
+
+
     override fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity> {
         return roomCache.selectRouteById(routeId)
     }

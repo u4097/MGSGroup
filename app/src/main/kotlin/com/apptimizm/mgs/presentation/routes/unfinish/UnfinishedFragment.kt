@@ -26,9 +26,12 @@ import org.koin.androidx.viewmodel.ext.viewModel
 import timber.log.Timber
 
 
-/*
- * Created by oleg on 03.02.2018.
+/**
+ * Created by Sitnikov Oleg
+ * Date: 2019-03-22
+ * Time: 23:03
  */
+
 
 class UnfinishedFragment : Fragment(), OnRouteClickListener {
 

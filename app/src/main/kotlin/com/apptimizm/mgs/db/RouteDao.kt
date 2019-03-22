@@ -23,6 +23,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
+import org.jetbrains.anko.db.SqlOrderDirection
 
 /**
  * Room data access object for accessing the [Route] table.
@@ -33,9 +34,6 @@ interface RouteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(routeList: List<RouteEntity>)
 
-    // Do a similar query as the search API:
-    // Look for repos that contain the query string in the name or in the description
-    // and order those results descending, by the number of stars and then by name
     @Query("SELECT * FROM route ORDER BY counterparty ASC")
     fun routes(): DataSource.Factory<Int,RouteEntity>
 
@@ -44,4 +42,7 @@ interface RouteDao {
 
     @Query("SELECT * FROM route WHERE id = :routeId")
     fun routeById(routeId: String): LiveData<RouteEntity>
+
+    @Query("SELECT * FROM route WHERE status = :status ORDER BY counterparty ASC")
+    fun routesByStatus(status: String): DataSource.Factory<Int,RouteEntity>
 }

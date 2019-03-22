@@ -55,6 +55,11 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
         routeResult.postValue(routeUseCase.getRoutesFromCache())
     }
 
+    /** Get routes from cache by status */
+    fun getRoutesFromCacheByStatus(status: String) {
+        routeResult.postValue(routeUseCase.getRoutesFromCacheByStatus(status))
+    }
+
     fun getRoutesFromCacheById(routeId: String) {
         route =  routeUseCase.getRouteFromCacheById(routeId)
     }

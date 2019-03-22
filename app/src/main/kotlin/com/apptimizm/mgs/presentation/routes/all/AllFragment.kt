@@ -9,9 +9,12 @@ import com.apptimizm.mgs.R
 import com.apptimizm.mgs.presentation.utils.view.inflate
 
 
-/*
- * Created by oleg on 03.02.2018.
+/**
+ * Created by Sitnikov Oleg
+ * Date: 2019-03-22
+ * Time: 23:03
  */
+
 
 class AllFragment : Fragment() {
 

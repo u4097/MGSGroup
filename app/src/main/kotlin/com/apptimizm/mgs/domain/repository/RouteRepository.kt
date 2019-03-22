@@ -11,6 +11,8 @@ interface RouteRepository {
 
     fun getRouteFromCache(): Resource<RouteResponse>
 
+    fun getRouteFromCacheByStatus(status: String): Resource<RouteResponse>
+
     fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity>
 
     suspend fun getRouteFromServerAndSave(refresh: Boolean, onError: (error: ErrorResponseEntity) -> Unit)

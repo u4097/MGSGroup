@@ -23,6 +23,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 
 /**
+ * Created by Sitnikov Oleg
+ * Date: 2019-03-22
+ * Time: 23:03
+ */
+
+
+/**
  * Adapter for the list of routesitories.
  */
 class RoutePagedAdapter(val listener: OnRouteClickListener) : PagedListAdapter<RouteEntity, RecyclerView.ViewHolder>(REPO_COMPARATOR) {

@@ -24,6 +24,10 @@ class RouteUseCase constructor(private val routeRepository: RouteRepository) {
     fun getRoutesFromCache(): Resource<RouteResponse> =
         routeRepository.getRouteFromCache()
 
+    fun getRoutesFromCacheByStatus(status: String): Resource<RouteResponse> =
+        routeRepository.getRouteFromCacheByStatus(status)
+
+
     fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity> =
         routeRepository.getRouteFromCacheById(routeId)
 }
