@@ -29,6 +29,7 @@
 
         <action android:id="@+id/action_to_finished_detail"
                 app:destination="@id/finished_detail"/>
+        <action android:id="@+id/action_route_fragment_to_all_detail" app:destination="@id/all_detail"/>
 
     </fragment>
 
@@ -54,5 +55,11 @@
     <argument android:name="routeId" app:argType="string"
               android:defaultValue=" "
     />
+
+    <!--All detail fragment-->
+    <fragment android:id="@+id/all_detail"
+              tools:layout="@layout/fmt_info"
+              android:name="com.apptimizm.mgs.presentation.routes.all.AllDetailFragment"
+              android:label="AllDetailFragment"/>
 
 </navigation>

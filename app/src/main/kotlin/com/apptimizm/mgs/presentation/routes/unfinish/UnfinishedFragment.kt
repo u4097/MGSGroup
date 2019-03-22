@@ -62,7 +62,7 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
 
         setupScrollListener()
 
-        mRouteVm.getRoutesFromCache()
+        mRouteVm.getRoutesFromCacheByStatus("not_active")
         initAdapter()
 
     }

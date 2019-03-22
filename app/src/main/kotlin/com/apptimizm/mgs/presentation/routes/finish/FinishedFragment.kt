@@ -62,7 +62,7 @@ class FinishedFragment : Fragment(), OnRouteClickListener {
 
         setupScrollListener()
 
-        mRouteVm.getRoutesFromCache()
+        mRouteVm.getRoutesFromCacheByStatus("active")
         initAdapter()
 
     }
