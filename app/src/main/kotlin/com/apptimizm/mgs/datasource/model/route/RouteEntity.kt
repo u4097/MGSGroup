@@ -18,7 +18,7 @@ data class RouteEntity(
 
     @ColumnInfo(name = "bugs")
     @field:Json(name = "bugs")
-    val bugs: List<BugEntity> = listOf(),
+    val bugs: List<BugEntity>? = listOf(),
 
     @field:Json(name = "counterparty")
     val counterparty: String? = "",
@@ -72,5 +72,7 @@ data class RouteEntity(
     val executor: String? = "",
 
     @field:Json(name = "schedule")
-    val schedule: String? = "0"
+    val schedule: String? = "0",
+
+    val updated: Boolean = false
 )

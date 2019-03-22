@@ -7,9 +7,9 @@ import androidx.paging.PagedList
 import com.apptimizm.mgs.data.repository.resouces.Resource
 import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
+import com.apptimizm.mgs.datasource.model.route.RouteUpdaterEntity
 import com.apptimizm.mgs.domain.model.route.RouteResponse
 import com.apptimizm.mgs.domain.usecases.RouteUseCase
-import com.apptimizm.mgs.presentation.utils.livedata.SingleLiveEvent
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
@@ -68,6 +68,17 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
                 }
             }
         }
+    }
+
+    fun updateRoute(route: RouteUpdaterEntity, id: String?) {
+        scope.launch {
+            if (pending.compareAndSet(false, true)) {
+                routeUseCase.updateRouteOnServer(route = route, id = id) {
+                    serverError.postValue(it)
+                }
+            }
+        }
+
     }
 
 

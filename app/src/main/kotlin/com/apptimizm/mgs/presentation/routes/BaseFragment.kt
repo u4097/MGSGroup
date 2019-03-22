@@ -1,6 +1,7 @@
 package com.apptimizm.mgs.presentation.routes
 
 import androidx.fragment.app.Fragment
+import com.apptimizm.mgs.App
 import io.reactivex.disposables.CompositeDisposable
 
 /**
@@ -20,4 +21,9 @@ open class BaseFragment: Fragment() {
         super.onDestroy()
         disposables.clear()
     }
+
+    fun isOnline(): Boolean {
+        return App.instance.isOnline()
+    }
+
 }

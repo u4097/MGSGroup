@@ -2,7 +2,6 @@ package com.apptimizm.mgs.presentation.routes.unfinish
 
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import com.apptimizm.mgs.R
 import com.apptimizm.mgs.ToolbarListener
 import com.apptimizm.mgs.datasource.model.route.BugEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
-import com.apptimizm.mgs.presentation.model.route.Bug
+import com.apptimizm.mgs.datasource.model.route.RouteUpdaterEntity
 import com.apptimizm.mgs.presentation.routes.BaseFragment
 import com.apptimizm.mgs.presentation.utils.Constants
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_06
@@ -30,11 +29,9 @@ import com.apptimizm.mgs.presentation.utils.Constants.BUG_8m3
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_MeshkovCollection
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_PackagedCollection
 import com.apptimizm.mgs.presentation.utils.RxUtils.rxTextView
+import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.currentDateTime
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.getStringFromLocalTime
-import com.apptimizm.mgs.presentation.utils.view.getTextValue
-import com.apptimizm.mgs.presentation.utils.view.inflate
-import com.apptimizm.mgs.presentation.utils.view.isNotEmpty
-import com.apptimizm.mgs.presentation.utils.view.visible
+import com.apptimizm.mgs.presentation.utils.view.*
 import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.checkedChanges
@@ -273,7 +270,7 @@ class UnFinishedDetailFragment : BaseFragment() {
 
     }
 
-    fun initFinishBtn() {
+    private fun initFinishBtn() {
         disposables.add(
             mBtnFinish.clicks()
                 .subscribe {
@@ -401,6 +398,45 @@ class UnFinishedDetailFragment : BaseFragment() {
                         }
                         longToast("bugs list: ${bugs.size}")
                         Timber.tag("ROUTE").d("bugs list: ${bugs}")
+                        val routeUpdater = RouteUpdaterEntity(
+                            currentDateTime,
+                            mCbTalon.isChecked,
+                            bugs
+                        )
+
+                        if (isOnline()) {
+                            val route = RouteEntity(
+                                id = mRoute?.id!!,
+                                address = mRoute?.address,
+                                bugs = mRoute?.bugs,
+                                counterparty = mRoute?.counterparty,
+                                costByOne = mRoute?.costByOne,
+                                contractNumber = mRoute?.contractNumber,
+                                isNightShift = mRoute?.isNightShift,
+                                county = mRoute?.county,
+                                area = mRoute?.area,
+                                street = mRoute?.street,
+                                note = mRoute?.note,
+                                coordinates = mRoute?.coordinates,
+                                contact = mRoute?.contact,
+
+                                exportOnScheduleDate = mRoute?.exportOnScheduleDate,
+
+                                getOutExportTimeStart = mRoute?.getOutExportTimeStart,
+                                getOutExportTimeEnd = mRoute?.getOutExportTimeEnd,
+
+
+                                executor = mRoute?.executor,
+                                schedule = mRoute?.schedule,
+
+                                factOnExportDatetime = routeUpdater.dateTimeGetOut,
+                                talon = routeUpdater.talon,
+                                status = "active",
+                                updated = true
+                            )
+
+                            mRouteVm.updateRoute(routeUpdater, route.id)
+                        }
                     }
                 }
         )
@@ -751,43 +787,43 @@ class UnFinishedDetailFragment : BaseFragment() {
 
         val tanks = mutableListOf<Boolean>()
 
-        if (isViewVisible(mBtnAmountPlan_06)) {
+        if (mBtnAmountPlan_06.isVisible()) {
             tanks.add(amount_06_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_07)) {
+        if (mBtnAmountPlan_07.isVisible()) {
             tanks.add(amount_07_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_08)) {
+        if (mBtnAmountPlan_08.isVisible()) {
             tanks.add(amount_08_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_11)) {
+        if (mBtnAmountPlan_11.isVisible()) {
             tanks.add(amount_11_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_3m3)) {
+        if (mBtnAmountPlan_3m3.isVisible()) {
             tanks.add(amount_3m3_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_5m3)) {
+        if (mBtnAmountPlan_5m3.isVisible()) {
             tanks.add(amount_5m3_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_8m3)) {
+        if (mBtnAmountPlan_8m3.isVisible()) {
             tanks.add(amount_8_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_20m3)) {
+        if (mBtnAmountPlan_20m3.isVisible()) {
             tanks.add(amount_20m3_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_27m3)) {
+        if (mBtnAmountPlan_27m3.isVisible()) {
             tanks.add(amount_27m3_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_32m3)) {
+        if (mBtnAmountPlan_32m3.isVisible()) {
             tanks.add(amount_32m3_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_35m3)) {
+        if (mBtnAmountPlan_35m3.isVisible()) {
             tanks.add(amount_35m3_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_PackagedCollection)) {
+        if (mBtnAmountPlan_PackagedCollection.isVisible()) {
             tanks.add(amount_PackagedCollection_valid)
         }
-        if (isViewVisible(mBtnAmountPlan_MeshkovCollection)) {
+        if (mBtnAmountPlan_MeshkovCollection.isVisible()) {
             tanks.add(amount_MeshkovCollection_valid)
         }
 
@@ -799,10 +835,6 @@ class UnFinishedDetailFragment : BaseFragment() {
 
     }
 
-
-    private fun isViewVisible(view: View): Boolean {
-        return view.visibility == View.VISIBLE
-    }
 
     private fun setFinishEnable(enabled: Boolean) {
         if (enabled) {

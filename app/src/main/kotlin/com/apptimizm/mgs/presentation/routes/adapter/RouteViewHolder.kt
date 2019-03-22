@@ -214,9 +214,10 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
 
         val bugs = route.bugs
 
-        if (bugs.size != 0) {
+        if (bugs?.size != 0) {
 
-            for (bug in bugs) {
+            bugs?.forEach { bug ->
+
                 val name = bug.name
 
                 if (name == Constants.BUG_06) {
@@ -377,14 +378,14 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
 
         val bugs = route.bugs
 
-        for (bug in bugs) {
+        bugs?.forEach { bug ->
             val name = bug.name
 
             if (name == Constants.BUG_06) {
                 if (bug.fact!! > 0) {
                     mBtnTank06!!.visibility = View.VISIBLE
                     mBtnAmountPlan06!!.visibility = View.VISIBLE
-                    mBtnAmountPlan06!!.setText(bug.fact)
+                    mBtnAmountPlan06!!.text = bug.fact.toString()
                 } else {
                     mBtnTank06!!.visibility = View.GONE
                     mBtnAmountPlan06!!.visibility = View.GONE
@@ -395,7 +396,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank07!!.visibility = View.VISIBLE
                     mBtnAmountPlan07!!.visibility = View.VISIBLE
-                    mBtnAmountPlan07!!.setText(bug.fact)
+                    mBtnAmountPlan07!!.text = bug.fact.toString()
                 } else {
                     mBtnTank07!!.visibility = View.GONE
                     mBtnAmountPlan07!!.visibility = View.GONE
@@ -407,7 +408,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank08!!.visibility = View.VISIBLE
                     mBtnAmountPlan08!!.visibility = View.VISIBLE
-                    mBtnAmountPlan08!!.setText(bug.fact)
+                    mBtnAmountPlan08!!.text = bug.fact.toString()
                 } else {
                     mBtnTank08!!.visibility = View.GONE
                     mBtnAmountPlan08!!.visibility = View.GONE
@@ -418,7 +419,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank11!!.visibility = View.VISIBLE
                     mBtnAmountPlan11!!.visibility = View.VISIBLE
-                    mBtnAmountPlan11!!.setText(bug.fact)
+                    mBtnAmountPlan11!!.text = bug.fact.toString()
                 } else {
                     mBtnTank11!!.visibility = View.GONE
                     mBtnAmountPlan11!!.visibility = View.GONE
@@ -429,7 +430,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank3m3!!.visibility = View.VISIBLE
                     mBtnAmountPlan3m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan3m3!!.setText(bug.fact)
+                    mBtnAmountPlan3m3!!.text = bug.fact.toString()
                 } else {
                     mBtnTank3m3!!.visibility = View.GONE
                     mBtnAmountPlan3m3!!.visibility = View.GONE
@@ -440,7 +441,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank5m3!!.visibility = View.VISIBLE
                     mBtnAmountPlan5m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan5m3!!.setText(bug.fact)
+                    mBtnAmountPlan5m3!!.text = bug.fact.toString()
                 } else {
                     mBtnTank5m3!!.visibility = View.GONE
                     mBtnAmountPlan5m3!!.visibility = View.GONE
@@ -452,7 +453,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank8m3!!.visibility = View.VISIBLE
                     mBtnAmountPlan8m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan8m3!!.setText(bug.fact)
+                    mBtnAmountPlan8m3!!.text = bug.fact.toString()
                 } else {
                     mBtnTank8m3!!.visibility = View.GONE
                     mBtnAmountPlan8m3!!.visibility = View.GONE
@@ -463,7 +464,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank20m3!!.visibility = View.VISIBLE
                     mBtnAmountPlan20m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan20m3!!.setText(bug.fact)
+                    mBtnAmountPlan20m3!!.text = bug.fact.toString()
                 } else {
                     mBtnTank20m3!!.visibility = View.GONE
                     mBtnAmountPlan20m3!!.visibility = View.GONE
@@ -474,7 +475,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank27m3!!.visibility = View.VISIBLE
                     mBtnAmountPlan27m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan27m3!!.setText(bug.fact)
+                    mBtnAmountPlan27m3!!.text = bug.fact.toString()
                 } else {
                     mBtnTank27m3!!.visibility = View.GONE
                     mBtnAmountPlan27m3!!.visibility = View.GONE
@@ -485,7 +486,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank32m3!!.visibility = View.VISIBLE
                     mBtnAmountPlan32m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan32m3!!.setText(bug.fact)
+                    mBtnAmountPlan32m3!!.text = bug.fact.toString()
                 } else {
                     mBtnTank32m3!!.visibility = View.GONE
                     mBtnAmountPlan32m3!!.visibility = View.GONE
@@ -496,7 +497,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTank35m3!!.visibility = View.VISIBLE
                     mBtnAmountPlan35m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan35m3!!.setText(bug.fact)
+                    mBtnAmountPlan35m3!!.text = bug.fact.toString()
                 } else {
                     mBtnTank35m3!!.visibility = View.GONE
                     mBtnAmountPlan35m3!!.visibility = View.GONE
@@ -507,7 +508,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTankPackagedCollection!!.visibility = View.VISIBLE
                     mBtnAmountPlanPackagedCollection!!.visibility = View.VISIBLE
-                    mBtnAmountPlanPackagedCollection!!.setText(bug.fact)
+                    mBtnAmountPlanPackagedCollection!!.text = bug.fact.toString()
                 } else {
                     mBtnTankPackagedCollection!!.visibility = View.GONE
                     mBtnAmountPlanPackagedCollection!!.visibility = View.GONE
@@ -518,7 +519,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                 if (bug.fact!! > 0) {
                     mBtnTankMeshkovCollection!!.visibility = View.VISIBLE
                     mBtnAmountPlanBugsCollection!!.visibility = View.VISIBLE
-                    mBtnAmountPlanBugsCollection!!.setText(bug.fact)
+                    mBtnAmountPlanBugsCollection!!.text = bug.fact.toString()
                 } else {
                     mBtnTankMeshkovCollection!!.visibility = View.GONE
                     mBtnAmountPlanBugsCollection!!.visibility = View.GONE

@@ -146,4 +146,9 @@ fun EditText.getTextValue(): Int {
     }
 }
 
-fun EditText.isNotEmpty(): Boolean  = this.text.isNotEmpty()
+fun EditText.isNotEmpty(): Boolean = this.text.isNotEmpty()
+
+fun View.isVisible(): Boolean =
+    this.visibility == View.VISIBLE
+
+

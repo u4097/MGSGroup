@@ -3,6 +3,7 @@ package com.apptimizm.mgs.mockapi
 import com.apptimizm.mgs.datasource.model.route.BugEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.datasource.model.route.RouteResponseEntity
+import com.apptimizm.mgs.datasource.model.route.RouteUpdaterEntity
 import com.apptimizm.mgs.networking.RouteApi
 import com.apptimizm.mgs.presentation.model.route.Bug
 import kotlinx.coroutines.Deferred
@@ -11,6 +12,13 @@ import retrofit2.mock.BehaviorDelegate
 import retrofit2.mock.MockRetrofit
 
 class MockRouteApi(mockRetrofit: MockRetrofit) : RouteApi {
+
+    override fun updateRouteAsync(
+        routeUpdater: RouteUpdaterEntity,
+        routeId: String
+    ): Deferred<Response<RouteUpdaterEntity>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun getRouteAsync(page: Int, pageSize: Int): Deferred<Response<RouteResponseEntity>> {
         val response = RouteResponseEntity("1","3","0",mockRoutes)

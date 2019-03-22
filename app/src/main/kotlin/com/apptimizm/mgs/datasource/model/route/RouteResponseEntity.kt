@@ -20,7 +20,7 @@ fun RouteEntity.mapToDomain(): RouteModel =
     RouteModel(
         id = this.id,
         address = this.address,
-        bugs = this.bugs.mapToDomain(),
+        bugs = this.bugs?.mapToDomain(),
         counterparty = this.counterparty,
         costByOne = this.costByOne,
         contractNumber = this.contractNumber,

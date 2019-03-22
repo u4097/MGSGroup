@@ -10,6 +10,7 @@ import com.apptimizm.mgs.data.repository.resouces.ResourceState
 import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.datasource.model.route.RouteResponseEntity
+import com.apptimizm.mgs.datasource.model.route.RouteUpdaterEntity
 import com.apptimizm.mgs.db.RoomLocalCache
 import com.apptimizm.mgs.domain.model.route.RouteResponse
 import com.apptimizm.mgs.domain.repository.RouteRepository
@@ -51,6 +52,14 @@ class RouteRepositoryImpl constructor(
         return roomCache.selectRouteById(routeId)
     }
 
+    override suspend fun updateRouteOnServer(
+        route: RouteUpdaterEntity,
+        id: String?,
+        onError: (error: ErrorResponseEntity) -> Unit
+    ) {
+        remoteDataSource.update(route, id)
+    }
+
 
     // Get from server And save routes to cache on Success.
     override suspend fun getRouteFromServerAndSave(refresh: Boolean, onError: (error: ErrorResponseEntity) -> Unit) {
@@ -84,12 +93,21 @@ class RouteRepositoryImpl constructor(
             }
         }
 
+        routes?.data.let {
+            it?.next ?: return
+        }
+
         routes?.message?.let {
             val moshi = Moshi.Builder().build()
             val jsonAdapter: JsonAdapter<ErrorResponseEntity> = moshi.adapter(ErrorResponseEntity::class.java)
             val error: ErrorResponseEntity = jsonAdapter.fromJson(it)!!
             Timber.tag("ROUTE").e("Failure to get routes: \n ${error.errors}")
 
+            if (error.statusCode?.equals(404)!!) {
+                Timber.tag("ROUTE").d("Return from 404.")
+                isRequestInProgress = false
+                return
+            }
             onError(error)
         }
     }

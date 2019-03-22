@@ -53,6 +53,8 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
             longToast("Update routes on swipe")
             Timber.tag("ROUTE").d("Update routes on swipe")
             mRouteVm.getRoutesFromServer(refresh = true)
+            mRouteVm.pending.set(false)
+            findNavController().navigate(R.id.login_fragment)
         }
 
         setupScrollListener()
