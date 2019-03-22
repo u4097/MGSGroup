@@ -16,6 +16,7 @@
 
 package com.apptimizm.mgs.db
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import timber.log.Timber
@@ -26,16 +27,16 @@ import java.util.concurrent.Executor
  * correct executor.
  */
 class RoomLocalCache(
-        private val routeDao: RouteDao,
-        private val ioExecutor: Executor
+    private val routeDao: RouteDao,
+    private val ioExecutor: Executor
 ) {
 
     /**
      * Insert a list of routes in the database, on a background thread.
      */
-    fun insert(routes: List<RouteEntity>, insertFinished: ()-> Unit) {
+    fun insert(routes: List<RouteEntity>, insertFinished: () -> Unit) {
         ioExecutor.execute {
-            Timber.d( "inserting ${routes.size} routes")
+            Timber.d("inserting ${routes.size} routes")
             routeDao.insert(routes)
             insertFinished()
         }
@@ -51,10 +52,20 @@ class RoomLocalCache(
         return routeDao.routes()
     }
 
+    /**
+     * Clear cache
+     */
     fun delete() {
         ioExecutor.execute {
             routeDao.clear()
         }
     }
+
+    /**
+     * Select route by id
+     */
+    fun selectRouteById(routeId: String): LiveData<RouteEntity> =
+        routeDao.routeById(routeId)
+
 
 }

@@ -29,13 +29,11 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
         private const val VISIBLE_THRESHOLD = 5
     }
 
-//    val refreshRouteList = SingleLiveEvent<Boolean>()
-
-/*     val routeResult: LiveData<Resource<RouteResponse>>? = Transformations.map(refreshRouteList) {
-            routeUseCase.getRoutesFromCache()
-        }*/
 
     val routeResult = MutableLiveData<Resource<RouteResponse>>()
+
+    var route : LiveData<RouteEntity>? = null
+
 
     val routes: LiveData<PagedList<RouteEntity>> = Transformations.switchMap(
         routeResult
@@ -56,6 +54,11 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
     fun getRoutesFromCache() {
         routeResult.postValue(routeUseCase.getRoutesFromCache())
     }
+
+    fun getRoutesFromCacheById(routeId: String) {
+        route =  routeUseCase.getRouteFromCacheById(routeId)
+    }
+
 
     fun getRoutesFromServer(refresh: Boolean = false) {
         scope.launch {

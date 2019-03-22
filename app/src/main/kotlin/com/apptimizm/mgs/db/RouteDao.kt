@@ -16,6 +16,7 @@
 
 package com.apptimizm.mgs.db
 
+import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
@@ -40,4 +41,7 @@ interface RouteDao {
 
     @Query("DELETE FROM route")
     fun clear()
+
+    @Query("SELECT * FROM route WHERE id = :routeId")
+    fun routeById(routeId: String): LiveData<RouteEntity>
 }

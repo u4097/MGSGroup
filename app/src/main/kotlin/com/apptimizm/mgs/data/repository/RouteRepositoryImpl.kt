@@ -47,6 +47,10 @@ class RouteRepositoryImpl constructor(
 
     }
 
+    override fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity> {
+        return roomCache.selectRouteById(routeId)
+    }
+
 
     // Get from server And save routes to cache on Success.
     override suspend fun getRouteFromServerAndSave(refresh: Boolean, onError: (error: ErrorResponseEntity) -> Unit) {

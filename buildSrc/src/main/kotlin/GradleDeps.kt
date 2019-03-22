@@ -1,3 +1,4 @@
+
 object AppVersion {
     // App version information
     const val majorAppVersion = 0
@@ -30,7 +31,7 @@ object Versions {
 
     const val pageList = "2.1.0"
 
-    const val navigation = "2.0.0"
+    const val navigation = "2.1.0-alpha01"
 
     const val constraintLayout = "2.0.0-alpha3"
 
@@ -60,7 +61,12 @@ object Versions {
 
     const val eventBus = "3.1.1"
 
-    const val materialDialog = "2.1.0"
+    const val rxJavaVersion = "2.2.7"
+    const val rxAndroidVersion = "2.1.1"
+    const val rxbVersion = "3.0.0-alpha2"
+    const val rxLifeCycleVersion = "3.0.0"
+
+    const val materialDialog = "2.4.0"
 
     const val jodaTime = "2.10.1.1"
 
@@ -109,11 +115,14 @@ object Libraries {
     // RETROFIT
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val retrofitMock = "com.squareup.retrofit2:retrofit-mock:${Versions.retrofit}"
+
     // MOSHI
     const val moshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
+
     // RETROFIT COROUTININES JAKEWHARTON
     const val retrofitCoroutines =
         "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.coroutinesRetrofit}"
+
     // COROUTINES
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     const val coroutinesKotlinAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
@@ -198,6 +207,19 @@ object Libraries {
 
     // Event BUS
     const val eventBus = "org.greenrobot:eventbus:${Versions.eventBus}"
+
+    // RxJAVA
+    const val rxJava = "io.reactivex.rxjava2:rxjava:${Versions.rxJavaVersion}"
+    const val rxJavaAndroid =  "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroidVersion}"
+
+    const val rxb_core = "com.jakewharton.rxbinding3:rxbinding-core:${Versions.rxbVersion}"
+    const val rxb_appcompat = "com.jakewharton.rxbinding3:rxbinding-appcompat:${Versions.rxbVersion}"
+    const val rxb_material  = "com.jakewharton.rxbinding3:rxbinding-material:${Versions.rxbVersion}"
+
+    // RX LIFE CYCLE
+    const val rxLifeCycle =  "com.trello.rxlifecycle3:rxlifecycle:${Versions.rxLifeCycleVersion}"
+    const val rxLifeCycleAndroid =  "com.trello.rxlifecycle3:rxlifecycle-android:${Versions.rxLifeCycleVersion}"
+    const val rxLifeCycleComponent =  "com.trello.rxlifecycle3:rxlifecycle-components:${Versions.rxLifeCycleVersion}"
 }
 
 

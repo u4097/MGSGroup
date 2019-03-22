@@ -183,6 +183,19 @@ dependencies {
     /** JodaTime */
     implementation(Libraries.jodaTime)
 
+    /** RX */
+    implementation(Libraries.rxJava)
+    implementation(Libraries.rxJavaAndroid)
+    /** RX Binding */
+    implementation(Libraries.rxb_core)
+    implementation(Libraries.rxb_appcompat)
+    implementation(Libraries.rxb_material)
+    /** Rx Life Cycle */
+    implementation(Libraries.rxLifeCycle)
+    implementation(Libraries.rxLifeCycleAndroid)
+    implementation(Libraries.rxLifeCycleComponent)
+
+
 
     /** LeakCanary */
     debugImplementation (Libraries.leakCanaryAndroid)
