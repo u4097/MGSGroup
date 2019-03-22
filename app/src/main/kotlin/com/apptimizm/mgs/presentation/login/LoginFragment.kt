@@ -62,8 +62,8 @@ class LoginFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         PrefUtils.token = ""
-        mLoginVm.login(Login(login = "user", password = "access123"))
-//        mLoginVm.login(Login(login = "фаун765", password = "скания765"))
+//        mLoginVm.login(Login(login = "user", password = "access123"))
+        mLoginVm.login(Login(login = "фаун765", password = "скания765"))
     }
 
 

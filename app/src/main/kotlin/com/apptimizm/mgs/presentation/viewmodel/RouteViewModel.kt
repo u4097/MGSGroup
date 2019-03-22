@@ -38,7 +38,7 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
     val routes: LiveData<PagedList<RouteEntity>> = Transformations.switchMap(
         routeResult
     ) {
-        Timber.tag("ROUTE").d("Transform.swithcMap on routeResult")
+//        Timber.tag("ROUTE").d("Transform.swithcMap on routeResult")
         it.data?.results
     }
 

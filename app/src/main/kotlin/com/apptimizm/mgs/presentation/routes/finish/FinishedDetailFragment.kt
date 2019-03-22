@@ -269,8 +269,8 @@ class FinishedDetailFragment : BaseFragment() {
         mRouteVm.getRoutesFromCacheById(mRouteId)
 
         mRouteVm.route?.observe(this, Observer<RouteEntity> {
-            longToast("Route:  ${it.address}")
-            Timber.tag("ROUTE").d("Route address:  ${it.address}")
+//            longToast("Route:  ${it.address}")
+//            Timber.tag("ROUTE").d("Route address:  ${it.address}")
             this.mRoute = it
             setRoute()
         })
@@ -403,7 +403,7 @@ class FinishedDetailFragment : BaseFragment() {
                             }
 
                         }
-                        longToast("bugs list: ${bugs.size}")
+//                        longToast("bugs list: ${bugs.size}")
                         Timber.tag("ROUTE").d("bugs list: ${bugs}")
                         val routeUpdater = RouteUpdaterEntity(
                             currentDateTime,

@@ -270,7 +270,7 @@ class AllDetailFragment : BaseFragment() {
 
         mRouteVm.route?.observe(this, Observer<RouteEntity> {
             longToast("Route:  ${it.address}")
-            Timber.tag("ROUTE").d("Route address:  ${it.address}")
+//            Timber.tag("ROUTE").d("Route address:  ${it.address}")
             this.mRoute = it
             setRoute()
         })
@@ -404,7 +404,7 @@ class AllDetailFragment : BaseFragment() {
 
                         }
                         longToast("bugs list: ${bugs.size}")
-                        Timber.tag("ROUTE").d("bugs list: ${bugs}")
+//                        Timber.tag("ROUTE").d("bugs list: ${bugs}")
                         val routeUpdater = RouteUpdaterEntity(
                             currentDateTime,
                             mCbTalon.isChecked,

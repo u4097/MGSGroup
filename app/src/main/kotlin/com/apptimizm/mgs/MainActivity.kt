@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity(),
         when (item?.itemId) {
             android.R.id.home -> {
                 mNavController.navigate(R.id.route_fragment)
-                Timber.tag("ROUTE").d("On home click")
+//                Timber.tag("ROUTE").d("On home click")
                 return true
             }
             R.id.login_fragment -> {

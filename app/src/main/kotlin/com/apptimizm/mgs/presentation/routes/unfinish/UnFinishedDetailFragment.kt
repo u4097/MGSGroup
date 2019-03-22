@@ -262,8 +262,8 @@ class UnFinishedDetailFragment : BaseFragment() {
         mRouteVm.getRoutesFromCacheById(mRouteId)
 
         mRouteVm.route?.observe(this, Observer<RouteEntity> {
-            longToast("Route:  ${it.address}")
-            Timber.tag("ROUTE").d("Route address:  ${it.address}")
+//            longToast("Route:  ${it.address}")
+//            Timber.tag("ROUTE").d("Route address:  ${it.address}")
             this.mRoute = it
             setRoute()
         })

@@ -74,16 +74,17 @@ class DateTimeUtils {
         }
 
 
+
         fun getStringFromLocalTime(time: String): String {
             val fmt = DateTimeFormat.forPattern("HH:mm:ss")
-            var localTime = LocalTime.now()
+            var localTime: LocalTime? = null
             try {
                 localTime = fmt.parseLocalTime(time)
             } catch (e: Exception) {
-                //      Timber.d(e);
+                     Timber.d(e)
             }
 
-            return format(localTime.getHourOfDay()) + "-" + format(localTime.getMinuteOfHour())
+            return format(localTime?.hourOfDay!!) + "-" + format(localTime.minuteOfHour)
         }
 
         fun format(num: Int): String {

@@ -83,7 +83,7 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             swRefreshLayout.isRefreshing = false
-            Timber.tag("ROUTE").d("Update route adapter in initAdapter() fun")
+//            Timber.tag("ROUTE").d("Update route adapter in initAdapter() fun")
         })
 
         mRouteVm.networkErrors.observe(this, Observer<String> {
