@@ -68,13 +68,9 @@ class FinishedFragment : Fragment(), OnRouteClickListener {
         rvRoutes.adapter = adapter
         mRouteVm.routes.observe(this, Observer<PagedList<RouteEntity>> {
             if (it?.size == 0) {
-                longToast("Cache is empty, get page ${PrefUtils.nextpage - 1}.")
                 mRouteVm.getRoutesFromServer()
             }
-            longToast("Cache size: ${it.size}")
             mRouteVm.pending.set(false)
-            Timber.d("list: ${it?.size}")
-            showEmptyList(it?.size == 0)
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             swRefreshLayout.isRefreshing = false
@@ -104,17 +100,6 @@ class FinishedFragment : Fragment(), OnRouteClickListener {
             }
 
         })
-    }
-
-
-    private fun showEmptyList(show: Boolean) {
-        if (show) {
-//            emptyList.visibility = View.VISIBLE
-//            list.visibility = View.GONE
-        } else {
-//            emptyList.visibility = View.GONE
-//            list.visibility = View.VISIBLE
-        }
     }
 
 

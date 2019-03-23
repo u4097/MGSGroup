@@ -54,8 +54,6 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
 
         val swipeRefreshLayout: SwipeRefreshLayout = view.findViewById(R.id.swRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
-            longToast("Update routes on swipe")
-            Timber.tag("ROUTE").d("Update routes on swipe")
             mRouteVm.getRoutesFromServer(refresh = true)
             mRouteVm.pending.set(false)
             findNavController().navigate(R.id.login_fragment)
@@ -76,11 +74,8 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
         rvRoutes.adapter = adapter
         mRouteVm.routes.observe(this, Observer<PagedList<RouteEntity>> {
             if (it?.size == 0) {
-                longToast("Cache is empty, get page ${PrefUtils.nextpage - 1}.")
                 mRouteVm.getRoutesFromServer()
             }
-            longToast("Cache size: ${it.size}")
-            Timber.d("list: ${it?.size}")
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             swRefreshLayout.isRefreshing = false
@@ -116,13 +111,6 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
             }
 
         })
-    }
-
-
-    private fun showEmptyList(show: Boolean) {
-        if (show) {
-            findNavController().navigate(R.id.support)
-        }
     }
 
 }
