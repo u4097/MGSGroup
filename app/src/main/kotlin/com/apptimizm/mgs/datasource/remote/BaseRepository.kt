@@ -20,10 +20,11 @@ open class BaseRepository {
         val result: Resource<T> = safeApiResource(call, errorMessage)
 
         when (result.state) {
+            is ResourceState.LOADING -> {}
             is ResourceState.EMPTY_CACHE ->{}
             is ResourceState.SUCCESS ->{}
             is ResourceState.ERROR -> {
-                Timber.e("$errorMessage & Exception - ${result.error}")
+                Timber.e("$errorMessage  - ${result.error}")
             }
         }
         return result

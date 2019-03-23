@@ -3,7 +3,6 @@ package com.apptimizm.mgs
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,22 +11,33 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.apptimizm.mgs.AppConfiguration.getRootViewContainerFor
 import com.apptimizm.mgs.AppConfiguration.riseAndShine
-import com.apptimizm.mgs.data.repository.resouces.ResourceState
 import com.apptimizm.mgs.di.loadAppModules
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
-import com.apptimizm.mgs.presentation.viewmodel.SettingViewModel
+import com.apptimizm.mgs.presentation.utils.view.gone
+import com.apptimizm.mgs.presentation.utils.view.visible
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
-import org.jetbrains.anko.longToast
-import org.koin.androidx.viewmodel.ext.viewModel
-import timber.log.Timber
 
 interface ToolbarListener {
     fun updateTitle(title: String)
 }
 
-class MainActivity : AppCompatActivity(),
-    ToolbarListener {
+interface OnLoadingListener {
+    fun onFinishLoading()
+    fun onStartLoading()
+}
 
+class MainActivity : AppCompatActivity(),
+    ToolbarListener,
+    OnLoadingListener {
+
+    override fun onStartLoading() {
+        progress.visible()
+    }
+
+    override fun onFinishLoading() {
+        progress.gone()
+    }
 
     override fun updateTitle(title: String) {
         toolbar.setTitle(title)

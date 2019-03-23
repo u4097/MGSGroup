@@ -63,9 +63,9 @@ class DateTimeUtils {
 
 
         fun formatTime(time: String): String {
-            val hh = time.substringBefore(":")
-            val mm = time.substringAfter(":").substringAfter(":")
-            return "$hh - $mm"
+            val hh = time.substringBefore(":").trim()
+            val mm = time.substringAfter(":").substringAfter(":").trim()
+            return "$hh-$mm"
         }
 
 

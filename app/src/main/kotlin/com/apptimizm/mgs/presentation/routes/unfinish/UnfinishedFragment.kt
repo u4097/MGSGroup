@@ -11,14 +11,13 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.apptimizm.mgs.OnLoadingListener
 import com.apptimizm.mgs.R
-import com.apptimizm.mgs.data.repository.resouces.ResourceState
 import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.presentation.routes.RouteTabFragmentDirections
 import com.apptimizm.mgs.presentation.routes.adapter.OnRouteClickListener
 import com.apptimizm.mgs.presentation.routes.adapter.RoutePagedAdapter
-import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.apptimizm.mgs.presentation.utils.view.inflate
 import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
 import kotlinx.android.synthetic.main.fmt_routes_rv.*
@@ -59,9 +58,11 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
             findNavController().navigate(R.id.login_fragment)
         }
 
+        (activity as OnLoadingListener).onStartLoading()
+
         setupScrollListener()
 
-        mRouteVm.routeSize.postValue(10)
+        mRouteVm.routeSize.postValue(1000)
 
         mRouteVm.getRoutesFromCacheByStatus("not_active")
         initAdapter()
@@ -76,6 +77,7 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
             if (it?.size == 0) {
                 mRouteVm.getRoutesFromServer()
             }
+            (activity as OnLoadingListener).onFinishLoading()
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             swRefreshLayout.isRefreshing = false
@@ -84,6 +86,7 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
         mRouteVm.routeSize.observe(this, Observer {
             if (it == 0) {
                 findNavController().navigate(R.id.support)
+            } else {
             }
         })
 

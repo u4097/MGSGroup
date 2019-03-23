@@ -9,6 +9,20 @@
 
     <include layout="@layout/toolbar"/>
 
+    <ProgressBar
+            android:id="@+id/progress"
+            android:visibility="gone"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+
     <!-- Nav Host Fragment -->
     <fragment
             android:id="@+id/host_fragment"

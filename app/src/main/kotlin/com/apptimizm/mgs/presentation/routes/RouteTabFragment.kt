@@ -16,7 +16,6 @@ import com.apptimizm.mgs.presentation.utils.view.inflate
 import com.google.android.material.tabs.TabLayout
 
 
-
 /**
  * Created by Sitnikov Oleg
  * Date: 2019-03-16
@@ -24,6 +23,7 @@ import com.google.android.material.tabs.TabLayout
  */
 
 class RouteTabFragment : Fragment() {
+
     private lateinit var adapter: TabAdapter
     private var tabLayout: TabLayout? = null
     private var vp: ViewPager? = null
@@ -43,6 +43,9 @@ class RouteTabFragment : Fragment() {
         initAdapter()
 
     }
+
+
+
 
     private fun initAdapter() {
         adapter = TabAdapter(fragmentManager)
