@@ -20,14 +20,6 @@ class LoginViewModel constructor(val loginUseCase: LoginUseCase) : AbstractViewM
 
     val loginEventResponse = SingleLiveEvent<Resource<LoginResponseEntity>>()
 
-    val tokenData = MutableLiveData<Resource<String>>()
-
-    fun getToken() {
-        scope.launch {
-            val response = loginUseCase.getToken()
-            tokenData.postValue(response)
-        }
-    }
 
     fun login(login: Login) {
         scope.launch {

@@ -28,6 +28,6 @@ fun List<BugEntity>.mapToDomain(): List<BugModel> = map {
 fun Resource<List<BugEntity>>.mapToDomain(): Resource<List<BugModel>> = Resource<List<BugModel>>(
     state = state,
     data = data?.mapToDomain(),
-    message = message
+    error = error
 )
 

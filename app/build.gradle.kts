@@ -195,6 +195,10 @@ dependencies {
     implementation(Libraries.rxLifeCycleAndroid)
     implementation(Libraries.rxLifeCycleComponent)
 
+    /** Keyboard visibility */
+    implementation(Libraries.keybordEvent)
+
+
 
 
     /** LeakCanary */

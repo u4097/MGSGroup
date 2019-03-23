@@ -74,4 +74,9 @@
     <string name="bug_MeshkovCollection">МЕШКОВОЙ СБОР</string>
     <string name="title_plan">Необходимо забрать баков, мешков, бункеров:</string>
     <string name="title_fact">Количество загруженных баков, мешков, бункеров:</string>
+
+
+    <!--Login form-->
+    <string name="ac_login_error">Логин не дложен быть меньше 4 символов</string>
+    <string name="ac_login_error_password">Длина пароля должна не менее 8 символов</string>
 </resources>

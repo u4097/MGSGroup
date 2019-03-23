@@ -33,6 +33,8 @@ object Constants {
     val BUG_PackagedCollection = "ПАКЕТИРОВАННЫЙ СБОР"
     val BUG_MeshkovCollection = "МЕШКОВОЙ СБОР"
 
+    const val LOGIN_LENGTH = 4
+    const val PASSWORD_LENGTH = 6
 
     val TIME_UPDATE = TimeUnit.MINUTES.toMillis(5)
 

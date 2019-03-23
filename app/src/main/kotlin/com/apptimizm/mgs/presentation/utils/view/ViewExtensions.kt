@@ -13,9 +13,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorRes
-import androidx.appcompat.widget.AppCompatButton
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.apptimizm.mgs.R
+import com.apptimizm.mgs.presentation.utils.Constants.PASSWORD_LENGTH
+import com.apptimizm.mgs.presentation.utils.Constants.LOGIN_LENGTH
 import org.jetbrains.anko.backgroundResource
 
 fun View.visible() {
@@ -150,5 +151,13 @@ fun EditText.isNotEmpty(): Boolean = this.text.isNotEmpty()
 
 fun View.isVisible(): Boolean =
     this.visibility == View.VISIBLE
+
+fun  Editable.isLoginValid(): Boolean {
+    return  this.length >= LOGIN_LENGTH
+}
+
+fun  Editable.isPasswordValid(): Boolean {
+    return  this.length >= PASSWORD_LENGTH
+}
 
 

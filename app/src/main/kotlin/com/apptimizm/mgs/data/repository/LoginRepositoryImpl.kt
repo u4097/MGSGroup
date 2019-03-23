@@ -15,32 +15,9 @@ class LoginRepositoryImpl constructor(
     private val remoteDataSource: LoginRemoteDataSource
 ) : LoginRepository {
 
-    override suspend fun getToken(): Resource<String>? {
-        var token: String?
-        var response = cacheDataSource.get()
-        response.await().let {
-            token = it
-        }
-        token?.let {
-            if (!token?.isEmpty()!!) {
-                return Resource(ResourceState.SUCCESS, token)
-            } else {
-                return Resource(ResourceState.ERROR, null, "Token is empty")
-            }
-        }
-        return Resource(ResourceState.SUCCESS, token)
-    }
 
+    override suspend fun get(loginModel: LoginModel): Resource<LoginResponseEntity>? =
+        remoteDataSource.get(loginModel = loginModel.mapToDataSource())
 
-        override suspend fun get(loginModel: LoginModel): Resource<LoginResponseEntity>? {
-            val loginResponse = remoteDataSource.get(loginModel = loginModel.mapToDataSource())
-            try {
-                cacheDataSource.set(loginResponse?.data?.token)
-            } catch (e: Exception) {
-                Timber.e("Fail to login:\n $e")
-            }
-            return loginResponse
-        }
-
-    }
+}
 

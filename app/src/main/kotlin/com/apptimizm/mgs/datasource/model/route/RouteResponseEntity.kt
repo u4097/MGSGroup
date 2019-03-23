@@ -55,6 +55,6 @@ fun RouteResponseEntity.mapToDomain(): RouteResponseModel = RouteResponseModel(
 fun Resource<RouteResponseEntity>.mapToDomain(): Resource<RouteResponseModel> = Resource<RouteResponseModel>(
     state = state,
     data = data?.mapToDomain(),
-    message = message
+    error = error
 )
 

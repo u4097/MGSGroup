@@ -32,13 +32,15 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
 
     val routeResult = MutableLiveData<Resource<RouteResponse>>()
 
-    var route : LiveData<RouteEntity>? = null
+    val routeSize = MutableLiveData<Int>()
+
+    var route: LiveData<RouteEntity>? = null
 
 
     val routes: LiveData<PagedList<RouteEntity>> = Transformations.switchMap(
         routeResult
     ) {
-//        Timber.tag("ROUTE").d("Transform.swithcMap on routeResult")
+        //        Timber.tag("ROUTE").d("Transform.swithcMap on routeResult")
         it.data?.results
     }
 
@@ -61,14 +63,14 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
     }
 
     fun getRoutesFromCacheById(routeId: String) {
-        route =  routeUseCase.getRouteFromCacheById(routeId)
+        route = routeUseCase.getRouteFromCacheById(routeId)
     }
 
 
     fun getRoutesFromServer(refresh: Boolean = false) {
         scope.launch {
             if (pending.compareAndSet(false, true)) {
-                routeUseCase.getRouteFromServer(refresh = refresh) {
+                routeUseCase.getRouteFromServer(refresh = refresh, onSuccess = { routeSize.postValue(it) }) {
                     serverError.postValue(it)
                 }
             }
@@ -78,13 +80,15 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
     fun updateRoute(
         routeEntity: RouteEntity,
         route: RouteUpdaterEntity,
-        id: String?) {
+        id: String?
+    ) {
         scope.launch {
             if (pending.compareAndSet(false, true)) {
                 routeUseCase.updateRouteOnServer(
                     routeEntity = routeEntity,
                     route = route,
-                    id = id) {
+                    id = id
+                ) {
                     serverError.postValue(it)
                 }
             }
@@ -97,7 +101,7 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
         if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
             scope.launch {
                 if (pending.compareAndSet(false, true)) {
-                    routeUseCase.getRouteFromServer(refresh = false) {
+                    routeUseCase.getRouteFromServer(refresh = false, onSuccess = { routeSize.postValue(it) }) {
                         serverError.postValue(it)
                     }
                 }

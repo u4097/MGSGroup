@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.apptimizm.mgs.R
+import com.apptimizm.mgs.data.repository.resouces.ResourceState
 import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.presentation.routes.RouteTabFragmentDirections
@@ -62,6 +63,8 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
 
         setupScrollListener()
 
+        mRouteVm.routeSize.postValue(10)
+
         mRouteVm.getRoutesFromCacheByStatus("not_active")
         initAdapter()
 
@@ -78,10 +81,15 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
             }
             longToast("Cache size: ${it.size}")
             Timber.d("list: ${it?.size}")
-            showEmptyList(it?.size == 0)
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             swRefreshLayout.isRefreshing = false
+        })
+
+        mRouteVm.routeSize.observe(this, Observer {
+            if (it == 0) {
+                findNavController().navigate(R.id.support)
+            }
         })
 
         mRouteVm.networkErrors.observe(this, Observer<String> {
@@ -113,13 +121,8 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
 
     private fun showEmptyList(show: Boolean) {
         if (show) {
-//            emptyList.visibility = View.VISIBLE
-//            list.visibility = View.GONE
-        } else {
-//            emptyList.visibility = View.GONE
-//            list.visibility = View.VISIBLE
+            findNavController().navigate(R.id.support)
         }
     }
-
 
 }

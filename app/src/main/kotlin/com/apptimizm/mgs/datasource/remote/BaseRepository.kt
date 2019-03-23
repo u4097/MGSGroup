@@ -2,6 +2,9 @@ package com.apptimizm.mgs.datasource.remote
 
 import com.apptimizm.mgs.data.repository.resouces.Resource
 import com.apptimizm.mgs.data.repository.resouces.ResourceState
+import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
 import retrofit2.Response
 import timber.log.Timber
 
@@ -15,37 +18,30 @@ open class BaseRepository {
     suspend fun <T : Any> safeApiCall(call: suspend () -> Response<T>, errorMessage: String): Resource<T>? {
 
         val result: Resource<T> = safeApiResource(call, errorMessage)
-//        var data : Resource<T>? = null
 
         when (result.state) {
             is ResourceState.EMPTY_CACHE ->{}
             is ResourceState.SUCCESS ->{}
-//                Timber.tag("$$$").d("${result.state}  - ${result.data.toString()}")
             is ResourceState.ERROR -> {
-                Timber.e("$errorMessage & Exception - ${result.message}")
+                Timber.e("$errorMessage & Exception - ${result.error}")
             }
         }
         return result
 
     }
 
+
     private suspend fun <T : Any> safeApiResource(call: suspend () -> Response<T>, errorMessage: String): Resource<T> {
         val response = call.invoke()
         var message = ""
-        var code = ""
         if (response.isSuccessful) return Resource(ResourceState.SUCCESS, response.body())
 
         try {
             val errorJsonString = response.errorBody()?.string()
-            code = response.code().toString()
             message = errorJsonString.toString()
-/*            message = JsonParser().parse(errorJsonString)
-                .asJsonObject["message"]
-                .asString*/
         } catch (e: Exception) {
-            Timber.tag("$$$").d(e.message)
+            Timber.e(e)
         }
-
 
         return Resource(ResourceState.ERROR, null, message)
     }

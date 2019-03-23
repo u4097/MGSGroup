@@ -8,6 +8,4 @@ interface LoginRepository {
 
     suspend fun get(loginModel: LoginModel): Resource<LoginResponseEntity>?
 
-    suspend fun getToken(): Resource<String>?
-
 }

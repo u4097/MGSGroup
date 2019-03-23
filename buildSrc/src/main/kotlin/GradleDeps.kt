@@ -66,6 +66,8 @@ object Versions {
     const val rxbVersion = "3.0.0-alpha2"
     const val rxLifeCycleVersion = "3.0.0"
 
+    const val keyboardVisibilityEventVersion = "2.1.0"
+
     const val materialDialog = "2.4.0"
 
     const val jodaTime = "2.10.1.1"
@@ -220,6 +222,10 @@ object Libraries {
     const val rxLifeCycle =  "com.trello.rxlifecycle3:rxlifecycle:${Versions.rxLifeCycleVersion}"
     const val rxLifeCycleAndroid =  "com.trello.rxlifecycle3:rxlifecycle-android:${Versions.rxLifeCycleVersion}"
     const val rxLifeCycleComponent =  "com.trello.rxlifecycle3:rxlifecycle-components:${Versions.rxLifeCycleVersion}"
+
+    //== keyboard visibility event listener ==//
+    const val keybordEvent =  "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${Versions.keyboardVisibilityEventVersion}"
+
 }
 
 

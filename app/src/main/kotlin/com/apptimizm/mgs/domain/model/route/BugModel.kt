@@ -24,6 +24,6 @@ fun List<BugModel>.mapToPresentation(): List<Bug> = map {
 fun Resource<List<BugModel>>.mapToDomain(): Resource<List<Bug>> = Resource<List<Bug>>(
     state = state,
     data = data?.mapToPresentation(),
-    message = message
+    error = error
 )
 

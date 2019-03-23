@@ -1,6 +1,11 @@
 package com.apptimizm.mgs.presentation.routes.unfinish
 
 import android.annotation.SuppressLint
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
@@ -8,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.apptimizm.mgs.R
@@ -146,6 +152,8 @@ class UnFinishedDetailFragment : BaseFragment() {
 
     lateinit var mTvNote: TextView
 
+    private var myClipboard: ClipboardManager? = null
+    private var myClip: ClipData? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         context?.inflate(R.layout.fmt_info)
@@ -153,6 +161,7 @@ class UnFinishedDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        myClipboard = activity?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
 
         arguments?.let {
             val safeArgs = UnFinishedDetailFragmentArgs.fromBundle(it)
@@ -264,11 +273,26 @@ class UnFinishedDetailFragment : BaseFragment() {
         mRouteVm.getRoutesFromCacheById(mRouteId)
 
         mRouteVm.route?.observe(this, Observer<RouteEntity> {
-//            longToast("Route:  ${it.address}")
+            //            longToast("Route:  ${it.address}")
             Timber.tag("ROUTE").d("Route data updates, address:  ${it.address}")
             this.mRoute = it
             setRoute()
         })
+
+        mBtnClipBoardCopy.setOnClickListener {
+            val clip = ClipData.newPlainText("Coordinates", mTvCoordinates.text)
+            myClipboard?.primaryClip = clip
+            longToast(resources.getString(R.string.msg_coordinates_copy))
+
+        }
+
+        mTvContact.setOnClickListener {
+            if (mTvContact.text.isNotEmpty()) {
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:" + mTvContact.text)
+                startActivity(intent)
+            }
+        }
 
     }
 
@@ -407,8 +431,9 @@ class UnFinishedDetailFragment : BaseFragment() {
                             bugs
                         )
 
+                        val route: RouteEntity?
                         if (isOnline()) {
-                            val route = RouteEntity(
+                            route = RouteEntity(
                                 id = mRoute?.id!!,
                                 address = mRoute?.address,
                                 counterparty = mRoute?.counterparty,
@@ -439,18 +464,55 @@ class UnFinishedDetailFragment : BaseFragment() {
                                 updated = true
                             )
 
+                        } else {
+                            route = RouteEntity(
+                                id = mRoute?.id!!,
+                                address = mRoute?.address,
+                                counterparty = mRoute?.counterparty,
+                                costByOne = mRoute?.costByOne,
+                                contractNumber = mRoute?.contractNumber,
+                                isNightShift = mRoute?.isNightShift,
+                                county = mRoute?.county,
+                                area = mRoute?.area,
+                                street = mRoute?.street,
+                                note = mRoute?.note,
+                                coordinates = mRoute?.coordinates,
+                                contact = mRoute?.contact,
+
+                                exportOnScheduleDate = mRoute?.exportOnScheduleDate,
+
+                                getOutExportTimeStart = mRoute?.getOutExportTimeStart,
+                                getOutExportTimeEnd = mRoute?.getOutExportTimeEnd,
+
+
+                                executor = mRoute?.executor,
+                                schedule = mRoute?.schedule,
+
+                                // Updated data
+                                factOnExportDatetime = currentDateTime,
+                                bugs = bugs,
+                                talon = mCbTalon.isChecked,
+                                status = "active",
+                                updated = false
+                            )
+                        }
+
+                        route.let {
                             mRouteVm.updateRoute(
-                                route,
+                                it,
                                 routeUpdater,
-                                route.id)
-                            Timber.tag("ROUTE")
-                                .d("Route updated: id - $id, \n" +
+                                route.id
+                            )
+                        }
+                        Timber.tag("ROUTE")
+                            .d(
+                                "Route updated: id - $id, \n" +
                                         "time - ${route.factOnExportDatetime}," +
                                         "\n status - ${route.status}}" +
-                                        "\n bugs: - ${route.bugs}")
+                                        "\n bugs: - ${route.bugs}"
+                            )
 
-                            findNavController().navigate(R.id.login_fragment)
-                        }
+                        findNavController().navigate(R.id.login_fragment)
                     }
                 }
         )

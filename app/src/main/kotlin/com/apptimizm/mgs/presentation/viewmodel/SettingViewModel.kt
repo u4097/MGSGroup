@@ -18,13 +18,11 @@ class SettingViewModel constructor(val settingUseCase: SettingUseCase) : Abstrac
     val settingEventResponse = SingleLiveEvent<Resource<SettingEntity>>()
 
 
-
     fun getPhone() {
         scope.launch {
             val response = settingUseCase.get()
             settingEventResponse.postValue(response)
         }
     }
-
 
 }

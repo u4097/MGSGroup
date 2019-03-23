@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity(),
         toolbar.setTitle(title)
     }
 
-    private val mSettingVm: SettingViewModel by viewModel()
     lateinit var mNavController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -77,24 +76,6 @@ class MainActivity : AppCompatActivity(),
 
         // Wake up activity in devices on run
         riseAndShine(this)
-
-        mSettingVm.settingEventResponse.observe(this@MainActivity, Observer {
-            it?.let {
-                when (it.state) {
-                    ResourceState.LOADING -> {
-                    }
-                    ResourceState.ERROR -> {
-                    }
-                    ResourceState.SUCCESS -> {
-                        PrefUtils.phone = it.data?.setting
-                        longToast(PrefUtils.phone.toString())
-                    }
-                    else -> {
-                        longToast("No data")
-                    }
-                }
-            }
-        })
 
     }
 

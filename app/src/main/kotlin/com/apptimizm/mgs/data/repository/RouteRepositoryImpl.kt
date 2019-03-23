@@ -73,14 +73,16 @@ class RouteRepositoryImpl constructor(
     ) {
         remoteDataSource.update(route, id)
         roomCache.update(routeEntity) {
-//            PrefUtils.nextpage++
+            //            PrefUtils.nextpage++
 //            isRequestInProgress = false
         }
     }
 
 
     // Get from server And save routes to cache on Success.
-    override suspend fun getRouteFromServerAndSave(refresh: Boolean, onError: (error: ErrorResponseEntity) -> Unit) {
+    override suspend fun getRouteFromServerAndSave(refresh: Boolean,
+                                                   onSuccess:(size: Int) -> Unit,
+                                                   onError: (error: ErrorResponseEntity) -> Unit) {
         val pending = AtomicBoolean(false)
         var routes: Resource<RouteResponseEntity>? = null
         if (isRequestInProgress) return
@@ -106,6 +108,7 @@ class RouteRepositoryImpl constructor(
             // Save to cache
             pending.set(false)
             roomCache.insert(routes.data?.results!!) {
+                onSuccess(it.size)
                 PrefUtils.nextpage++
                 isRequestInProgress = false
             }
@@ -115,13 +118,13 @@ class RouteRepositoryImpl constructor(
             it?.next ?: return
         }
 
-        routes?.message?.let {
+        routes?.error?.let {
             val moshi = Moshi.Builder().build()
             val jsonAdapter: JsonAdapter<ErrorResponseEntity> = moshi.adapter(ErrorResponseEntity::class.java)
             val error: ErrorResponseEntity = jsonAdapter.fromJson(it)!!
             Timber.tag("ROUTE").e("Failure to get routes: \n ${error.errors}")
 
-            if (error.statusCode?.equals(404)!!) {
+            if (it.equals(404)) {
                 Timber.tag("ROUTE").d("Return from 404.")
                 isRequestInProgress = false
                 return
