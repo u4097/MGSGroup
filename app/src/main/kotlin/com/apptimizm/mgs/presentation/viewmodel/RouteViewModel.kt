@@ -75,10 +75,16 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
         }
     }
 
-    fun updateRoute(route: RouteUpdaterEntity, id: String?) {
+    fun updateRoute(
+        routeEntity: RouteEntity,
+        route: RouteUpdaterEntity,
+        id: String?) {
         scope.launch {
             if (pending.compareAndSet(false, true)) {
-                routeUseCase.updateRouteOnServer(route = route, id = id) {
+                routeUseCase.updateRouteOnServer(
+                    routeEntity = routeEntity,
+                    route = route,
+                    id = id) {
                     serverError.postValue(it)
                 }
             }

@@ -1,5 +1,6 @@
 package com.apptimizm.mgs.presentation.routes.unfinish
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.apptimizm.mgs.R
 import com.apptimizm.mgs.ToolbarListener
 import com.apptimizm.mgs.datasource.model.route.BugEntity
@@ -30,7 +32,7 @@ import com.apptimizm.mgs.presentation.utils.Constants.BUG_MeshkovCollection
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_PackagedCollection
 import com.apptimizm.mgs.presentation.utils.RxUtils.rxTextView
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.currentDateTime
-import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.getStringFromLocalTime
+import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.formatTime
 import com.apptimizm.mgs.presentation.utils.view.*
 import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
 import com.jakewharton.rxbinding3.view.clicks
@@ -263,13 +265,14 @@ class UnFinishedDetailFragment : BaseFragment() {
 
         mRouteVm.route?.observe(this, Observer<RouteEntity> {
 //            longToast("Route:  ${it.address}")
-//            Timber.tag("ROUTE").d("Route address:  ${it.address}")
+            Timber.tag("ROUTE").d("Route data updates, address:  ${it.address}")
             this.mRoute = it
             setRoute()
         })
 
     }
 
+    @SuppressLint("BinaryOperationInTimber")
     private fun initFinishBtn() {
         disposables.add(
             mBtnFinish.clicks()
@@ -397,7 +400,7 @@ class UnFinishedDetailFragment : BaseFragment() {
 
                         }
                         longToast("bugs list: ${bugs.size}")
-                        Timber.tag("ROUTE").d("bugs list: ${bugs}")
+                        Timber.tag("ROUTE").d("bugs list: $bugs")
                         val routeUpdater = RouteUpdaterEntity(
                             currentDateTime,
                             mCbTalon.isChecked,
@@ -408,7 +411,6 @@ class UnFinishedDetailFragment : BaseFragment() {
                             val route = RouteEntity(
                                 id = mRoute?.id!!,
                                 address = mRoute?.address,
-                                bugs = mRoute?.bugs,
                                 counterparty = mRoute?.counterparty,
                                 costByOne = mRoute?.costByOne,
                                 contractNumber = mRoute?.contractNumber,
@@ -429,13 +431,25 @@ class UnFinishedDetailFragment : BaseFragment() {
                                 executor = mRoute?.executor,
                                 schedule = mRoute?.schedule,
 
-                                factOnExportDatetime = routeUpdater.dateTimeGetOut,
-                                talon = routeUpdater.talon,
+                                // Updated data
+                                factOnExportDatetime = currentDateTime,
+                                bugs = bugs,
+                                talon = mCbTalon.isChecked,
                                 status = "active",
                                 updated = true
                             )
 
-                            mRouteVm.updateRoute(routeUpdater, route.id)
+                            mRouteVm.updateRoute(
+                                route,
+                                routeUpdater,
+                                route.id)
+                            Timber.tag("ROUTE")
+                                .d("Route updated: id - $id, \n" +
+                                        "time - ${route.factOnExportDatetime}," +
+                                        "\n status - ${route.status}}" +
+                                        "\n bugs: - ${route.bugs}")
+
+                            findNavController().navigate(R.id.login_fragment)
                         }
                     }
                 }
@@ -477,8 +491,8 @@ class UnFinishedDetailFragment : BaseFragment() {
         mTvTimeRemoval.text =
             String.format(
                 "%s : %s",
-                getStringFromLocalTime(mRoute?.getOutExportTimeStart!!),
-                getStringFromLocalTime(mRoute?.getOutExportTimeEnd!!)
+                formatTime(mRoute?.getOutExportTimeStart!!),
+                formatTime(mRoute?.getOutExportTimeEnd!!)
             )
         mTvCoordinates.text = mRoute?.coordinates!!
 

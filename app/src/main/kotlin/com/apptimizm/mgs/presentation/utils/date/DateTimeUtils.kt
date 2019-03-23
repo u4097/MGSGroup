@@ -1,37 +1,30 @@
 package com.apptimizm.mgs.presentation.utils.date
 
+import android.annotation.SuppressLint
 import com.apptimizm.mgs.presentation.utils.Constants
-import timber.log.Timber
 import java.text.DateFormat
 import java.text.DateFormatSymbols
 
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
-import org.joda.time.LocalDate
-import org.joda.time.LocalDateTime
-import org.joda.time.LocalTime
-import org.joda.time.format.DateTimeFormat
-
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalTime
 import java.util.*
-import java.util.function.Supplier
 
 
 class DateTimeUtils {
 
-    private val mSupplier: Supplier<LocalDateTime>? = null
-
 
     companion object {
 
+        // Simple Date Format
+        private val FORMAT_DATE = SimpleDateFormat("yyyy-MM-dd", Locale("RU"))
+
+        private val FORMAT_DATETIME = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZ", Locale("RU"))
+
+
         private val FORMAT_DATETIME_REMOTE = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale("ru"))
-
         private val FORMAT_DATETIME_LOCAL = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale("ru"))
-
-        private val FORMAT_DATETIME = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ssZZ")
-
-        private val FORMAT_DATE = DateTimeFormat.forPattern("yyyy-MM-dd")
+        private val FORMAT_HH_MM_SS = SimpleDateFormat("HH:mm:ss", Locale("ru"))
 
 
         fun getUpdateDate(date: String): String {
@@ -68,76 +61,38 @@ class DateTimeUtils {
             return month
         }
 
-        fun getLocalTime(time: String): LocalTime {
-            val fmt = DateTimeFormat.forPattern("HH:mm:ss")
-            return fmt.parseLocalTime(time)
-        }
 
-
-
-        fun getStringFromLocalTime(time: String): String {
-            val fmt = DateTimeFormat.forPattern("HH:mm:ss")
-            var localTime: LocalTime? = null
-            try {
-                localTime = fmt.parseLocalTime(time)
-            } catch (e: Exception) {
-                     Timber.d(e)
-            }
-
-            return format(localTime?.hourOfDay!!) + "-" + format(localTime.minuteOfHour)
-        }
-
-        fun format(num: Int): String {
-            return String.format("%02d", num)
+        fun formatTime(time: String): String {
+            val hh = time.substringBefore(":")
+            val mm = time.substringAfter(":").substringAfter(":")
+            return "$hh - $mm"
         }
 
 
         val currentDate: String
-            get() = FORMAT_DATE.print(LocalDate.now())
+            get() {
+                val currentDate = Calendar.getInstance().time
+                return FORMAT_DATE.format(currentDate)
+            }
 
-        //    DateTimeZone tz = DateTimeZone.forID("Europe/Moscow");
         val currentDateTime: String
             get() {
-                val utc = DateTime(DateTimeZone.UTC)
-                var moskowDateTime: DateTime? = null
-                var tz: DateTimeZone? = null
-                try {
-                    tz = DateTimeZone.forTimeZone(TimeZone.getDefault())
-                    moskowDateTime = utc.toDateTime(tz)
-                    Timber.tag("$$$").d("Time zone: %s", tz)
-
-                } catch (throwable: Throwable) {
-                    Timber.tag("$$$").d("Time zone error: %s", throwable.message)
-                }
-
-                return FORMAT_DATETIME.print(moskowDateTime)
+                val currentDate = Calendar.getInstance().time
+                return FORMAT_DATETIME.format(currentDate)
             }
 
 
-        fun getFactTime(dateTime: String): String {
-            val localTime = getLocalTimeFinish(dateTime)
-            return format(localTime.getHourOfDay()) + "-" + format(localTime.getMinuteOfHour())
-        }
-
-        fun getLocalTimeFinish(dateTime: String): LocalTime {
-            var date = Date()
-            if (dateTime.contains("+0300")) {
-                try {
-                    date = FORMAT_DATETIME_REMOTE.parse(dateTime)
-                } catch (e: ParseException) {
-                    e.printStackTrace()
-                }
-
-            } else if (dateTime.contains("+03:00")) {
-                try {
-                    date = FORMAT_DATETIME_LOCAL.parse(dateTime)
-                } catch (e: ParseException) {
-                    e.printStackTrace()
-                }
-
+        val factTime: String
+            @SuppressLint("NewApi")
+            get() {
+                val localTime = LocalTime.now()
+                return format(localTime.hour) + "-" + format(localTime.minute)
             }
-            return LocalTime.fromDateFields(date)
+
+        private fun format(num: Int): String {
+            return String.format("%02d", num)
         }
+
     }
 
 }

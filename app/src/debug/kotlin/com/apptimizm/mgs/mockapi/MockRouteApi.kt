@@ -16,7 +16,7 @@ class MockRouteApi(mockRetrofit: MockRetrofit) : RouteApi {
     override fun updateRouteAsync(
         routeUpdater: RouteUpdaterEntity,
         routeId: String
-    ): Deferred<Response<RouteUpdaterEntity>> {
+    ): Deferred<Response<Unit>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

@@ -18,12 +18,8 @@ package com.apptimizm.mgs.db
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
-import org.jetbrains.anko.db.SqlOrderDirection
 
 /**
  * Room data access object for accessing the [Route] table.
@@ -33,6 +29,9 @@ interface RouteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(routeList: List<RouteEntity>)
+
+    @Update
+    fun update(route: RouteEntity)
 
     @Query("SELECT * FROM route ORDER BY counterparty ASC")
     fun routes(): DataSource.Factory<Int,RouteEntity>

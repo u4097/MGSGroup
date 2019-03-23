@@ -30,9 +30,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apptimizm.mgs.R
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.presentation.utils.Constants
-import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.getFactTime
-import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.getStringFromLocalTime
+import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.factTime
+import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.formatTime
+import com.apptimizm.mgs.presentation.utils.view.gone
 import com.apptimizm.mgs.presentation.utils.view.setBackgroundWhite
+import com.apptimizm.mgs.presentation.utils.view.visible
 import timber.log.Timber
 
 /**
@@ -106,35 +108,35 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
     private fun showRouteEntityData(route: RouteEntity) {
         this.mRoute = route
 
-        mTvContragent!!.text = route.counterparty
-        mTvAddress!!.text = route.address
+        mTvContragent?.text = route.counterparty
+        mTvAddress?.text = route.address
 
-        mBtnTank06!!.visibility = View.GONE
-        mBtnAmountPlan06!!.visibility = View.GONE
-        mBtnTank07!!.visibility = View.GONE
-        mBtnAmountPlan07!!.visibility = View.GONE
-        mBtnTank08!!.visibility = View.GONE
-        mBtnAmountPlan08!!.visibility = View.GONE
-        mBtnTank11!!.visibility = View.GONE
-        mBtnAmountPlan11!!.visibility = View.GONE
-        mBtnTank3m3!!.visibility = View.GONE
-        mBtnAmountPlan3m3!!.visibility = View.GONE
-        mBtnTank5m3!!.visibility = View.GONE
-        mBtnAmountPlan5m3!!.visibility = View.GONE
-        mBtnTank8m3!!.visibility = View.GONE
-        mBtnAmountPlan8m3!!.visibility = View.GONE
-        mBtnTank20m3!!.visibility = View.GONE
-        mBtnAmountPlan20m3!!.visibility = View.GONE
-        mBtnTank27m3!!.visibility = View.GONE
-        mBtnAmountPlan27m3!!.visibility = View.GONE
-        mBtnTank32m3!!.visibility = View.GONE
-        mBtnAmountPlan32m3!!.visibility = View.GONE
-        mBtnTank35m3!!.visibility = View.GONE
-        mBtnAmountPlan35m3!!.visibility = View.GONE
-        mBtnTankPackagedCollection!!.visibility = View.GONE
-        mBtnAmountPlanPackagedCollection!!.visibility = View.GONE
-        mBtnTankMeshkovCollection!!.visibility = View.GONE
-        mBtnAmountPlanBugsCollection!!.visibility = View.GONE
+        mBtnTank06?.gone()
+        mBtnAmountPlan06?.gone()
+        mBtnTank07?.gone()
+        mBtnAmountPlan07?.gone()
+        mBtnTank08?.gone()
+        mBtnAmountPlan08?.gone()
+        mBtnTank11?.gone()
+        mBtnAmountPlan11?.gone()
+        mBtnTank3m3?.gone()
+        mBtnAmountPlan3m3?.gone()
+        mBtnTank5m3?.gone()
+        mBtnAmountPlan5m3?.gone()
+        mBtnTank8m3?.gone()
+        mBtnAmountPlan8m3?.gone()
+        mBtnTank20m3?.gone()
+        mBtnAmountPlan20m3?.gone()
+        mBtnTank27m3?.gone()
+        mBtnAmountPlan27m3?.gone()
+        mBtnTank32m3?.gone()
+        mBtnAmountPlan32m3?.gone()
+        mBtnTank35m3?.gone()
+        mBtnAmountPlan35m3?.gone()
+        mBtnTankPackagedCollection?.gone()
+        mBtnAmountPlanPackagedCollection?.gone()
+        mBtnTankMeshkovCollection?.gone()
+        mBtnAmountPlanBugsCollection?.gone()
 
         if (route.status == "not_active") {
             mTvTankTitle!!.setText(R.string.title_plan)
@@ -180,9 +182,9 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
             mBtnAmountPlanBugsCollection!!.setBackgroundWhite()
             mBtnAmountPlanBugsCollection!!.setTextColor(Color.BLACK)
 
-            mVDividerTime!!.visibility = View.GONE
+            mVDividerTime?.gone()
             mCbTalon!!.isChecked = route.talon!!
-            mCbTalon!!.visibility = View.GONE
+            mCbTalon?.gone()
             mCbTalon!!.isClickable = false
             mIvStatus!!.setColorFilter(Color.RED)
 
@@ -196,9 +198,9 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
             mTvTankTitle!!.setText(R.string.title_fact)
             mIvStatus!!.setColorFilter(Color.GREEN)
 
-            mCbTalon!!.visibility = View.VISIBLE
-            mCbTalon!!.isChecked = route.talon!!
-            mCbTalon!!.isClickable = false
+            mCbTalon?.visible()
+            mCbTalon?.isChecked = route.talon!!
+            mCbTalon?.isClickable = false
             try {
                 setAmountFact(route)
             } catch (e: Exception) {
@@ -229,155 +231,155 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
 
                 if (name == Constants.BUG_06) {
                     if (bug.plan!! > 0) {
-                        mBtnTank06!!.visibility = View.VISIBLE
-                        mBtnAmountPlan06!!.visibility = View.VISIBLE
-                        mBtnAmountPlan06!!.text = bug.plan.toString()
+                        mBtnTank06?.visible()
+                        mBtnAmountPlan06?.visible()
+                        mBtnAmountPlan06?.text = bug.plan.toString()
                     } else {
-                        mBtnTank06!!.visibility = View.GONE
-                        mBtnAmountPlan06!!.visibility = View.GONE
+                        mBtnTank06?.gone()
+                        mBtnAmountPlan06?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_07) {
                     if (bug.plan!! > 0) {
-                        mBtnTank07!!.visibility = View.VISIBLE
-                        mBtnAmountPlan07!!.visibility = View.VISIBLE
-                        mBtnAmountPlan07!!.text = bug.plan.toString()
+                        mBtnTank07?.visible()
+                        mBtnAmountPlan07?.visible()
+                        mBtnAmountPlan07?.text = bug.plan.toString()
                     } else {
-                        mBtnTank07!!.visibility = View.GONE
-                        mBtnAmountPlan07!!.visibility = View.GONE
+                        mBtnTank07?.gone()
+                        mBtnAmountPlan07?.gone()
                     }
                 }
 
 
                 if (name == Constants.BUG_08) {
                     if (bug.plan!! > 0) {
-                        mBtnTank08!!.visibility = View.VISIBLE
-                        mBtnAmountPlan08!!.visibility = View.VISIBLE
-                        mBtnAmountPlan08!!.text = bug.plan.toString()
+                        mBtnTank08?.visible()
+                        mBtnAmountPlan08?.visible()
+                        mBtnAmountPlan08?.text = bug.plan.toString()
                     } else {
-                        mBtnTank08!!.visibility = View.GONE
-                        mBtnAmountPlan08!!.visibility = View.GONE
+                        mBtnTank08?.gone()
+                        mBtnAmountPlan08?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_11) {
                     if (bug.plan!! > 0) {
-                        mBtnTank11!!.visibility = View.VISIBLE
-                        mBtnAmountPlan11!!.visibility = View.VISIBLE
-                        mBtnAmountPlan11!!.text = bug.plan.toString()
+                        mBtnTank11?.visible()
+                        mBtnAmountPlan11?.visible()
+                        mBtnAmountPlan11?.text = bug.plan.toString()
                     } else {
-                        mBtnTank11!!.visibility = View.GONE
-                        mBtnAmountPlan11!!.visibility = View.GONE
+                        mBtnTank11?.gone()
+                        mBtnAmountPlan11?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_3m3) {
                     if (bug.plan!! > 0) {
-                        mBtnTank3m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan3m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan3m3!!.text = bug.plan.toString()
+                        mBtnTank3m3?.visible()
+                        mBtnAmountPlan3m3?.visible()
+                        mBtnAmountPlan3m3?.text = bug.plan.toString()
                     } else {
-                        mBtnTank3m3!!.visibility = View.GONE
-                        mBtnAmountPlan3m3!!.visibility = View.GONE
+                        mBtnTank3m3?.gone()
+                        mBtnAmountPlan3m3?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_5m3) {
                     if (bug.plan!! > 0) {
-                        mBtnTank5m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan5m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan5m3!!.text = bug.plan.toString()
+                        mBtnTank5m3?.visible()
+                        mBtnAmountPlan5m3?.visible()
+                        mBtnAmountPlan5m3?.text = bug.plan.toString()
                     } else {
-                        mBtnTank5m3!!.visibility = View.GONE
-                        mBtnAmountPlan5m3!!.visibility = View.GONE
+                        mBtnTank5m3?.gone()
+                        mBtnAmountPlan5m3?.gone()
                     }
                 }
 
 
                 if (name == Constants.BUG_8m3) {
                     if (bug.plan!! > 0) {
-                        mBtnTank8m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan8m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan8m3!!.text = bug.plan.toString()
+                        mBtnTank8m3?.visible()
+                        mBtnAmountPlan8m3?.visible()
+                        mBtnAmountPlan8m3?.text = bug.plan.toString()
                     } else {
-                        mBtnTank8m3!!.visibility = View.GONE
-                        mBtnAmountPlan8m3!!.visibility = View.GONE
+                        mBtnTank8m3?.gone()
+                        mBtnAmountPlan8m3?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_20m3) {
                     if (bug.plan!! > 0) {
-                        mBtnTank20m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan20m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan20m3!!.text = bug.plan.toString()
+                        mBtnTank20m3?.visible()
+                        mBtnAmountPlan20m3?.visible()
+                        mBtnAmountPlan20m3?.text = bug.plan.toString()
                     } else {
-                        mBtnTank20m3!!.visibility = View.GONE
-                        mBtnAmountPlan20m3!!.visibility = View.GONE
+                        mBtnTank20m3?.gone()
+                        mBtnAmountPlan20m3?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_27m3) {
                     if (bug.plan!! > 0) {
-                        mBtnTank27m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan27m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan27m3!!.text = bug.plan.toString()
+                        mBtnTank27m3?.visible()
+                        mBtnAmountPlan27m3?.visible()
+                        mBtnAmountPlan27m3?.text = bug.plan.toString()
                     } else {
-                        mBtnTank27m3!!.visibility = View.GONE
-                        mBtnAmountPlan27m3!!.visibility = View.GONE
+                        mBtnTank27m3?.gone()
+                        mBtnAmountPlan27m3?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_32m3) {
                     if (bug.plan!! > 0) {
-                        mBtnTank32m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan32m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan32m3!!.text = bug.plan.toString()
+                        mBtnTank32m3?.visible()
+                        mBtnAmountPlan32m3?.visible()
+                        mBtnAmountPlan32m3?.text = bug.plan.toString()
                     } else {
-                        mBtnTank32m3!!.visibility = View.GONE
-                        mBtnAmountPlan32m3!!.visibility = View.GONE
+                        mBtnTank32m3?.gone()
+                        mBtnAmountPlan32m3?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_35m3) {
                     if (bug.plan!! > 0) {
-                        mBtnTank35m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan35m3!!.visibility = View.VISIBLE
-                        mBtnAmountPlan35m3!!.text = bug.plan.toString()
+                        mBtnTank35m3?.visible()
+                        mBtnAmountPlan35m3?.visible()
+                        mBtnAmountPlan35m3?.text = bug.plan.toString()
                     } else {
-                        mBtnTank35m3!!.visibility = View.GONE
-                        mBtnAmountPlan35m3!!.visibility = View.GONE
+                        mBtnTank35m3?.gone()
+                        mBtnAmountPlan35m3?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_PackagedCollection) {
                     if (bug.plan!! > 0) {
-                        mBtnTankPackagedCollection!!.visibility = View.VISIBLE
-                        mBtnAmountPlanPackagedCollection!!.visibility = View.VISIBLE
-                        mBtnAmountPlanPackagedCollection!!.text = bug.plan.toString()
+                        mBtnTankPackagedCollection?.visible()
+                        mBtnAmountPlanPackagedCollection?.visible()
+                        mBtnAmountPlanPackagedCollection?.text = bug.plan.toString()
                     } else {
-                        mBtnTankPackagedCollection!!.visibility = View.GONE
-                        mBtnAmountPlanPackagedCollection!!.visibility = View.GONE
+                        mBtnTankPackagedCollection?.gone()
+                        mBtnAmountPlanPackagedCollection?.gone()
                     }
                 }
 
                 if (name == Constants.BUG_MeshkovCollection) {
                     if (bug.plan!! > 0) {
-                        mBtnTankMeshkovCollection!!.visibility = View.VISIBLE
-                        mBtnAmountPlanBugsCollection!!.visibility = View.VISIBLE
-                        mBtnAmountPlanBugsCollection!!.text = bug.plan.toString()
+                        mBtnTankMeshkovCollection?.visible()
+                        mBtnAmountPlanBugsCollection?.visible()
+                        mBtnAmountPlanBugsCollection?.text = bug.plan.toString()
                     } else {
-                        mBtnTankMeshkovCollection!!.visibility = View.GONE
-                        mBtnAmountPlanBugsCollection!!.visibility = View.GONE
+                        mBtnTankMeshkovCollection?.gone()
+                        mBtnAmountPlanBugsCollection?.gone()
                     }
                 }
 
             }
         }
 
-        mTvTimeRemoval!!.text = String.format(
-            "%s : %s", getStringFromLocalTime(route.getOutExportTimeStart!!),
-            getStringFromLocalTime(route.getOutExportTimeEnd!!)
+        mTvTimeRemoval?.text = String.format(
+            "%s : %s", formatTime(route.getOutExportTimeStart!!),
+            formatTime(route.getOutExportTimeEnd!!)
         )
     }
 
@@ -390,153 +392,153 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
 
             if (name == Constants.BUG_06) {
                 if (bug.fact!! > 0) {
-                    mBtnTank06!!.visibility = View.VISIBLE
-                    mBtnAmountPlan06!!.visibility = View.VISIBLE
-                    mBtnAmountPlan06!!.text = bug.fact.toString()
+                    mBtnTank06?.visible()
+                    mBtnAmountPlan06?.visible()
+                    mBtnAmountPlan06?.text = bug.fact.toString()
                 } else {
-                    mBtnTank06!!.visibility = View.GONE
-                    mBtnAmountPlan06!!.visibility = View.GONE
+                    mBtnTank06?.gone()
+                    mBtnAmountPlan06?.gone()
                 }
             }
 
             if (name == Constants.BUG_07) {
                 if (bug.fact!! > 0) {
-                    mBtnTank07!!.visibility = View.VISIBLE
-                    mBtnAmountPlan07!!.visibility = View.VISIBLE
-                    mBtnAmountPlan07!!.text = bug.fact.toString()
+                    mBtnTank07?.visible()
+                    mBtnAmountPlan07?.visible()
+                    mBtnAmountPlan07?.text = bug.fact.toString()
                 } else {
-                    mBtnTank07!!.visibility = View.GONE
-                    mBtnAmountPlan07!!.visibility = View.GONE
+                    mBtnTank07?.gone()
+                    mBtnAmountPlan07?.gone()
                 }
             }
 
 
             if (name == Constants.BUG_08) {
                 if (bug.fact!! > 0) {
-                    mBtnTank08!!.visibility = View.VISIBLE
-                    mBtnAmountPlan08!!.visibility = View.VISIBLE
-                    mBtnAmountPlan08!!.text = bug.fact.toString()
+                    mBtnTank08?.visible()
+                    mBtnAmountPlan08?.visible()
+                    mBtnAmountPlan08?.text = bug.fact.toString()
                 } else {
-                    mBtnTank08!!.visibility = View.GONE
-                    mBtnAmountPlan08!!.visibility = View.GONE
+                    mBtnTank08?.gone()
+                    mBtnAmountPlan08?.gone()
                 }
             }
 
             if (name == Constants.BUG_11) {
                 if (bug.fact!! > 0) {
-                    mBtnTank11!!.visibility = View.VISIBLE
-                    mBtnAmountPlan11!!.visibility = View.VISIBLE
-                    mBtnAmountPlan11!!.text = bug.fact.toString()
+                    mBtnTank11?.visible()
+                    mBtnAmountPlan11?.visible()
+                    mBtnAmountPlan11?.text = bug.fact.toString()
                 } else {
-                    mBtnTank11!!.visibility = View.GONE
-                    mBtnAmountPlan11!!.visibility = View.GONE
+                    mBtnTank11?.gone()
+                    mBtnAmountPlan11?.gone()
                 }
             }
 
             if (name == Constants.BUG_3m3) {
                 if (bug.fact!! > 0) {
-                    mBtnTank3m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan3m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan3m3!!.text = bug.fact.toString()
+                    mBtnTank3m3?.visible()
+                    mBtnAmountPlan3m3?.visible()
+                    mBtnAmountPlan3m3?.text = bug.fact.toString()
                 } else {
-                    mBtnTank3m3!!.visibility = View.GONE
-                    mBtnAmountPlan3m3!!.visibility = View.GONE
+                    mBtnTank3m3?.gone()
+                    mBtnAmountPlan3m3?.gone()
                 }
             }
 
             if (name == Constants.BUG_5m3) {
                 if (bug.fact!! > 0) {
-                    mBtnTank5m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan5m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan5m3!!.text = bug.fact.toString()
+                    mBtnTank5m3?.visible()
+                    mBtnAmountPlan5m3?.visible()
+                    mBtnAmountPlan5m3?.text = bug.fact.toString()
                 } else {
-                    mBtnTank5m3!!.visibility = View.GONE
-                    mBtnAmountPlan5m3!!.visibility = View.GONE
+                    mBtnTank5m3?.gone()
+                    mBtnAmountPlan5m3?.gone()
                 }
             }
 
 
             if (name == Constants.BUG_8m3) {
                 if (bug.fact!! > 0) {
-                    mBtnTank8m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan8m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan8m3!!.text = bug.fact.toString()
+                    mBtnTank8m3?.visible()
+                    mBtnAmountPlan8m3?.visible()
+                    mBtnAmountPlan8m3?.text = bug.fact.toString()
                 } else {
-                    mBtnTank8m3!!.visibility = View.GONE
-                    mBtnAmountPlan8m3!!.visibility = View.GONE
+                    mBtnTank8m3?.gone()
+                    mBtnAmountPlan8m3?.gone()
                 }
             }
 
             if (name == Constants.BUG_20m3) {
                 if (bug.fact!! > 0) {
-                    mBtnTank20m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan20m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan20m3!!.text = bug.fact.toString()
+                    mBtnTank20m3?.visible()
+                    mBtnAmountPlan20m3?.visible()
+                    mBtnAmountPlan20m3?.text = bug.fact.toString()
                 } else {
-                    mBtnTank20m3!!.visibility = View.GONE
-                    mBtnAmountPlan20m3!!.visibility = View.GONE
+                    mBtnTank20m3?.gone()
+                    mBtnAmountPlan20m3?.gone()
                 }
             }
 
             if (name == Constants.BUG_27m3) {
                 if (bug.fact!! > 0) {
-                    mBtnTank27m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan27m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan27m3!!.text = bug.fact.toString()
+                    mBtnTank27m3?.visible()
+                    mBtnAmountPlan27m3?.visible()
+                    mBtnAmountPlan27m3?.text = bug.fact.toString()
                 } else {
-                    mBtnTank27m3!!.visibility = View.GONE
-                    mBtnAmountPlan27m3!!.visibility = View.GONE
+                    mBtnTank27m3?.gone()
+                    mBtnAmountPlan27m3?.gone()
                 }
             }
 
             if (name == Constants.BUG_32m3) {
                 if (bug.fact!! > 0) {
-                    mBtnTank32m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan32m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan32m3!!.text = bug.fact.toString()
+                    mBtnTank32m3?.visible()
+                    mBtnAmountPlan32m3?.visible()
+                    mBtnAmountPlan32m3?.text = bug.fact.toString()
                 } else {
-                    mBtnTank32m3!!.visibility = View.GONE
-                    mBtnAmountPlan32m3!!.visibility = View.GONE
+                    mBtnTank32m3?.gone()
+                    mBtnAmountPlan32m3?.gone()
                 }
             }
 
             if (name == Constants.BUG_35m3) {
                 if (bug.fact!! > 0) {
-                    mBtnTank35m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan35m3!!.visibility = View.VISIBLE
-                    mBtnAmountPlan35m3!!.text = bug.fact.toString()
+                    mBtnTank35m3?.visible()
+                    mBtnAmountPlan35m3?.visible()
+                    mBtnAmountPlan35m3?.text = bug.fact.toString()
                 } else {
-                    mBtnTank35m3!!.visibility = View.GONE
-                    mBtnAmountPlan35m3!!.visibility = View.GONE
+                    mBtnTank35m3?.gone()
+                    mBtnAmountPlan35m3?.gone()
                 }
             }
 
             if (name == Constants.BUG_PackagedCollection) {
                 if (bug.fact!! > 0) {
-                    mBtnTankPackagedCollection!!.visibility = View.VISIBLE
-                    mBtnAmountPlanPackagedCollection!!.visibility = View.VISIBLE
-                    mBtnAmountPlanPackagedCollection!!.text = bug.fact.toString()
+                    mBtnTankPackagedCollection?.visible()
+                    mBtnAmountPlanPackagedCollection?.visible()
+                    mBtnAmountPlanPackagedCollection?.text = bug.fact.toString()
                 } else {
-                    mBtnTankPackagedCollection!!.visibility = View.GONE
-                    mBtnAmountPlanPackagedCollection!!.visibility = View.GONE
+                    mBtnTankPackagedCollection?.gone()
+                    mBtnAmountPlanPackagedCollection?.gone()
                 }
             }
 
             if (name == Constants.BUG_MeshkovCollection) {
                 if (bug.fact!! > 0) {
-                    mBtnTankMeshkovCollection!!.visibility = View.VISIBLE
-                    mBtnAmountPlanBugsCollection!!.visibility = View.VISIBLE
-                    mBtnAmountPlanBugsCollection!!.text = bug.fact.toString()
+                    mBtnTankMeshkovCollection?.visible()
+                    mBtnAmountPlanBugsCollection?.visible()
+                    mBtnAmountPlanBugsCollection?.text = bug.fact.toString()
                 } else {
-                    mBtnTankMeshkovCollection!!.visibility = View.GONE
-                    mBtnAmountPlanBugsCollection!!.visibility = View.GONE
+                    mBtnTankMeshkovCollection?.gone()
+                    mBtnAmountPlanBugsCollection?.gone()
                 }
             }
 
 
         }
 
-        mTvTimeRemoval!!.text = String.format(getFactTime(route.factOnExportDatetime!!))
+        mTvTimeRemoval?.text = factTime
     }
 
 }

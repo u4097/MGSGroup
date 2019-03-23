@@ -181,7 +181,7 @@ dependencies {
     implementation(Libraries.pagedList)
 
     /** JodaTime */
-    implementation(Libraries.jodaTime)
+//    implementation(Libraries.jodaTime)
 
     /** RX */
     implementation(Libraries.rxJava)
@@ -210,6 +210,6 @@ dependencies {
     testImplementation(Libraries.kotlinTest)
     testImplementation(Libraries.koinTest)
     testImplementation(Libraries.androidArchTest)
-    testImplementation(Libraries.jodaTimeTest)
+//    testImplementation(Libraries.jodaTimeTest)
 //    testImplementation(Libraries.robolectric)
 }

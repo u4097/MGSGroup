@@ -43,6 +43,17 @@ class RoomLocalCache(
     }
 
     /**
+     * Update  route in the database, on a background thread.
+     */
+    fun update(route: RouteEntity, updateFinished: () -> Unit) {
+        ioExecutor.execute {
+            Timber.d("updating ${route.counterparty} route")
+            routeDao.update(route)
+            updateFinished()
+        }
+    }
+
+    /**
      * Request a LiveData<List<Route>> from the Dao, based on a route name. If the name contains
      * multiple words separated by spaces, then we're emulating the GitHub API behavior and allow
      * any characters between the words.

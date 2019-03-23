@@ -48,6 +48,6 @@ interface RouteApi {
         @Body routeUpdater: RouteUpdaterEntity,
         @Path("route_id") routeId: String
     )
-            : Deferred<Response<RouteUpdaterEntity>>
+            : Deferred<Response<Unit>>
 
 }

@@ -11,21 +11,24 @@ class RouteRemoteDataSourceImpl constructor(
 ) : RouteRemoteDataSource, BaseRepository() {
 
 
-    override suspend fun update(route: RouteUpdaterEntity, id: String?): Resource<RouteUpdaterEntity>? {
-        val response = safeApiCall(
-            call = { api.updateRouteAsync(route,id!!).await() },
+    /** Finish route */
+    override suspend fun update(
+        route: RouteUpdaterEntity,
+        id: String?
+    ): Resource<Unit>? {
+        return safeApiCall(
+            call = { api.updateRouteAsync(route, id!!).await() },
             errorMessage = "Failure update routes on server!"
         )
-        return response
     }
 
 
+    /** Get routes list from server */
     override suspend fun get(page: Int, pageSize: Int): Resource<RouteResponseEntity>? {
-        val response = safeApiCall(
+        return safeApiCall(
             call = { api.getRouteAsync(page, pageSize).await() },
             errorMessage = "Failure get routes from server!"
         )
-        return response
     }
 
 

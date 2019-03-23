@@ -36,9 +36,6 @@ import timber.log.Timber
 class FinishedFragment : Fragment(), OnRouteClickListener {
 
     override fun onRouteItemClicked(route: RouteEntity) {
-//        val action = RouteTabFragmentDirections.actionToUnFinishedDetail()
-//        action.routeId = route.id
-//        findNavController().navigate(action)
     }
 
     private val mRouteVm: RouteViewModel by viewModel()
@@ -53,8 +50,6 @@ class FinishedFragment : Fragment(), OnRouteClickListener {
 
         val swipeRefreshLayout: SwipeRefreshLayout = view.findViewById(R.id.swRefreshLayout)
         swipeRefreshLayout.setOnRefreshListener {
-//            longToast("Update routes on swipe")
-//            Timber.tag("ROUTE").d("Update routes on swipe")
             mRouteVm.getRoutesFromServer(refresh = true)
             mRouteVm.pending.set(false)
             findNavController().navigate(R.id.login_fragment)
@@ -83,7 +78,6 @@ class FinishedFragment : Fragment(), OnRouteClickListener {
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             swRefreshLayout.isRefreshing = false
-//            Timber.tag("ROUTE").d("Update route adapter in initAdapter() fun")
         })
 
         mRouteVm.networkErrors.observe(this, Observer<String> {

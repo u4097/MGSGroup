@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.apptimizm.mgs.ToolbarListener
 import com.apptimizm.mgs.presentation.routes.all.AllFragment
 import com.apptimizm.mgs.presentation.routes.finish.FinishedFragment
 import com.apptimizm.mgs.presentation.routes.unfinish.UnfinishedFragment
+import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.currentDate
+import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.getUpdateDate
 import com.apptimizm.mgs.presentation.utils.view.inflate
 import com.google.android.material.tabs.TabLayout
 
@@ -32,7 +35,7 @@ class RouteTabFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        (activity as ToolbarListener).updateTitle("График на " + getUpdateDate(currentDate))
+        (activity as ToolbarListener).updateTitle("График на " + getUpdateDate(currentDate))
 
         tabLayout = view.findViewById(com.apptimizm.mgs.R.id.tab_layout)
         vp = view.findViewById(com.apptimizm.mgs.R.id.view_pager)

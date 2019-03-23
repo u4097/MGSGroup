@@ -77,13 +77,11 @@ class UnfinishedFragment : Fragment(), OnRouteClickListener {
                 mRouteVm.getRoutesFromServer()
             }
             longToast("Cache size: ${it.size}")
-            mRouteVm.pending.set(false)
             Timber.d("list: ${it?.size}")
             showEmptyList(it?.size == 0)
             adapter.submitList(it)
             adapter.notifyDataSetChanged()
             swRefreshLayout.isRefreshing = false
-//            Timber.tag("ROUTE").d("Update route adapter in initAdapter() fun")
         })
 
         mRouteVm.networkErrors.observe(this, Observer<String> {

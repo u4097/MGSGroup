@@ -15,11 +15,15 @@ class RouteUseCase constructor(private val routeRepository: RouteRepository) {
         routeRepository.getRouteFromServerAndSave(refresh = refresh, onError = onError)
 
     suspend fun updateRouteOnServer(
+        routeEntity: RouteEntity,
         route: RouteUpdaterEntity,
         id: String?,
         onError: (error: ErrorResponseEntity) -> Unit
     ) =
-        routeRepository.updateRouteOnServer(route = route, id = id, onError = onError)
+        routeRepository.updateRouteOnServer(
+            routeEntity = routeEntity,
+            route = route,
+            id = id, onError = onError)
 
     fun getRoutesFromCache(): Resource<RouteResponse> =
         routeRepository.getRouteFromCache()

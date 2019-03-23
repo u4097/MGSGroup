@@ -66,11 +66,16 @@ class RouteRepositoryImpl constructor(
     }
 
     override suspend fun updateRouteOnServer(
+        routeEntity: RouteEntity,
         route: RouteUpdaterEntity,
         id: String?,
         onError: (error: ErrorResponseEntity) -> Unit
     ) {
         remoteDataSource.update(route, id)
+        roomCache.update(routeEntity) {
+//            PrefUtils.nextpage++
+//            isRequestInProgress = false
+        }
     }
 
 
