@@ -49,12 +49,6 @@ class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewM
 
     val serverError = MutableLiveData<ErrorResponseEntity>()
 
-    /**
-     * Refresh routes from  repository based.
-     */
-    fun getRoutesFromCache() {
-        routeResult.postValue(routeUseCase.getRoutesFromCache())
-    }
 
     /** Get routes from cache by status */
     fun getRoutesFromCacheByStatus(status: String) {

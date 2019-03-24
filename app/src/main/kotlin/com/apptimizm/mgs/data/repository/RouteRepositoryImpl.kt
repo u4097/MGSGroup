@@ -86,13 +86,13 @@ class RouteRepositoryImpl constructor(
         if (isRequestInProgress) return
 
         if (refresh) {
+            App.instance.processedPages.clear()
             roomCache.delete()
             PrefUtils.nextpage = 1
             Timber.tag("ROUTE").d("Remove data from cache")
             isRequestInProgress = true
         }
 
-        Timber.d("processed data: ${App.instance.processedPages}")
         Timber.tag("ROUTE")
             .d("Get routes from server, page: ${PrefUtils.nextpage}, itemsPerPage: $NETWORK_PAGE_SIZE")
         isRequestInProgress = true
@@ -103,6 +103,7 @@ class RouteRepositoryImpl constructor(
             // Save to cache
             roomCache.insert(routes.data.results) {
                 App.instance.processedPages.add(PrefUtils.nextpage)
+                Timber.d("processed data: ${App.instance.processedPages}")
                 onSuccess(it.size)
                 PrefUtils.nextpage++
                 isRequestInProgress = false

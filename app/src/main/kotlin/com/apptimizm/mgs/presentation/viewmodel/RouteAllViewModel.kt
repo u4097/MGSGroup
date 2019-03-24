@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  */
 
 
-class RouteFinishedViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewModel() {
+class RouteAllViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewModel() {
 
     val pending = AtomicBoolean(false)
 
@@ -49,10 +49,13 @@ class RouteFinishedViewModel constructor(val routeUseCase: RouteUseCase) : Abstr
 
     val serverError = MutableLiveData<ErrorResponseEntity>()
 
-    /** Get routes from cache by status */
-    fun getRoutesFromCacheByStatus(status: String) {
-        routeResult.postValue(routeUseCase.getRoutesFromCacheByStatus(status))
+    /**
+     * Get all routes from cache.
+     */
+    fun getRoutesFromCache() {
+        routeResult.postValue(routeUseCase.getRoutesFromCache())
     }
+
 
 
     fun getRoutesFromServer(refresh: Boolean = false) {

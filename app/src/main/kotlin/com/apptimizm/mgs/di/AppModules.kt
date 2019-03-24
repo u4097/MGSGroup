@@ -27,10 +27,7 @@ import com.apptimizm.mgs.domain.repository.SettingRepository
 import com.apptimizm.mgs.domain.usecases.LoginUseCase
 import com.apptimizm.mgs.domain.usecases.RouteUseCase
 import com.apptimizm.mgs.domain.usecases.SettingUseCase
-import com.apptimizm.mgs.presentation.viewmodel.LoginViewModel
-import com.apptimizm.mgs.presentation.viewmodel.RouteFinishedViewModel
-import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
-import com.apptimizm.mgs.presentation.viewmodel.SettingViewModel
+import com.apptimizm.mgs.presentation.viewmodel.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
@@ -56,6 +53,7 @@ val viewModelModule: Module = module {
     viewModel { SettingViewModel(settingUseCase = get()) }
     viewModel { RouteViewModel(routeUseCase = get()) }
     viewModel { RouteFinishedViewModel(routeUseCase = get()) }
+    viewModel { RouteAllViewModel(routeUseCase = get()) }
 }
 
 // USE CASES

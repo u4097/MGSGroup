@@ -19,6 +19,7 @@ import com.apptimizm.mgs.presentation.routes.adapter.OnRouteClickListener
 import com.apptimizm.mgs.presentation.routes.adapter.RoutePagedAdapter
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.apptimizm.mgs.presentation.utils.view.inflate
+import com.apptimizm.mgs.presentation.viewmodel.RouteFinishedViewModel
 import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
 import kotlinx.android.synthetic.main.fmt_routes_rv.*
 import org.jetbrains.anko.support.v4.longToast
@@ -38,7 +39,7 @@ class FinishedFragment : Fragment(), OnRouteClickListener {
     override fun onRouteItemClicked(route: RouteEntity) {
     }
 
-    private val mRouteVm: RouteViewModel by viewModel()
+    private val mRouteVm: RouteFinishedViewModel by viewModel()
     private val adapter = RoutePagedAdapter(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -57,7 +58,7 @@ class FinishedFragment : Fragment(), OnRouteClickListener {
 
         setupScrollListener()
 
-//        mRouteVm.getRoutesFromCacheByStatus("active")
+        mRouteVm.getRoutesFromCacheByStatus("active")
         initAdapter()
 
     }

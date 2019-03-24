@@ -19,6 +19,7 @@ import com.apptimizm.mgs.presentation.routes.adapter.OnRouteClickListener
 import com.apptimizm.mgs.presentation.routes.adapter.RoutePagedAdapter
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.apptimizm.mgs.presentation.utils.view.inflate
+import com.apptimizm.mgs.presentation.viewmodel.RouteAllViewModel
 import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
 import kotlinx.android.synthetic.main.fmt_routes_rv.*
 import org.jetbrains.anko.support.v4.longToast
@@ -36,12 +37,9 @@ import timber.log.Timber
 class AllFragment : Fragment(), OnRouteClickListener {
 
     override fun onRouteItemClicked(route: RouteEntity) {
-//        val action = RouteTabFragmentDirections.actionToUnFinishedDetail()
-//        action.routeId = route.id
-//        findNavController().navigate(action)
     }
 
-    private val mRouteVm: RouteViewModel by viewModel()
+    private val mRouteVm: RouteAllViewModel by viewModel()
     private val adapter = RoutePagedAdapter(this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -60,11 +58,10 @@ class AllFragment : Fragment(), OnRouteClickListener {
 
         setupScrollListener()
 
-//        mRouteVm.getRoutesFromCache()
+        mRouteVm.getRoutesFromCache()
         initAdapter()
 
     }
-
 
     private fun initAdapter() {
 
