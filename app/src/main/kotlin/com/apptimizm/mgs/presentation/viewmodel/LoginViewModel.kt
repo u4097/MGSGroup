@@ -8,6 +8,7 @@ import com.apptimizm.mgs.presentation.utils.livedata.SingleLiveEvent
 import com.apptimizm.mgs.domain.usecases.LoginUseCase
 import com.apptimizm.mgs.presentation.model.mapToDomain
 import kotlinx.coroutines.launch
+import java.util.concurrent.atomic.AtomicBoolean
 
 /**
  * Created by Oleg Sitnikov
@@ -17,6 +18,15 @@ import kotlinx.coroutines.launch
 
 
 class LoginViewModel constructor(val loginUseCase: LoginUseCase) : AbstractViewModel() {
+
+    override val pending: AtomicBoolean? = null
+    override fun getRoutesFromServer(refresh: Boolean) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun listScrolled() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     val loginEventResponse = SingleLiveEvent<Resource<LoginResponseEntity>>()
 

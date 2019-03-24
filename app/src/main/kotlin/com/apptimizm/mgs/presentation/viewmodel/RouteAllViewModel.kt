@@ -23,11 +23,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 class RouteAllViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewModel() {
 
-    val pending = AtomicBoolean(false)
-
-    companion object {
-        private const val VISIBLE_THRESHOLD = 5
-    }
+    override val pending = AtomicBoolean(false)
 
 
     val routeResult = MutableLiveData<Resource<RouteResponse>>()
@@ -57,8 +53,7 @@ class RouteAllViewModel constructor(val routeUseCase: RouteUseCase) : AbstractVi
     }
 
 
-
-    fun getRoutesFromServer(refresh: Boolean = false) {
+    override fun getRoutesFromServer(refresh: Boolean) {
         scope.launch {
             if (pending.compareAndSet(false, true)) {
                 routeUseCase.getRouteFromServer(refresh = refresh, onSuccess = { routeSize.postValue(it) }) {
@@ -69,12 +64,10 @@ class RouteAllViewModel constructor(val routeUseCase: RouteUseCase) : AbstractVi
     }
 
 
-    fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
-        if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
-            scope.launch {
-                routeUseCase.getRouteFromServer(refresh = false, onSuccess = { routeSize.postValue(it) }) {
-                    serverError.postValue(it)
-                }
+    override fun listScrolled() {
+        scope.launch {
+            routeUseCase.getRouteFromServer(refresh = false, onSuccess = { routeSize.postValue(it) }) {
+                serverError.postValue(it)
             }
         }
     }

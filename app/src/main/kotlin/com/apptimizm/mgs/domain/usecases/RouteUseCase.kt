@@ -15,12 +15,14 @@ class RouteUseCase constructor(private val routeRepository: RouteRepository) {
         routeRepository.getRouteFromServerAndSave(refresh = refresh, onSuccess = onSuccess, onError = onError)
 
     suspend fun updateRouteOnServer(
+        isOnline: Boolean,
         routeEntity: RouteEntity,
         route: RouteUpdaterEntity,
         id: String?,
         onError: (error: ErrorResponseEntity) -> Unit
     ) =
         routeRepository.updateRouteOnServer(
+            isOnline = isOnline,
             routeEntity = routeEntity,
             route = route,
             id = id, onError = onError)

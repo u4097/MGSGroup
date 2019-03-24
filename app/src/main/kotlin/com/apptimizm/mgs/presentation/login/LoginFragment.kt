@@ -80,7 +80,11 @@ class LoginFragment : BaseFragment() {
                     val username = etLogin.text.toString()
                     val password = etPass.text.toString()
 
-                    mLoginVm.login(Login(login = username, password = password))
+                    if (isOnline()) {
+                        mLoginVm.login(Login(login = username, password = password))
+                    } else {
+                        noInetConnectionMessage()
+                    }
                 }
             }
 
@@ -91,7 +95,11 @@ class LoginFragment : BaseFragment() {
     override fun onStart() {
         super.onStart()
 //        mLoginVm.login(Login(login = "user", password = "access123"))
-        mLoginVm.login(Login(login = "фаун765", password = "скания765"))
+        if (isOnline()) {
+            mLoginVm.login(Login(login = "фаун765", password = "скания765"))
+        } else {
+           noInetConnectionMessage()
+        }
         if (PrefUtils.token?.isNotEmpty()!!) {
             val action = LoginFragmentDirections.actionToRouteFragment()
             findNavController().navigate(action)

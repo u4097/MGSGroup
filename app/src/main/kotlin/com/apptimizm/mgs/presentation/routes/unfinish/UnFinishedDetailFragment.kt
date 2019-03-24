@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.apptimizm.mgs.R
@@ -40,7 +39,7 @@ import com.apptimizm.mgs.presentation.utils.RxUtils.rxTextView
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.currentDateTime
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.formatTime
 import com.apptimizm.mgs.presentation.utils.view.*
-import com.apptimizm.mgs.presentation.viewmodel.RouteViewModel
+import com.apptimizm.mgs.presentation.viewmodel.RouteUnFinishedViewModel
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.checkedChanges
 import io.reactivex.Observable
@@ -53,7 +52,7 @@ import java.util.*
 
 class UnFinishedDetailFragment : BaseFragment() {
 
-    private val mRouteVm: RouteViewModel by viewModel()
+    private val mRouteVm: RouteUnFinishedViewModel by viewModel()
     var mRouteId: String = ""
     var mRoute: RouteEntity? = null
 
@@ -464,6 +463,16 @@ class UnFinishedDetailFragment : BaseFragment() {
                                 updated = true
                             )
 
+                            Timber.tag("ROUTE")
+                                .d(
+                                    "Route updated on server: id - $id, \n" +
+                                            "time - ${route.factOnExportDatetime}," +
+                                            "\n status - ${route.status}}" +
+                                            "\n bugs: - ${route.bugs}"
+                                )
+
+
+                            // Offline - update route in db
                         } else {
                             route = RouteEntity(
                                 id = mRoute?.id!!,
@@ -495,22 +504,23 @@ class UnFinishedDetailFragment : BaseFragment() {
                                 status = "active",
                                 updated = false
                             )
+                            Timber.tag("ROUTE")
+                                .d(
+                                    "Route updated in db: id - $id, \n" +
+                                            "time - ${route.factOnExportDatetime}," +
+                                            "\n status - ${route.status}}" +
+                                            "\n bugs: - ${route.bugs}"
+                                )
                         }
 
                         route.let {
-                            mRouteVm.updateRoute(
-                                it,
-                                routeUpdater,
-                                route.id
+                            mRouteVm.updateRouteOnServer(
+                                isOnline = isOnline(),
+                                routeEntity = it,
+                                route = routeUpdater,
+                                id = route.id
                             )
                         }
-                        Timber.tag("ROUTE")
-                            .d(
-                                "Route updated: id - $id, \n" +
-                                        "time - ${route.factOnExportDatetime}," +
-                                        "\n status - ${route.status}}" +
-                                        "\n bugs: - ${route.bugs}"
-                            )
 
                         findNavController().navigate(R.id.login_fragment)
                     }

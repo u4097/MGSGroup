@@ -19,7 +19,6 @@ import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.squareup.moshi.JsonAdapter
 import timber.log.Timber
 import com.squareup.moshi.Moshi
-import java.util.concurrent.atomic.AtomicBoolean
 
 
 class RouteRepositoryImpl constructor(
@@ -32,6 +31,7 @@ class RouteRepositoryImpl constructor(
 
     // avoid triggering multiple requests in the same time
     private var isRequestInProgress = false
+    private var isNoMorePages = false
 
 
     override fun getRouteFromCache(): Resource<RouteResponse> {
@@ -64,15 +64,18 @@ class RouteRepositoryImpl constructor(
     }
 
     override suspend fun updateRouteOnServer(
+        isOnline: Boolean,
         routeEntity: RouteEntity,
         route: RouteUpdaterEntity,
         id: String?,
         onError: (error: ErrorResponseEntity) -> Unit
     ) {
-        remoteDataSource.update(route, id)
+        if (isOnline) {
+            remoteDataSource.update(route, id)
+        }
         roomCache.update(routeEntity) {
-            //            PrefUtils.nextpage++
-//            isRequestInProgress = false
+            // PrefUtils.nextpage++
+            //isRequestInProgress = false
         }
     }
 
@@ -91,8 +94,10 @@ class RouteRepositoryImpl constructor(
             PrefUtils.nextpage = 1
             Timber.tag("ROUTE").d("Remove data from cache")
             isRequestInProgress = true
+            isNoMorePages = false
         }
 
+        if (isNoMorePages) return
         Timber.tag("ROUTE")
             .d("Get routes from server, page: ${PrefUtils.nextpage}, itemsPerPage: $NETWORK_PAGE_SIZE")
         isRequestInProgress = true
@@ -111,7 +116,11 @@ class RouteRepositoryImpl constructor(
         }
 
         routes?.data.let {
-            it?.next ?: return
+            if (it?.next == null) {
+                Timber.d("next page: ${it?.next}. Return")
+                isRequestInProgress = false
+                return
+            }
         }
 
         routes?.error?.let {
@@ -120,7 +129,8 @@ class RouteRepositoryImpl constructor(
             val error: ErrorResponseEntity = jsonAdapter.fromJson(it)!!
             Timber.tag("ROUTE").e("Failure to get routes: \n ${error.errors}")
 
-            if (it.equals(404)) {
+            if (error.statusCode?.equals("404")!!) {
+                isNoMorePages = true
                 Timber.tag("ROUTE").d("Return from 404.")
                 isRequestInProgress = false
                 return

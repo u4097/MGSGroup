@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -20,6 +21,7 @@ abstract class AbstractViewModel : ViewModel() {
         get() = parentJob + Dispatchers.Default
 
     val scope = CoroutineScope(coroutineContext)
+    abstract val pending: AtomicBoolean?
 
     private fun cancelAllRequests() = coroutineContext.cancel()
 
@@ -28,4 +30,8 @@ abstract class AbstractViewModel : ViewModel() {
         super.onCleared()
         cancelAllRequests()
     }
+
+    abstract fun listScrolled()
+
+    abstract fun getRoutesFromServer(refresh: Boolean = false)
 }

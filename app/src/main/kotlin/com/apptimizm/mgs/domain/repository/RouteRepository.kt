@@ -17,5 +17,5 @@ interface RouteRepository {
 
     suspend fun getRouteFromServerAndSave(refresh: Boolean, onSuccess:(size: Int)->Unit, onError: (error: ErrorResponseEntity) -> Unit)
 
-    suspend fun updateRouteOnServer(routeEntity: RouteEntity, route: RouteUpdaterEntity, id: String?, onError: (error: ErrorResponseEntity) -> Unit)
+    suspend fun updateRouteOnServer(isOnline: Boolean, routeEntity: RouteEntity, route: RouteUpdaterEntity, id: String?, onError: (error: ErrorResponseEntity) -> Unit)
 }

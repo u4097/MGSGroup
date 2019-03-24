@@ -18,9 +18,7 @@ import com.apptimizm.mgs.datasource.remote.LoginRemoteDataSourceImpl
 import com.apptimizm.mgs.datasource.remote.RouteRemoteDataSourceImpl
 import com.apptimizm.mgs.datasource.remote.SettingRemoteDataSourceImpl
 import com.apptimizm.mgs.db.AppDatabase
-import com.apptimizm.mgs.db.AppDatabase_Impl
 import com.apptimizm.mgs.db.RoomLocalCache
-import com.apptimizm.mgs.networking.LoginApi
 import com.apptimizm.mgs.domain.repository.LoginRepository
 import com.apptimizm.mgs.domain.repository.RouteRepository
 import com.apptimizm.mgs.domain.repository.SettingRepository
@@ -51,7 +49,7 @@ private val loadModules by lazy {
 val viewModelModule: Module = module {
     viewModel { LoginViewModel(loginUseCase = get()) }
     viewModel { SettingViewModel(settingUseCase = get()) }
-    viewModel { RouteViewModel(routeUseCase = get()) }
+    viewModel { RouteUnFinishedViewModel(routeUseCase = get()) }
     viewModel { RouteFinishedViewModel(routeUseCase = get()) }
     viewModel { RouteAllViewModel(routeUseCase = get()) }
 }
