@@ -1,6 +1,7 @@
 package com.apptimizm.mgs.domain.repository
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.apptimizm.mgs.data.repository.resouces.Resource
 import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
@@ -12,6 +13,8 @@ interface RouteRepository {
     fun getRouteFromCache(): Resource<RouteResponse>
 
     fun getRouteFromCacheByStatus(status: String): Resource<RouteResponse>
+
+    fun getRouteFromCacheByPending(): Resource<RouteResponse>
 
     fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity>
 

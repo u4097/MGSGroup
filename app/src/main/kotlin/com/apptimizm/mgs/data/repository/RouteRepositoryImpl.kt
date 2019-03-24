@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.apptimizm.mgs.App
+import com.apptimizm.mgs.AppConfiguration.remoteDataSource
 import com.apptimizm.mgs.data.datasource.RouteRemoteDataSource
 import com.apptimizm.mgs.data.repository.resouces.Resource
 import com.apptimizm.mgs.data.repository.resouces.ResourceState
@@ -47,7 +48,7 @@ class RouteRepositoryImpl constructor(
     }
 
     override fun getRouteFromCacheByStatus(status: String): Resource<RouteResponse> {
-        var data: LiveData<PagedList<RouteEntity>>? = null
+        val data: LiveData<PagedList<RouteEntity>>?
         // Get from cache first.
         // Get data source factory from room cache
         val dataSourceFactory = roomCache.getRouteByStatus(status)
@@ -55,7 +56,13 @@ class RouteRepositoryImpl constructor(
         data = LivePagedListBuilder(dataSourceFactory, DATABASE_PAGE_SIZE).build()
 
         return Resource(ResourceState.SUCCESS, RouteResponse(data, networkErrors))
+    }
 
+    override fun getRouteFromCacheByPending():  Resource<RouteResponse> {
+        val data: LiveData<PagedList<RouteEntity>>?
+        val dataSourceFactory = roomCache.getRoutesByPending()
+        data = LivePagedListBuilder(dataSourceFactory, DATABASE_PAGE_SIZE).build()
+        return Resource(ResourceState.SUCCESS, RouteResponse(data, networkErrors))
     }
 
 
@@ -73,6 +80,7 @@ class RouteRepositoryImpl constructor(
         if (isOnline) {
             remoteDataSource.update(route, id)
         }
+        Timber.tag("ROUTE").d("route: ${routeEntity.id}, route marked as pending: ${routeEntity.pending}")
         roomCache.update(routeEntity) {
             // PrefUtils.nextpage++
             //isRequestInProgress = false

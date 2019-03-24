@@ -68,6 +68,11 @@ class RoomLocalCache(
         return routeDao.routesByStatus(status)
     }
 
+    /** Get routes by pending status (pending or not) */
+    fun getRoutesByPending(): DataSource.Factory<Int, RouteEntity> {
+        return routeDao.routesByPending()
+    }
+
     /**
      * Clear cache
      */

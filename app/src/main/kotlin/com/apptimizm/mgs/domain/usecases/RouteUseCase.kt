@@ -1,6 +1,7 @@
 package com.apptimizm.mgs.domain.usecases
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagedList
 import com.apptimizm.mgs.data.repository.resouces.Resource
 import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
@@ -32,6 +33,9 @@ class RouteUseCase constructor(private val routeRepository: RouteRepository) {
 
     fun getRoutesFromCacheByStatus(status: String): Resource<RouteResponse> =
         routeRepository.getRouteFromCacheByStatus(status)
+
+    fun getRoutesFromCacheByPending(): Resource<RouteResponse> =
+        routeRepository.getRouteFromCacheByPending()
 
 
     fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity> =

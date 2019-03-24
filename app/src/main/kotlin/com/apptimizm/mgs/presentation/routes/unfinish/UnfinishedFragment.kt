@@ -20,7 +20,6 @@ import com.apptimizm.mgs.presentation.utils.Constants.NOT_ACTIVE
 import com.apptimizm.mgs.presentation.utils.view.inflate
 import com.apptimizm.mgs.presentation.viewmodel.RouteUnFinishedViewModel
 import kotlinx.android.synthetic.main.fmt_routes_rv.*
-import org.jetbrains.anko.support.v4.longToast
 import org.koin.androidx.viewmodel.ext.viewModel
 import timber.log.Timber
 
@@ -33,6 +32,7 @@ import timber.log.Timber
 
 
 class UnfinishedFragment : BaseFragment(), OnRouteClickListener {
+
 
     override fun onRouteItemClicked(route: RouteEntity) {
         val action = RouteTabFragmentDirections.actionToUnFinishedDetail()
@@ -53,7 +53,7 @@ class UnfinishedFragment : BaseFragment(), OnRouteClickListener {
         (activity as OnLoadingListener).onStartLoading()
 
         val sw: SwipeRefreshLayout = view.findViewById(R.id.swRefreshLayout)
-        onSwipeRefresh(mRouteVm,sw)
+        onSwipeRefresh(mRouteVm, sw)
         setupScrollListener(mRouteVm)
 
         mRouteVm.routeSize.postValue(999)
@@ -67,6 +67,7 @@ class UnfinishedFragment : BaseFragment(), OnRouteClickListener {
     private fun initAdapter() {
 
         rvRoutes.adapter = adapter
+
         mRouteVm.routes.observe(this, Observer<PagedList<RouteEntity>> {
             if (it?.size == 0) {
                 if (isOnline()) {

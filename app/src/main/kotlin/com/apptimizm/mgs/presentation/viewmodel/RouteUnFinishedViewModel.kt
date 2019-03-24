@@ -11,7 +11,6 @@ import com.apptimizm.mgs.datasource.model.route.RouteUpdaterEntity
 import com.apptimizm.mgs.domain.model.route.RouteResponse
 import com.apptimizm.mgs.domain.usecases.RouteUseCase
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
 /**
@@ -88,10 +87,10 @@ class RouteUnFinishedViewModel constructor(val routeUseCase: RouteUseCase) : Abs
 
 
     override fun listScrolled() {
-            scope.launch {
-                routeUseCase.getRouteFromServer(refresh = false, onSuccess = { routeSize.postValue(it) }) {
-                    serverError.postValue(it)
-                }
+        scope.launch {
+            routeUseCase.getRouteFromServer(refresh = false, onSuccess = { routeSize.postValue(it) }) {
+                serverError.postValue(it)
+            }
         }
     }
 }

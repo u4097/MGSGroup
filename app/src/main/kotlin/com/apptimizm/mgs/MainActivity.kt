@@ -1,8 +1,12 @@
 package com.apptimizm.mgs
 
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,12 +15,23 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.apptimizm.mgs.AppConfiguration.getRootViewContainerFor
 import com.apptimizm.mgs.AppConfiguration.riseAndShine
-import com.apptimizm.mgs.di.loadAppModules
+import com.apptimizm.mgs.di.*
+import com.apptimizm.mgs.networking.OnUpdateListener
+import com.apptimizm.mgs.networking.UpdateReceiver
 import com.apptimizm.mgs.presentation.utils.pref.PrefUtils
 import com.apptimizm.mgs.presentation.utils.view.gone
 import com.apptimizm.mgs.presentation.utils.view.visible
+import com.apptimizm.mgs.presentation.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.koin.androidx.viewmodel.ext.viewModel
+import org.koin.core.KoinComponent
+import org.koin.core.context.loadKoinModules
+import org.koin.core.inject
+import org.koin.core.module.Module
+import org.koin.dsl.module
+import timber.log.Timber
+import java.lang.Exception
 
 interface ToolbarListener {
     fun updateTitle(title: String)
@@ -29,7 +44,10 @@ interface OnLoadingListener {
 
 class MainActivity : AppCompatActivity(),
     ToolbarListener,
-    OnLoadingListener {
+    OnLoadingListener, KoinComponent, OnUpdateListener {
+    override fun onUpdate() {
+        mVm.getRoutesFromCacheByPending()
+    }
 
     override fun onStartLoading() {
         progress.visible()
@@ -40,11 +58,31 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun updateTitle(title: String) {
-        toolbar.setTitle(title)
+        toolbar.title = title
     }
 
     lateinit var mNavController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private val mVm: MainViewModel by viewModel()
+
+    val loadBRModule by lazy {
+        loadKoinModules(
+            broadcastReceiver
+        )
+    }
+
+    val broadcastReceiver: Module = module {
+        single { UpdateReceiver(routeUseCase = get(), onUpdateListener = this@MainActivity) }
+        single {
+            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION).apply {
+                addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+            }
+        }
+    }
+
+
+    val br: UpdateReceiver by inject()
+    val filter: IntentFilter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,10 +122,26 @@ class MainActivity : AppCompatActivity(),
         // Koin  DI init
         loadAppModules()
 
+        loadBRModules()
+
+        mVm.routes.observe(this, Observer {
+            Timber.tag("ROUTE").d("Pending routes size: ${it.size}")
+        })
+
+
+        try {
+            registerReceiver(br, filter)
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
+
         // Wake up activity in devices on run
         riseAndShine(this)
 
+
     }
+
+    fun loadBRModules() = loadBRModule
 
     private fun setupActionBar(
         navController: NavController,

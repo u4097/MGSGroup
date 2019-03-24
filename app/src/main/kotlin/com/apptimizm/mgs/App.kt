@@ -1,12 +1,18 @@
 package com.apptimizm.mgs
 
 import android.app.Application
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.net.ConnectivityManager
+import androidx.core.content.ContextCompat.getSystemService
 import au.com.gridstone.debugdrawer.LumberYard
 import com.apptimizm.mgs.AppConfiguration.remoteDataSource
+import com.apptimizm.mgs.networking.UpdateReceiver
 import com.facebook.stetho.Stetho
 import com.squareup.leakcanary.LeakCanary
+import okhttp3.internal.Internal.instance
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
@@ -20,10 +26,14 @@ class App : Application() {
 
     var dirForCache: File? = null
 
+    // Register broad cast receiver
+    fun registerBroadCastReceiver(updateReceiver: UpdateReceiver, filter: IntentFilter) {
+        registerReceiver(updateReceiver, filter)
+    }
+
     override fun onCreate() {
         super.onCreate()
         instance = this
-
 
         if (LeakCanary.isInAnalyzerProcess(this)) return
 
@@ -40,7 +50,7 @@ class App : Application() {
 
         loadKoinModules(remoteDataSource)
 
-        Stetho.initializeWithDefaults(this);
+        Stetho.initializeWithDefaults(this)
     }
 
     private fun getRootAppDir(): String? {

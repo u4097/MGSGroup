@@ -27,7 +27,7 @@ import com.apptimizm.mgs.datasource.model.route.RouteEntity
  */
 @Database(
     entities = [RouteEntity::class],
-    version = 3,
+    version = 5,
     exportSchema = false
 )
 @TypeConverters(BugTypeConverter::class)

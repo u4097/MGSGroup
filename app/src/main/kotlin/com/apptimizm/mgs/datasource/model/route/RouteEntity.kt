@@ -74,5 +74,5 @@ data class RouteEntity(
     @field:Json(name = "schedule")
     val schedule: String? = "0",
 
-    val updated: Boolean = false
+    val pending: Boolean = false
 )

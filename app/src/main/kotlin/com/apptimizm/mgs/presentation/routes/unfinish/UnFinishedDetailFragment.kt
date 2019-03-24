@@ -1,10 +1,8 @@
 package com.apptimizm.mgs.presentation.routes.unfinish
 
 import android.annotation.SuppressLint
-import android.content.ClipData
-import android.content.ClipboardManager
+import android.content.*
 import android.content.Context.CLIPBOARD_SERVICE
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableStringBuilder
@@ -20,6 +18,7 @@ import com.apptimizm.mgs.ToolbarListener
 import com.apptimizm.mgs.datasource.model.route.BugEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.datasource.model.route.RouteUpdaterEntity
+import com.apptimizm.mgs.networking.OnUpdateListener
 import com.apptimizm.mgs.presentation.routes.BaseFragment
 import com.apptimizm.mgs.presentation.utils.Constants
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_06
@@ -152,13 +151,19 @@ class UnFinishedDetailFragment : BaseFragment() {
     lateinit var mTvNote: TextView
 
     private var myClipboard: ClipboardManager? = null
-    private var myClip: ClipData? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         context?.inflate(R.layout.fmt_info)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+/*        val br: BroadcastReceiver = UpdateReceiver()
+        val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION).apply {
+            addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        }
+        registerReceiver(br, filter)*/
+
 
         myClipboard = activity?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
 
@@ -460,12 +465,12 @@ class UnFinishedDetailFragment : BaseFragment() {
                                 bugs = bugs,
                                 talon = mCbTalon.isChecked,
                                 status = "active",
-                                updated = true
+                                pending = false
                             )
 
                             Timber.tag("ROUTE")
                                 .d(
-                                    "Route updated on server: id - $id, \n" +
+                                    "Route pending on server: id - $id, \n" +
                                             "time - ${route.factOnExportDatetime}," +
                                             "\n status - ${route.status}}" +
                                             "\n bugs: - ${route.bugs}"
@@ -502,11 +507,11 @@ class UnFinishedDetailFragment : BaseFragment() {
                                 bugs = bugs,
                                 talon = mCbTalon.isChecked,
                                 status = "active",
-                                updated = false
+                                pending = true
                             )
                             Timber.tag("ROUTE")
                                 .d(
-                                    "Route updated in db: id - $id, \n" +
+                                    "Route pending in db: id - $id, \n" +
                                             "time - ${route.factOnExportDatetime}," +
                                             "\n status - ${route.status}}" +
                                             "\n bugs: - ${route.bugs}"

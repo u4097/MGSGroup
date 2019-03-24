@@ -1,5 +1,9 @@
 package com.apptimizm.mgs.di
 
+import android.content.BroadcastReceiver
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import com.apptimizm.mgs.App
 import com.apptimizm.mgs.AppConfiguration
 import com.apptimizm.mgs.cache.DiskLruCache
@@ -25,8 +29,10 @@ import com.apptimizm.mgs.domain.repository.SettingRepository
 import com.apptimizm.mgs.domain.usecases.LoginUseCase
 import com.apptimizm.mgs.domain.usecases.RouteUseCase
 import com.apptimizm.mgs.domain.usecases.SettingUseCase
+import com.apptimizm.mgs.networking.UpdateReceiver
 import com.apptimizm.mgs.presentation.viewmodel.*
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.context.GlobalContext.get
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -52,6 +58,7 @@ val viewModelModule: Module = module {
     viewModel { RouteUnFinishedViewModel(routeUseCase = get()) }
     viewModel { RouteFinishedViewModel(routeUseCase = get()) }
     viewModel { RouteAllViewModel(routeUseCase = get()) }
+    viewModel { MainViewModel(routeUseCase = get()) }
 }
 
 // USE CASES
@@ -103,6 +110,7 @@ val cacheModule: Module = module {
         )
     }
 }
+
 
 private const val ROOM_CACHE = "ROOM_CACHE"
 private const val LOGIN_CACHE = "LOGIN_CACHE"

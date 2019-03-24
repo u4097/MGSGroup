@@ -42,6 +42,9 @@ interface RouteDao {
     @Query("SELECT * FROM route WHERE id = :routeId")
     fun routeById(routeId: String): LiveData<RouteEntity>
 
+    @Query("SELECT * FROM route WHERE pending = :pending")
+    fun routesByPending(pending: Boolean = true):DataSource.Factory<Int,RouteEntity>
+
     @Query("SELECT * FROM route WHERE status = :status ORDER BY status ASC")
     fun routesByStatus(status: String): DataSource.Factory<Int,RouteEntity>
 }
