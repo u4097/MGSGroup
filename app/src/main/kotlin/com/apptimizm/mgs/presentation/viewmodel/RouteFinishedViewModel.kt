@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  */
 
 
-class RouteViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewModel() {
+class RouteFinishedViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewModel() {
 
     val pending = AtomicBoolean(false)
 

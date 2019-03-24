@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.apptimizm.mgs.App
 import com.apptimizm.mgs.data.datasource.RouteRemoteDataSource
 import com.apptimizm.mgs.data.repository.resouces.Resource
 import com.apptimizm.mgs.data.repository.resouces.ResourceState
@@ -25,9 +26,6 @@ class RouteRepositoryImpl constructor(
     private val roomCache: RoomLocalCache,
     private val remoteDataSource: RouteRemoteDataSource
 ) : RouteRepository {
-
-    // keep the last requested page. When the request is successful, increment the page number.
-    private var nextRequestedPage = 1
 
     // LiveData of network errors.
     private val networkErrors = MutableLiveData<String>()
@@ -80,11 +78,11 @@ class RouteRepositoryImpl constructor(
 
 
     // Get from server And save routes to cache on Success.
-    override suspend fun getRouteFromServerAndSave(refresh: Boolean,
-                                                   onSuccess:(size: Int) -> Unit,
-                                                   onError: (error: ErrorResponseEntity) -> Unit) {
-        val pending = AtomicBoolean(false)
-        var routes: Resource<RouteResponseEntity>? = null
+    override suspend fun getRouteFromServerAndSave(
+        refresh: Boolean,
+        onSuccess: (size: Int) -> Unit,
+        onError: (error: ErrorResponseEntity) -> Unit
+    ) {
         if (isRequestInProgress) return
 
         if (refresh) {
@@ -94,20 +92,17 @@ class RouteRepositoryImpl constructor(
             isRequestInProgress = true
         }
 
-        if (pending.compareAndSet(false, true)) {
-            Timber.tag("ROUTE")
-                .d("Get routes from server, page: ${PrefUtils.nextpage}, itemsPerPage: $NETWORK_PAGE_SIZE")
-            routes = remoteDataSource.get(PrefUtils.nextpage, NETWORK_PAGE_SIZE)
-            isRequestInProgress = true
-        } else {
-            return
-        }
+        Timber.d("processed data: ${App.instance.processedPages}")
+        Timber.tag("ROUTE")
+            .d("Get routes from server, page: ${PrefUtils.nextpage}, itemsPerPage: $NETWORK_PAGE_SIZE")
+        isRequestInProgress = true
+        val routes: Resource<RouteResponseEntity>? = remoteDataSource.get(PrefUtils.nextpage, NETWORK_PAGE_SIZE)
 
 
         routes?.data?.results?.let {
             // Save to cache
-            pending.set(false)
-            roomCache.insert(routes.data?.results!!) {
+            roomCache.insert(routes.data.results) {
+                App.instance.processedPages.add(PrefUtils.nextpage)
                 onSuccess(it.size)
                 PrefUtils.nextpage++
                 isRequestInProgress = false

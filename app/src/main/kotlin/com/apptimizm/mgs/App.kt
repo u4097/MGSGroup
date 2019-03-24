@@ -16,11 +16,14 @@ import java.io.File
 
 class App : Application() {
 
+    var processedPages = mutableListOf<Int>()
+
     var dirForCache: File? = null
 
     override fun onCreate() {
         super.onCreate()
         instance = this
+
 
         if (LeakCanary.isInAnalyzerProcess(this)) return
 

@@ -4,7 +4,6 @@ object PrefUtils {
     private const val TOKEN = "token"
     private const val PHONE = "phone"
     private const val NEXT_PAGE = "nextpage"
-    private const val LAST_PAGE = "nextpage"
 
     var token: String?
         get() = SharedPrefFactory.prefs.getString(TOKEN, "")
@@ -24,9 +23,4 @@ object PrefUtils {
             SharedPrefFactory.editor.putInt(NEXT_PAGE, nextpage).commit()
         }
 
-    var lastpage: Int
-        get() = SharedPrefFactory.prefs.getInt(NEXT_PAGE, 1)
-        set(lastpage) {
-            SharedPrefFactory.editor.putInt(NEXT_PAGE, lastpage).commit()
-        }
 }
