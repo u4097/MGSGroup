@@ -39,6 +39,7 @@ object Constants {
 
     const val NOT_ACTIVE = "not_active"
     const val ACTIVE = "active"
+    const val PENDING = "pending"
 
     val TIME_UPDATE = TimeUnit.MINUTES.toMillis(5)
 

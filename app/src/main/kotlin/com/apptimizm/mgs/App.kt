@@ -26,10 +26,6 @@ class App : Application() {
 
     var dirForCache: File? = null
 
-    // Register broad cast receiver
-    fun registerBroadCastReceiver(updateReceiver: UpdateReceiver, filter: IntentFilter) {
-        registerReceiver(updateReceiver, filter)
-    }
 
     override fun onCreate() {
         super.onCreate()
@@ -68,7 +64,7 @@ class App : Application() {
     fun isOnline(): Boolean {
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val netInfo = cm.activeNetworkInfo
-        return netInfo != null && netInfo.isConnectedOrConnecting
+        return netInfo != null && netInfo.isConnected
     }
 
 }

@@ -18,9 +18,9 @@ import com.apptimizm.mgs.ToolbarListener
 import com.apptimizm.mgs.datasource.model.route.BugEntity
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.datasource.model.route.RouteUpdaterEntity
-import com.apptimizm.mgs.networking.OnUpdateListener
 import com.apptimizm.mgs.presentation.routes.BaseFragment
 import com.apptimizm.mgs.presentation.utils.Constants
+import com.apptimizm.mgs.presentation.utils.Constants.ACTIVE
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_06
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_07
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_08
@@ -34,6 +34,7 @@ import com.apptimizm.mgs.presentation.utils.Constants.BUG_5m3
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_8m3
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_MeshkovCollection
 import com.apptimizm.mgs.presentation.utils.Constants.BUG_PackagedCollection
+import com.apptimizm.mgs.presentation.utils.Constants.PENDING
 import com.apptimizm.mgs.presentation.utils.RxUtils.rxTextView
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.currentDateTime
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.formatTime
@@ -464,9 +465,18 @@ class UnFinishedDetailFragment : BaseFragment() {
                                 factOnExportDatetime = currentDateTime,
                                 bugs = bugs,
                                 talon = mCbTalon.isChecked,
-                                status = "active",
+                                status = ACTIVE,
                                 pending = false
                             )
+                            Timber.tag("ROUTE").d("Updated route. Network status isOnline: true}")
+                            route.let {
+                                mRouteVm.updateRouteOnServer(
+                                    isOnline = true,
+                                    routeEntity = it,
+                                    route = routeUpdater,
+                                    id = route.id
+                                )
+                            }
 
                             Timber.tag("ROUTE")
                                 .d(
@@ -506,9 +516,18 @@ class UnFinishedDetailFragment : BaseFragment() {
                                 factOnExportDatetime = currentDateTime,
                                 bugs = bugs,
                                 talon = mCbTalon.isChecked,
-                                status = "active",
+                                status = PENDING,
                                 pending = true
                             )
+                            Timber.tag("ROUTE").d("Updated route. Network status isOnline: false}")
+                            route.let {
+                                mRouteVm.updateRouteOnServer(
+                                    isOnline = false,
+                                    routeEntity = it,
+                                    route = routeUpdater,
+                                    id = route.id
+                                )
+                            }
                             Timber.tag("ROUTE")
                                 .d(
                                     "Route pending in db: id - $id, \n" +
@@ -518,16 +537,7 @@ class UnFinishedDetailFragment : BaseFragment() {
                                 )
                         }
 
-                        route.let {
-                            mRouteVm.updateRouteOnServer(
-                                isOnline = isOnline(),
-                                routeEntity = it,
-                                route = routeUpdater,
-                                id = route.id
-                            )
-                        }
-
-                        findNavController().navigate(R.id.login_fragment)
+                        updateRoutes(mRouteVm)
                     }
                 }
         )

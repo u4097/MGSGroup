@@ -49,6 +49,12 @@ class RouteFinishedViewModel constructor(val routeUseCase: RouteUseCase) : Abstr
         routeResult.postValue(routeUseCase.getRoutesFromCacheByStatus(status))
     }
 
+    /** Get routes from cache by status (active and pending) */
+    fun getRoutesFromCacheActiveAndPendign() {
+        routeResult.postValue(routeUseCase.getRoutesFromCacheActiveAndPending())
+    }
+
+
 
     override fun getRoutesFromServer(refresh: Boolean) {
         scope.launch {

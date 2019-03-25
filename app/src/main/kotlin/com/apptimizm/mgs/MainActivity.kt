@@ -15,6 +15,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.apptimizm.mgs.AppConfiguration.getRootViewContainerFor
 import com.apptimizm.mgs.AppConfiguration.riseAndShine
+import com.apptimizm.mgs.datasource.model.ErrorResponseEntity
+import com.apptimizm.mgs.datasource.model.route.RouteEntity
+import com.apptimizm.mgs.datasource.model.route.RouteUpdaterEntity
 import com.apptimizm.mgs.di.*
 import com.apptimizm.mgs.networking.OnUpdateListener
 import com.apptimizm.mgs.networking.UpdateReceiver
@@ -24,6 +27,8 @@ import com.apptimizm.mgs.presentation.utils.view.visible
 import com.apptimizm.mgs.presentation.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar.*
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 import org.koin.androidx.viewmodel.ext.viewModel
 import org.koin.core.KoinComponent
 import org.koin.core.context.loadKoinModules
@@ -126,8 +131,24 @@ class MainActivity : AppCompatActivity(),
 
         mVm.routes.observe(this, Observer {
             Timber.tag("ROUTE").d("Pending routes size: ${it.size}")
+            if (App.instance.isOnline()) {
+                it.forEach {
+                    mVm.updateRouteOnServer(
+                        isOnline = true,
+                        routeEntity = it,
+                        route = RouteUpdaterEntity(it.factOnExportDatetime!!,it.talon, it.bugs!!),
+                        id = it.id
+                    )
+                }
+            } else {
+                longToast("Нет подключения к интернету.")
+                Timber.tag("ROUTE").d("No inet connection on route update!")
+            }
         })
 
+        mVm.serverError.observe(this, Observer<ErrorResponseEntity> {
+            Timber.tag("ERROR").e("\uD83D\uDE28 Wooops ${it.statusCode} - ${it.errors?.detail}")
+        })
 
         try {
             registerReceiver(br, filter)

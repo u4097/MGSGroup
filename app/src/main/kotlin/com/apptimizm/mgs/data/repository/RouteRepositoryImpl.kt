@@ -58,6 +58,17 @@ class RouteRepositoryImpl constructor(
         return Resource(ResourceState.SUCCESS, RouteResponse(data, networkErrors))
     }
 
+    override fun getRouteFromCacheActiveAndPending(): Resource<RouteResponse> {
+        val data: LiveData<PagedList<RouteEntity>>?
+        // Get from cache first.
+        // Get data source factory from room cache
+        val dataSourceFactory = roomCache.getRouteActiveAndPending()
+        // Get data from room cache
+        data = LivePagedListBuilder(dataSourceFactory, DATABASE_PAGE_SIZE).build()
+
+        return Resource(ResourceState.SUCCESS, RouteResponse(data, networkErrors))
+    }
+
     override fun getRouteFromCacheByPending():  Resource<RouteResponse> {
         val data: LiveData<PagedList<RouteEntity>>?
         val dataSourceFactory = roomCache.getRoutesByPending()
@@ -77,7 +88,8 @@ class RouteRepositoryImpl constructor(
         id: String?,
         onError: (error: ErrorResponseEntity) -> Unit
     ) {
-        if (isOnline) {
+        if (App.instance.isOnline()) {
+            Timber.tag("ROUTE").d("Update online")
             remoteDataSource.update(route, id)
         }
         Timber.tag("ROUTE").d("route: ${routeEntity.id}, route marked as pending: ${routeEntity.pending}")

@@ -12,7 +12,11 @@ import com.apptimizm.mgs.domain.repository.RouteRepository
 
 class RouteUseCase constructor(private val routeRepository: RouteRepository) {
 
-    suspend fun getRouteFromServer(refresh: Boolean, onSuccess: (size: Int)-> Unit, onError: (error: ErrorResponseEntity) -> Unit) =
+    suspend fun getRouteFromServer(
+        refresh: Boolean,
+        onSuccess: (size: Int) -> Unit,
+        onError: (error: ErrorResponseEntity) -> Unit
+    ) =
         routeRepository.getRouteFromServerAndSave(refresh = refresh, onSuccess = onSuccess, onError = onError)
 
     suspend fun updateRouteOnServer(
@@ -26,13 +30,17 @@ class RouteUseCase constructor(private val routeRepository: RouteRepository) {
             isOnline = isOnline,
             routeEntity = routeEntity,
             route = route,
-            id = id, onError = onError)
+            id = id, onError = onError
+        )
 
     fun getRoutesFromCache(): Resource<RouteResponse> =
         routeRepository.getRouteFromCache()
 
     fun getRoutesFromCacheByStatus(status: String): Resource<RouteResponse> =
         routeRepository.getRouteFromCacheByStatus(status)
+
+    fun getRoutesFromCacheActiveAndPending(): Resource<RouteResponse> =
+        routeRepository.getRouteFromCacheActiveAndPending()
 
     fun getRoutesFromCacheByPending(): Resource<RouteResponse> =
         routeRepository.getRouteFromCacheByPending()

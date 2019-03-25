@@ -81,6 +81,15 @@ open class BaseFragment : Fragment() {
 
     }
 
+    fun updateRoutes(mRouteVm: AbstractViewModel) {
+        if (isOnline()) {
+            mRouteVm.getRoutesFromServer(refresh = true)
+            findNavController().navigate(R.id.login_fragment)
+        } else {
+            findNavController().navigate(R.id.login_fragment)
+        }
+    }
+
     fun setupScrollListener(viewModel: AbstractViewModel) {
         val layoutManager = rvRoutes.layoutManager as LinearLayoutManager
         rvRoutes.addOnScrollListener(object : RecyclerView.OnScrollListener() {

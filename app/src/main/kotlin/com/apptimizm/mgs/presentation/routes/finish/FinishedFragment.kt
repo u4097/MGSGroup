@@ -49,7 +49,7 @@ class FinishedFragment : BaseFragment(), OnRouteClickListener {
 
         setupScrollListener(mRouteVm)
 
-        mRouteVm.getRoutesFromCacheByStatus(ACTIVE)
+        mRouteVm.getRoutesFromCacheActiveAndPendign()
         initAdapter()
 
     }

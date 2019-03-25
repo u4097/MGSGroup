@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 class MainViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewModel() {
 
-    override val pending: AtomicBoolean? = null
+    override val pending = AtomicBoolean(false)
 
     override fun getRoutesFromServer(refresh: Boolean) {
 //        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -32,7 +32,7 @@ class MainViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewMo
 //        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-
+    val serverError = MutableLiveData<ErrorResponseEntity>()
 
     var pendingRoutes = MutableLiveData<Resource<RouteResponse>>()
 
@@ -45,6 +45,28 @@ class MainViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewMo
     fun getRoutesFromCacheByPending() {
         pendingRoutes.postValue(routeUseCase.getRoutesFromCacheByPending())
     }
+
+    fun updateRouteOnServer(
+        isOnline: Boolean,
+        routeEntity: RouteEntity,
+        route: RouteUpdaterEntity,
+        id: String?
+    ) {
+        scope.launch {
+            if (pending.compareAndSet(false, true)) {
+                routeUseCase.updateRouteOnServer(
+                    isOnline = isOnline,
+                    routeEntity = routeEntity,
+                    route = route,
+                    id = id
+                ) {
+                    serverError.postValue(it)
+                }
+            }
+        }
+
+    }
+
 
 }
 

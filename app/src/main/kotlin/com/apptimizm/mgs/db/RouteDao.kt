@@ -20,6 +20,7 @@ import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
+import org.jetbrains.anko.db.SqlOrderDirection
 
 /**
  * Room data access object for accessing the [Route] table.
@@ -42,9 +43,12 @@ interface RouteDao {
     @Query("SELECT * FROM route WHERE id = :routeId")
     fun routeById(routeId: String): LiveData<RouteEntity>
 
-    @Query("SELECT * FROM route WHERE pending = :pending")
-    fun routesByPending(pending: Boolean = true):DataSource.Factory<Int,RouteEntity>
+    @Query("SELECT * FROM route WHERE status = :pending")
+    fun routesByPending(pending: String = "pending"):DataSource.Factory<Int,RouteEntity>
 
     @Query("SELECT * FROM route WHERE status = :status ORDER BY status ASC")
     fun routesByStatus(status: String): DataSource.Factory<Int,RouteEntity>
+
+    @Query("SELECT * FROM route WHERE status = 'active' OR status = 'pending' ORDER BY counterparty ASC")
+    fun routesActiveAndPending (): DataSource.Factory<Int,RouteEntity>
 }

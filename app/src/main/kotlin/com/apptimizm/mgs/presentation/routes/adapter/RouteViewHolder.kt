@@ -30,6 +30,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.apptimizm.mgs.R
 import com.apptimizm.mgs.datasource.model.route.RouteEntity
 import com.apptimizm.mgs.presentation.utils.Constants
+import com.apptimizm.mgs.presentation.utils.Constants.ACTIVE
+import com.apptimizm.mgs.presentation.utils.Constants.NOT_ACTIVE
+import com.apptimizm.mgs.presentation.utils.Constants.PENDING
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.factTime
 import com.apptimizm.mgs.presentation.utils.date.DateTimeUtils.Companion.formatTime
 import com.apptimizm.mgs.presentation.utils.view.gone
@@ -138,75 +141,92 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
         mBtnTankMeshkovCollection?.gone()
         mBtnAmountPlanBugsCollection?.gone()
 
-        if (route.status == "not_active") {
-            mTvTankTitle!!.setText(R.string.title_plan)
-            mTvTime!!.setText(R.string.label_time_plan)
+        when (route.status) {
+            NOT_ACTIVE -> {
 
-            mBtnAmountPlan06!!.setBackgroundWhite()
-            mBtnAmountPlan06!!.setTextColor(Color.BLACK)
+                mTvTankTitle!!.setText(R.string.title_plan)
+                mTvTime!!.setText(R.string.label_time_plan)
 
-            mBtnAmountPlan07!!.setBackgroundWhite()
-            mBtnAmountPlan07!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan06!!.setBackgroundWhite()
+                mBtnAmountPlan06!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlan08!!.setBackgroundWhite()
-            mBtnAmountPlan08!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan07!!.setBackgroundWhite()
+                mBtnAmountPlan07!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlan11!!.setBackgroundWhite()
-            mBtnAmountPlan11!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan08!!.setBackgroundWhite()
+                mBtnAmountPlan08!!.setTextColor(Color.BLACK)
+
+                mBtnAmountPlan11!!.setBackgroundWhite()
+                mBtnAmountPlan11!!.setTextColor(Color.BLACK)
 
 
-            mBtnAmountPlan3m3!!.setBackgroundWhite()
-            mBtnAmountPlan3m3!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan3m3!!.setBackgroundWhite()
+                mBtnAmountPlan3m3!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlan5m3!!.setBackgroundWhite()
-            mBtnAmountPlan5m3!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan5m3!!.setBackgroundWhite()
+                mBtnAmountPlan5m3!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlan8m3!!.setBackgroundWhite()
-            mBtnAmountPlan8m3!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan8m3!!.setBackgroundWhite()
+                mBtnAmountPlan8m3!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlan20m3!!.setBackgroundWhite()
-            mBtnAmountPlan20m3!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan20m3!!.setBackgroundWhite()
+                mBtnAmountPlan20m3!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlan27m3!!.setBackgroundWhite()
-            mBtnAmountPlan27m3!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan27m3!!.setBackgroundWhite()
+                mBtnAmountPlan27m3!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlan32m3!!.setBackgroundWhite()
-            mBtnAmountPlan32m3!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan32m3!!.setBackgroundWhite()
+                mBtnAmountPlan32m3!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlan35m3!!.setBackgroundWhite()
-            mBtnAmountPlan35m3!!.setTextColor(Color.BLACK)
+                mBtnAmountPlan35m3!!.setBackgroundWhite()
+                mBtnAmountPlan35m3!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlanPackagedCollection!!.setBackgroundWhite()
-            mBtnAmountPlanPackagedCollection!!.setTextColor(Color.BLACK)
+                mBtnAmountPlanPackagedCollection!!.setBackgroundWhite()
+                mBtnAmountPlanPackagedCollection!!.setTextColor(Color.BLACK)
 
-            mBtnAmountPlanBugsCollection!!.setBackgroundWhite()
-            mBtnAmountPlanBugsCollection!!.setTextColor(Color.BLACK)
+                mBtnAmountPlanBugsCollection!!.setBackgroundWhite()
+                mBtnAmountPlanBugsCollection!!.setTextColor(Color.BLACK)
 
-            mVDividerTime?.gone()
-            mCbTalon!!.isChecked = route.talon!!
-            mCbTalon?.gone()
-            mCbTalon!!.isClickable = false
-            mIvStatus!!.setColorFilter(Color.RED)
+                mVDividerTime?.gone()
+                mCbTalon!!.isChecked = route.talon!!
+                mCbTalon?.gone()
+                mCbTalon!!.isClickable = false
+                mIvStatus!!.setColorFilter(Color.RED)
 
-            try {
-                setAmountPlan(route)
-            } catch (e: Exception) {
-                Timber.d(e)
+                try {
+                    setAmountPlan(route)
+                } catch (e: Exception) {
+                    Timber.d(e)
+                }
+
+            }
+            ACTIVE -> {
+                mTvTankTitle!!.setText(R.string.title_fact)
+                mIvStatus!!.setColorFilter(Color.GREEN)
+
+                mCbTalon?.visible()
+                mCbTalon?.isChecked = route.talon!!
+                mCbTalon?.isClickable = false
+                try {
+                    setAmountFact(route)
+                } catch (e: Exception) {
+                    Timber.d(e)
+                }
             }
 
-        } else {
-            mTvTankTitle!!.setText(R.string.title_fact)
-            mIvStatus!!.setColorFilter(Color.GREEN)
+            PENDING -> {
+                mTvTankTitle!!.setText(R.string.title_fact)
+                mIvStatus!!.setColorFilter(Color.YELLOW)
 
-            mCbTalon?.visible()
-            mCbTalon?.isChecked = route.talon!!
-            mCbTalon?.isClickable = false
-            try {
-                setAmountFact(route)
-            } catch (e: Exception) {
-                Timber.d(e)
+                mCbTalon?.visible()
+                mCbTalon?.isChecked = route.talon!!
+                mCbTalon?.isClickable = false
+                try {
+                    setAmountFact(route)
+                } catch (e: Exception) {
+                    Timber.d(e)
+                }
             }
-
         }
 
     }
@@ -229,8 +249,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
 
                 val name = bug.name
 
-                if (name == Constants.BUG_06) {
-                    if (bug.plan!! > 0) {
+                when (name) {
+                    Constants.BUG_06 -> if (bug.plan!! > 0) {
                         mBtnTank06?.visible()
                         mBtnAmountPlan06?.visible()
                         mBtnAmountPlan06?.text = bug.plan.toString()
@@ -238,10 +258,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank06?.gone()
                         mBtnAmountPlan06?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_07) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_07 -> if (bug.plan!! > 0) {
                         mBtnTank07?.visible()
                         mBtnAmountPlan07?.visible()
                         mBtnAmountPlan07?.text = bug.plan.toString()
@@ -249,11 +267,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank07?.gone()
                         mBtnAmountPlan07?.gone()
                     }
-                }
 
-
-                if (name == Constants.BUG_08) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_08 -> if (bug.plan!! > 0) {
                         mBtnTank08?.visible()
                         mBtnAmountPlan08?.visible()
                         mBtnAmountPlan08?.text = bug.plan.toString()
@@ -261,10 +276,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank08?.gone()
                         mBtnAmountPlan08?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_11) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_11 -> if (bug.plan!! > 0) {
                         mBtnTank11?.visible()
                         mBtnAmountPlan11?.visible()
                         mBtnAmountPlan11?.text = bug.plan.toString()
@@ -272,10 +285,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank11?.gone()
                         mBtnAmountPlan11?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_3m3) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_3m3 -> if (bug.plan!! > 0) {
                         mBtnTank3m3?.visible()
                         mBtnAmountPlan3m3?.visible()
                         mBtnAmountPlan3m3?.text = bug.plan.toString()
@@ -283,10 +294,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank3m3?.gone()
                         mBtnAmountPlan3m3?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_5m3) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_5m3 -> if (bug.plan!! > 0) {
                         mBtnTank5m3?.visible()
                         mBtnAmountPlan5m3?.visible()
                         mBtnAmountPlan5m3?.text = bug.plan.toString()
@@ -294,11 +303,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank5m3?.gone()
                         mBtnAmountPlan5m3?.gone()
                     }
-                }
 
-
-                if (name == Constants.BUG_8m3) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_8m3 -> if (bug.plan!! > 0) {
                         mBtnTank8m3?.visible()
                         mBtnAmountPlan8m3?.visible()
                         mBtnAmountPlan8m3?.text = bug.plan.toString()
@@ -306,10 +312,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank8m3?.gone()
                         mBtnAmountPlan8m3?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_20m3) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_20m3 -> if (bug.plan!! > 0) {
                         mBtnTank20m3?.visible()
                         mBtnAmountPlan20m3?.visible()
                         mBtnAmountPlan20m3?.text = bug.plan.toString()
@@ -317,10 +321,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank20m3?.gone()
                         mBtnAmountPlan20m3?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_27m3) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_27m3 -> if (bug.plan!! > 0) {
                         mBtnTank27m3?.visible()
                         mBtnAmountPlan27m3?.visible()
                         mBtnAmountPlan27m3?.text = bug.plan.toString()
@@ -328,10 +330,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank27m3?.gone()
                         mBtnAmountPlan27m3?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_32m3) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_32m3 -> if (bug.plan!! > 0) {
                         mBtnTank32m3?.visible()
                         mBtnAmountPlan32m3?.visible()
                         mBtnAmountPlan32m3?.text = bug.plan.toString()
@@ -339,10 +339,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank32m3?.gone()
                         mBtnAmountPlan32m3?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_35m3) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_35m3 -> if (bug.plan!! > 0) {
                         mBtnTank35m3?.visible()
                         mBtnAmountPlan35m3?.visible()
                         mBtnAmountPlan35m3?.text = bug.plan.toString()
@@ -350,10 +348,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTank35m3?.gone()
                         mBtnAmountPlan35m3?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_PackagedCollection) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_PackagedCollection -> if (bug.plan!! > 0) {
                         mBtnTankPackagedCollection?.visible()
                         mBtnAmountPlanPackagedCollection?.visible()
                         mBtnAmountPlanPackagedCollection?.text = bug.plan.toString()
@@ -361,10 +357,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTankPackagedCollection?.gone()
                         mBtnAmountPlanPackagedCollection?.gone()
                     }
-                }
 
-                if (name == Constants.BUG_MeshkovCollection) {
-                    if (bug.plan!! > 0) {
+                    Constants.BUG_MeshkovCollection -> if (bug.plan!! > 0) {
                         mBtnTankMeshkovCollection?.visible()
                         mBtnAmountPlanBugsCollection?.visible()
                         mBtnAmountPlanBugsCollection?.text = bug.plan.toString()
@@ -372,8 +366,8 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
                         mBtnTankMeshkovCollection?.gone()
                         mBtnAmountPlanBugsCollection?.gone()
                     }
-                }
 
+                }
             }
         }
 

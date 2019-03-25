@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment() {
                     ResourceState.LOADING -> {
                     }
                     ResourceState.ERROR -> {
-                            hideKeyboard()
+                        hideKeyboard()
                         longToast("Не верный пароль.")
                     }
                     ResourceState.EMPTY_CACHE -> {
@@ -94,11 +94,11 @@ class LoginFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-//        mLoginVm.login(Login(login = "user", password = "access123"))
         if (isOnline()) {
+//            mLoginVm.login(Login(login = "user", password = "access123"))
             mLoginVm.login(Login(login = "фаун765", password = "скания765"))
         } else {
-           noInetConnectionMessage()
+            noInetConnectionMessage()
         }
         if (PrefUtils.token?.isNotEmpty()!!) {
             val action = LoginFragmentDirections.actionToRouteFragment()

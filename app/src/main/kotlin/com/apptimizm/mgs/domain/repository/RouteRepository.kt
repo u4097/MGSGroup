@@ -14,6 +14,8 @@ interface RouteRepository {
 
     fun getRouteFromCacheByStatus(status: String): Resource<RouteResponse>
 
+    fun getRouteFromCacheActiveAndPending(): Resource<RouteResponse>
+
     fun getRouteFromCacheByPending(): Resource<RouteResponse>
 
     fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity>
