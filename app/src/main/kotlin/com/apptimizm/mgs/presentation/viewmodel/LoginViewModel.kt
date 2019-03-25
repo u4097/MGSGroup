@@ -19,10 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 class LoginViewModel constructor(val loginUseCase: LoginUseCase) : AbstractViewModel() {
 
-    override val pending: AtomicBoolean? = null
-    override fun getRoutesFromServer(refresh: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override val pending = AtomicBoolean(false)
 
     override fun listScrolled() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -30,11 +27,24 @@ class LoginViewModel constructor(val loginUseCase: LoginUseCase) : AbstractViewM
 
     val loginEventResponse = SingleLiveEvent<Resource<LoginResponseEntity>>()
 
+    val serverError = MutableLiveData<String>()
+
+    val routeSize = MutableLiveData<Int>()
 
     fun login(login: Login) {
         scope.launch {
             val response = loginUseCase.get(loginModel = login.mapToDomain())
             loginEventResponse.postValue(response)
+        }
+    }
+
+    override fun getRoutesFromServer(refresh: Boolean) {
+        scope.launch {
+            if (pending.compareAndSet(false, true)) {
+                loginUseCase.getRouteFromServer(refresh = refresh, onSuccess = { routeSize.postValue(it) }) {
+                    serverError.postValue(it)
+                }
+            }
         }
     }
 

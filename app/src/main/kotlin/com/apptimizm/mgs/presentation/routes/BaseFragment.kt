@@ -75,7 +75,7 @@ open class BaseFragment : Fragment() {
                 findNavController().navigate(R.id.login_fragment)
             } else {
                 sw.isRefreshing = false
-                noInetConnectionMessage()
+//                noInetConnectionMessage()
             }
         }
 
@@ -84,9 +84,9 @@ open class BaseFragment : Fragment() {
     fun updateRoutes(mRouteVm: AbstractViewModel) {
         if (isOnline()) {
             mRouteVm.getRoutesFromServer(refresh = true)
-            findNavController().navigate(R.id.login_fragment)
+            findNavController().navigate(R.id.route_fragment)
         } else {
-            findNavController().navigate(R.id.login_fragment)
+            findNavController().navigate(R.id.route_fragment)
         }
     }
 
@@ -103,7 +103,7 @@ open class BaseFragment : Fragment() {
                     if (isOnline()) {
                         viewModel.listScrolled()
                     } else {
-                        noInetConnectionMessage()
+//                        noInetConnectionMessage()
                     }
                 }
             }
@@ -112,7 +112,7 @@ open class BaseFragment : Fragment() {
     }
 
     fun noInetConnectionMessage() {
-        longToast("Нет подключения к интернету.")
+        longToast(getString(R.string.msg_no_internet_dialog_content))
     }
 
 }

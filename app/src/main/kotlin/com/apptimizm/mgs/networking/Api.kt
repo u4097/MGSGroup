@@ -22,6 +22,13 @@ interface LoginApi {
     fun loginAsync(
         @Body loginEntity: LoginEntity
     ): Deferred<Response<LoginResponseEntity>>
+
+    @GET("routing_sheet/")
+    fun getRouteAsync(
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int
+    ): Deferred<Response<RouteResponseEntity>>
+
 }
 
 // Телефон диспетчерской

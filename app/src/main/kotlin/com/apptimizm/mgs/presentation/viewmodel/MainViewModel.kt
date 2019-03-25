@@ -67,6 +67,9 @@ class MainViewModel constructor(val routeUseCase: RouteUseCase) : AbstractViewMo
 
     }
 
+    fun clearDb() {
+        routeUseCase.clearLocalDb()
+    }
 
 }
 

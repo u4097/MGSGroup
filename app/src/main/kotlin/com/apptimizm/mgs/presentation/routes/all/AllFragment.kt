@@ -61,7 +61,7 @@ class AllFragment : BaseFragment(), OnRouteClickListener {
                 if (isOnline()) {
                     mRouteVm.getRoutesFromServer()
                 } else {
-                    noInetConnectionMessage()
+//                    noInetConnectionMessage()
                 }
             }
             mRouteVm.pending.set(false)

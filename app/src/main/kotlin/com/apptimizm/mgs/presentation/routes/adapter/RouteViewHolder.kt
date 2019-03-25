@@ -94,11 +94,6 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
 
     private var mRoute: RouteEntity? = null
 
-    init {
-        view.setOnClickListener {
-            cardView!!.setOnClickListener { listener.onRouteItemClicked(this.mRoute!!) }
-        }
-    }
 
     fun bind(route: RouteEntity?) {
         if (route == null) {
@@ -111,6 +106,7 @@ class RouteViewHolder(val view: View, val listener: OnRouteClickListener) : Recy
     private fun showRouteEntityData(route: RouteEntity) {
         this.mRoute = route
 
+        cardView!!.setOnClickListener { listener.onRouteItemClicked(this.mRoute!!) }
         mTvContragent?.text = route.counterparty
         mTvAddress?.text = route.address
 

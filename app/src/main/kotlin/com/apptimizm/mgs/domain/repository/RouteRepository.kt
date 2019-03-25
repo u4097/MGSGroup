@@ -20,6 +20,8 @@ interface RouteRepository {
 
     fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity>
 
+    fun clearDb()
+
     suspend fun getRouteFromServerAndSave(refresh: Boolean, onSuccess:(size: Int)->Unit, onError: (error: ErrorResponseEntity) -> Unit)
 
     suspend fun updateRouteOnServer(isOnline: Boolean, routeEntity: RouteEntity, route: RouteUpdaterEntity, id: String?, onError: (error: ErrorResponseEntity) -> Unit)

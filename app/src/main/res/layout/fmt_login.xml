@@ -95,7 +95,7 @@
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etLoginLayout"
                     android:layout_width="264dp"
-                    android:layout_height="48dp"
+                    android:layout_height="60dp"
                     android:layout_marginTop="76dp"
                     android:layout_marginStart="@dimen/spacing_xxhuge"
                     android:layout_marginEnd="@dimen/spacing_xxhuge"
@@ -126,8 +126,8 @@
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/etPassLayout"
                     android:layout_width="264dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="68dp"
+                    android:layout_marginTop="4dp"
                     app:errorEnabled="true"
                     app:passwordToggleEnabled="true"
                     app:counterEnabled="true"
@@ -170,10 +170,9 @@
                     android:paddingStart="@dimen/spacing_medium"
                     android:paddingEnd="@dimen/spacing_medium"
                     android:background="@drawable/bg_btn_accent"
-                    android:text="@string/label_enter"
+                    android:text="@string/label_btn"
                     android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/etPassLayout"
                     app:layout_constraintTop_toBottomOf="@+id/etPassLayout"
             />
 

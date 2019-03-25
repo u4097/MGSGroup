@@ -56,8 +56,6 @@ class UnfinishedFragment : BaseFragment(), OnRouteClickListener {
         onSwipeRefresh(mRouteVm, sw)
         setupScrollListener(mRouteVm)
 
-        mRouteVm.routeSize.postValue(999)
-
         mRouteVm.getRoutesFromCacheByStatus(NOT_ACTIVE)
         initAdapter()
 
@@ -73,7 +71,7 @@ class UnfinishedFragment : BaseFragment(), OnRouteClickListener {
                 if (isOnline()) {
                     mRouteVm.getRoutesFromServer()
                 } else {
-                    noInetConnectionMessage()
+//                    noInetConnectionMessage()
                 }
             }
             (activity as OnLoadingListener).onFinishLoading()

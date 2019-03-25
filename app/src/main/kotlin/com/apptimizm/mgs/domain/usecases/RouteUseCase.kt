@@ -48,4 +48,8 @@ class RouteUseCase constructor(private val routeRepository: RouteRepository) {
 
     fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity> =
         routeRepository.getRouteFromCacheById(routeId)
+
+    fun clearLocalDb() {
+        routeRepository.clearDb()
+    }
 }

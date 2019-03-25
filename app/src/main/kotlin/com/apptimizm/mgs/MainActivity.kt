@@ -89,6 +89,9 @@ class MainActivity : AppCompatActivity(),
     val br: UpdateReceiver by inject()
     val filter: IntentFilter by inject()
 
+    private var currentDest: Int = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Get root container to put our app's UI in. For a debug build this will have our debug drawer.
@@ -103,11 +106,15 @@ class MainActivity : AppCompatActivity(),
         mNavController = Navigation.findNavController(this, R.id.host_fragment)
 
         mNavController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
+            currentDest = destination.id
+            when (currentDest) {
                 R.id.login_fragment -> {
                     supportActionBar?.hide()
                 }
                 R.id.route_fragment -> {
+                    supportActionBar?.show()
+                }
+                R.id.support -> {
                     supportActionBar?.show()
                 }
                 else -> {
@@ -123,7 +130,6 @@ class MainActivity : AppCompatActivity(),
         appBarConfiguration = AppBarConfiguration(mNavController.graph)
         setupActionBar(mNavController, appBarConfiguration)
 
-
         // Koin  DI init
         loadAppModules()
 
@@ -136,12 +142,12 @@ class MainActivity : AppCompatActivity(),
                     mVm.updateRouteOnServer(
                         isOnline = true,
                         routeEntity = it,
-                        route = RouteUpdaterEntity(it.factOnExportDatetime!!,it.talon, it.bugs!!),
+                        route = RouteUpdaterEntity(it.factOnExportDatetime!!, it.talon, it.bugs!!),
                         id = it.id
                     )
                 }
             } else {
-                longToast("Нет подключения к интернету.")
+//                longToast(getString(R.string.msg_no_internet_dialog_content))
                 Timber.tag("ROUTE").d("No inet connection on route update!")
             }
         })
@@ -184,9 +190,25 @@ class MainActivity : AppCompatActivity(),
 
         when (item?.itemId) {
             android.R.id.home -> {
-                mNavController.navigate(R.id.route_fragment)
-//                Timber.tag("ROUTE").d("On home click")
-                return true
+                when (currentDest) {
+                    R.id.support -> {
+                        mNavController.navigate(R.id.login_fragment)
+                        return true
+                    }
+                    R.id.unFinishedDetail -> {
+                        mNavController.navigate(R.id.route_fragment)
+                        return true
+
+                    }
+                    R.id.finished_fragment -> {
+                        mNavController.navigate(R.id.route_fragment)
+                        return true
+                    }
+                    else -> {
+                        mNavController.navigate(R.id.route_fragment)
+                        return true
+                    }
+                }
             }
             R.id.login_fragment -> {
                 MaterialDialog(this).show {
@@ -194,6 +216,8 @@ class MainActivity : AppCompatActivity(),
                     message(R.string.dialog_confirm_app_exit)
                     positiveButton(R.string.dialog_logout) {
                         PrefUtils.token = ""
+                        PrefUtils.nextpage = 1
+                        mVm.clearDb()
                         while (mNavController.popBackStack()) {
                             mNavController.popBackStack()
                         }

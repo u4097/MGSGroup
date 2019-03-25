@@ -11,7 +11,10 @@
 
         <action android:id="@+id/action_to_route_fragment"
                 app:destination="@id/route_fragment"
-                app:popUpTo="@+id/main_graph" app:popUpToInclusive="true"/>
+        />
+
+        <action android:id="@+id/action_to_support" app:destination="@id/support"
+        />
     </fragment>
 
     <!--Route List Tab Layout-->
@@ -26,6 +29,8 @@
         <action android:id="@+id/action_to_unFinishedDetail"
                 app:destination="@id/unFinishedDetail"/>
 
+        <action android:id="@+id/action_to_finished_fragment" app:destination="@id/finished_fragment"/>
+
     </fragment>
 
 
@@ -36,7 +41,9 @@
               android:label="UnFinishedDetail">
         <!--Route id-->
         <argument android:name="routeId" app:argType="string"
-                  android:defaultValue=" " />
+                  android:defaultValue=" "/>
+
+        <action android:id="@+id/action_to_all_fragment" app:destination="@id/all_fragment"/>
     </fragment>
 
     <!--Support Fragment-->
@@ -44,5 +51,17 @@
               tools:layout="@layout/fmt_support"
               android:name="com.apptimizm.mgs.presentation.support.SupportFragment"
               android:label="Нет маршрутов"/>
+
+    <!--All Fragment-->
+    <fragment android:id="@+id/all_fragment"
+              tools:layout="@layout/fmt_routes_rv"
+              android:name="com.apptimizm.mgs.presentation.routes.all.AllFragment"
+              android:label="AllFragment"/>
+
+    <!--Finished Fragment-->
+    <fragment android:id="@+id/finished_fragment"
+              tools:layout="@layout/fmt_routes_rv"
+              android:name="com.apptimizm.mgs.presentation.routes.finish.FinishedFragment"
+              android:label="FinishedFragment"/>
 
 </navigation>

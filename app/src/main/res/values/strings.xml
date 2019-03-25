@@ -4,7 +4,8 @@
     <string name="drawer_version_code">Code</string>
 
     <!--Labels for UI:-->
-    <string name="label_enter">Войти</string>
+    <string name="label_enter">Вход</string>
+    <string name="label_btn">Войти</string>
     <string name="label_login">Логин</string>
     <string name="label_pass">Пароль</string>
     <string name="label_checkbox_talon">Подписанная ведомость или талон</string>
@@ -31,7 +32,7 @@
     <string name="dialog_wanted">Внимание</string>
 
     <!--Messages:-->
-    <string name="msg_no_internet_dialog_content">Ошибка соединения с интернетом</string>
+    <string name="msg_no_internet_dialog_content">Нет подключения к интернету</string>
     <!--<string name="msg_no_internet_dialog_content">Проверьте правильность настройки сети Интернет и попробуйте еще раз.</string>-->
     <string name="msg_unknown_server_error_title">Неизвестная ошибка сервера</string>
     <string name="msg_coordinates_copy">Координаты скопированы</string>

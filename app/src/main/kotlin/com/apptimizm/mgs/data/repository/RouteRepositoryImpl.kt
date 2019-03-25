@@ -76,6 +76,10 @@ class RouteRepositoryImpl constructor(
         return Resource(ResourceState.SUCCESS, RouteResponse(data, networkErrors))
     }
 
+    override fun clearDb() {
+        Timber.i("Routes.db is empty now")
+        roomCache.delete()
+    }
 
     override fun getRouteFromCacheById(routeId: String): LiveData<RouteEntity> {
         return roomCache.selectRouteById(routeId)
@@ -98,6 +102,8 @@ class RouteRepositoryImpl constructor(
             //isRequestInProgress = false
         }
     }
+
+
 
 
     // Get from server And save routes to cache on Success.

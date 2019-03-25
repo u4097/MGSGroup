@@ -37,6 +37,19 @@ class LoginFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        mLoginVm.routeSize.postValue(999)
+
+        mLoginVm.routeSize.observe(this, Observer {
+            if (it == 0) {
+                val action = LoginFragmentDirections.actionToSupport()
+                findNavController().navigate(action)
+            } else {
+                val action = LoginFragmentDirections.actionToRouteFragment()
+                findNavController().navigate(action)
+            }
+        })
+
+
         mLoginVm.loginEventResponse.observe(this@LoginFragment, Observer {
             it?.let {
                 when (it.state) {
@@ -44,7 +57,7 @@ class LoginFragment : BaseFragment() {
                     }
                     ResourceState.ERROR -> {
                         hideKeyboard()
-                        longToast("Не верный пароль.")
+                        longToast(getString(R.string.msg_check_password_is_correct))
                     }
                     ResourceState.EMPTY_CACHE -> {
                     }
@@ -53,8 +66,7 @@ class LoginFragment : BaseFragment() {
                         PrefUtils.token = it.data?.token
                         when {
                             PrefUtils.token?.isNotEmpty()!! -> {
-                                val action = LoginFragmentDirections.actionToRouteFragment()
-                                findNavController().navigate(action)
+                                mLoginVm.getRoutesFromServer()
                             }
                             else -> {
                             }
@@ -83,7 +95,7 @@ class LoginFragment : BaseFragment() {
                     if (isOnline()) {
                         mLoginVm.login(Login(login = username, password = password))
                     } else {
-                        noInetConnectionMessage()
+//                        noInetConnectionMessage()
                     }
                 }
             }
@@ -96,13 +108,14 @@ class LoginFragment : BaseFragment() {
         super.onStart()
         if (isOnline()) {
 //            mLoginVm.login(Login(login = "user", password = "access123"))
-            mLoginVm.login(Login(login = "фаун765", password = "скания765"))
+//            mLoginVm.login(Login(login = "фаун765", password = "скания765"))
         } else {
             noInetConnectionMessage()
         }
         if (PrefUtils.token?.isNotEmpty()!!) {
-            val action = LoginFragmentDirections.actionToRouteFragment()
-            findNavController().navigate(action)
+            mLoginVm.getRoutesFromServer()
+//            val action = LoginFragmentDirections.actionToRouteFragment()
+//            findNavController().navigate(action)
         }
 
     }

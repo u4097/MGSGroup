@@ -53,6 +53,10 @@ class RouteUnFinishedViewModel constructor(val routeUseCase: RouteUseCase) : Abs
         route = routeUseCase.getRouteFromCacheById(routeId)
     }
 
+    fun clearDb() {
+        routeUseCase.clearLocalDb()
+    }
+
 
     override fun getRoutesFromServer(refresh: Boolean) {
         scope.launch {
