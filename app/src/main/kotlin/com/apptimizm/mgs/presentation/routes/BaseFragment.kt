@@ -72,7 +72,7 @@ open class BaseFragment : Fragment() {
             if (isOnline()) {
                 mRouteVm.getRoutesFromServer(refresh = true)
                 mRouteVm.pending?.set(false)
-                findNavController().navigate(R.id.login_fragment)
+                findNavController().navigate(R.id.route_fragment)
             } else {
                 sw.isRefreshing = false
 //                noInetConnectionMessage()
